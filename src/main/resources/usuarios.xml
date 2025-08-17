@@ -1,0 +1,15 @@
+<usuarios>
+    <usuario id="ADM-001" rol="administrador">
+        <nombre>Carla Gómez</nombre>
+        <clave>ADM-001</clave>
+    </usuario>
+    <usuario id="MED-111" rol="medico">
+        <nombre>David Pérez</nombre>
+        <clave>MEDPASS</clave>
+        <especialidad>Pediatría</especialidad>
+    </usuario>
+    <usuario id="FAR-123" rol="farmaceutico">
+        <nombre>Laura Sánchez</nombre>
+        <clave>FAR-123</clave>
+    </usuario>
+</usuarios>
