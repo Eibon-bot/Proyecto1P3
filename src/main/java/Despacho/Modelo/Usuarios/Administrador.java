@@ -1,4 +1,4 @@
-package Modelo.Usuarios;
+package Despacho.Modelo.Usuarios;
 
 public class Administrador extends Usuario {
     public Administrador(String id, String nombre, String clave) {

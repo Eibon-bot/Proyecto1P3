@@ -1,4 +1,4 @@
-package Modelo.Usuarios;
+package Despacho.Modelo.Usuarios;
 
 public class Farmaceutico extends Usuario {
     public Farmaceutico(String id, String nombre, String clave) {

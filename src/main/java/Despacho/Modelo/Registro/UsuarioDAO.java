@@ -1,4 +1,4 @@
-package Modelo.Registro;
+package Despacho.Modelo.Registro;
 
 import java.io.File;
 import java.util.*;
@@ -7,10 +7,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
-import Modelo.Usuarios.Administrador;
-import Modelo.Usuarios.Farmaceutico;
-import Modelo.Usuarios.Medico;
-import Modelo.Usuarios.Usuario;
+import Despacho.Modelo.Usuarios.Administrador;
+import Despacho.Modelo.Usuarios.Farmaceutico;
+import Despacho.Modelo.Usuarios.Medico;
+import Despacho.Modelo.Usuarios.Usuario;
 import org.w3c.dom.*;
 
 public class UsuarioDAO {

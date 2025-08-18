@@ -1,4 +1,4 @@
-package Modelo.Usuarios;
+package Despacho.Modelo.Usuarios;
 
 public abstract class Usuario {
     protected String id;
