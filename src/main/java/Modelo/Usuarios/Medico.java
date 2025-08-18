@@ -1,4 +1,4 @@
-package Usuarios;
+package Modelo.Usuarios;
 
 public class Medico extends Usuario {
     private String especialidad;

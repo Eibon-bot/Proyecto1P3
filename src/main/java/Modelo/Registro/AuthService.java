@@ -1,5 +1,5 @@
-package Registro;
-import Usuarios.Usuario;
+package Modelo.Registro;
+import Modelo.Usuarios.Usuario;
 import java.util.*;
 
 public class AuthService {
