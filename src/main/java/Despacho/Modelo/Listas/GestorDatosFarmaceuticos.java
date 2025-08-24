@@ -23,7 +23,7 @@ public class GestorDatosFarmaceuticos {
     public List<Farmaceutico> cargar() {
         if (!archivo.exists()) return new ArrayList<Farmaceutico>();
         try {
-            JAXBContext ctx = JAXBContext.newInstance(ListaMedicamentos.class);
+            JAXBContext ctx = JAXBContext.newInstance(ListaFarmaceuticos.class);
             Unmarshaller um = ctx.createUnmarshaller();
             return ((ListaFarmaceuticos) um.unmarshal(archivo)).getFarmaceuticos();
         } catch (Exception e) {

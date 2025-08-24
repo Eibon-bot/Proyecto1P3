@@ -23,7 +23,7 @@ public class GestorDatosMedicos {
     public List<Medico> cargar() {
         if (!archivo.exists()) return new ArrayList<Medico>();
         try {
-            JAXBContext ctx = JAXBContext.newInstance(ListaMedicamentos.class);
+            JAXBContext ctx = JAXBContext.newInstance(ListaMedicos.class);
             Unmarshaller um = ctx.createUnmarshaller();
             return ((ListaMedicos) um.unmarshal(archivo)).getMedicos();
         } catch (Exception e) {
