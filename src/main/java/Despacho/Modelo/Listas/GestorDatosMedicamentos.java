@@ -1,5 +1,5 @@
 package Despacho.Modelo.Listas;
-import Despacho.Modelo.Usuarios.Farmaceutico;
+import Despacho.Modelo.entidades.Medicamento;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -7,28 +7,27 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorDatosFarmaceuticos {
-    private File archivo=new File("farmaceutico.xml");
 
-    public void guardar(List<Farmaceutico> lista){
+public class GestorDatosMedicamentos {
+    private File archivo=new File("medicamentos.xml");
+
+    public void guardar(List<Medicamento> lista){
         try{
-            JAXBContext ctx = JAXBContext.newInstance(Farmaceutico.class);
+            JAXBContext ctx = JAXBContext.newInstance(Medicamento.class);
             Marshaller m = ctx.createMarshaller();
-            m.marshal(new ListaFarmaceuticos(lista), archivo);
+            m.marshal(new ListaMedicamentos(lista), archivo);
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }
-    public List<Farmaceutico> cargar() {
-        if (!archivo.exists()) return new ArrayList<Farmaceutico>();
+    public List<Medicamento> cargar() {
+        if (!archivo.exists()) return new ArrayList<Medicamento>();
         try {
             JAXBContext ctx = JAXBContext.newInstance(ListaMedicamentos.class);
             Unmarshaller um = ctx.createUnmarshaller();
-            return ((ListaFarmaceuticos) um.unmarshal(archivo)).getFarmaceuticos();
+            return ((ListaMedicamentos) um.unmarshal(archivo)).getMedicamentos();
         } catch (Exception e) {
             return new ArrayList<>();
         }
     }
-
-}
