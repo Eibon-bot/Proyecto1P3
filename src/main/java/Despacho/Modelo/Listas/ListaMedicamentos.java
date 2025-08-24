@@ -2,13 +2,17 @@ package Despacho.Modelo.Listas;
 
 import Despacho.Modelo.entidades.Medicamento;
 
+import javax.lang.model.element.Name;
+import javax.xml.bind.annotation.*;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
+@XmlRootElement(name="ListaMedicamentos")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ListaMedicamentos {
-
+    @XmlElement(name="medicamento")
     private final List<Medicamento> medicamentos = new ArrayList<>();
 
 
