@@ -1,4 +1,4 @@
-package Despacho.Modelo.Registro;
+package Despacho.Data.Registro;
 
 import java.io.File;
 import java.util.*;
@@ -7,7 +7,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
-import Despacho.Modelo.entidades.Medicamento;
+import Despacho.Data.entidades.Medicamento;
 import org.w3c.dom.*;
 
 public class MedicamentoDAO {

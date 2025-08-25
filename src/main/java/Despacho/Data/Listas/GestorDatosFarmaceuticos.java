@@ -1,5 +1,5 @@
-package Despacho.Modelo.Listas;
-import Despacho.Modelo.Usuarios.Farmaceutico;
+package Despacho.Data.Listas;
+import Despacho.Data.Usuarios.Farmaceutico;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;

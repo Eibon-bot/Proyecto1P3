@@ -1,8 +1,7 @@
-package Despacho.Modelo.Listas;
+package Despacho.Data.Listas;
 
-import Despacho.Modelo.entidades.Medicamento;
+import Despacho.Data.entidades.Medicamento;
 
-import javax.lang.model.element.Name;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,6 +13,16 @@ import java.util.Optional;
 public class ListaMedicamentos {
     @XmlElement(name="medicamento")
     private final List<Medicamento> medicamentos = new ArrayList<>();
+
+    public ListaMedicamentos(List<Medicamento> lista) {
+        if (lista != null) {
+            medicamentos.addAll(lista);
+        }
+    }
+
+    public List<Medicamento> getMedicamentos() {
+        return medicamentos;
+    }
 
 
     public boolean agregar(Medicamento m) {

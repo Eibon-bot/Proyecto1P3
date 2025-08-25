@@ -1,4 +1,4 @@
-package Despacho.Modelo.Usuarios;
+package Despacho.Data.Usuarios;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,6 +11,10 @@ public class Medico extends Usuario {
     public Medico(String id, String nombre, String clave, String especialidad) {
         super(id, nombre, clave, "medico");
         this.especialidad = especialidad;
+    }
+
+    public Medico(Usuario u) {
+        super(u.getId(), u.getNombre(), u.getClave(), "medico");
     }
 
     public String getEspecialidad() { return especialidad; }

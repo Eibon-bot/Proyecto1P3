@@ -1,5 +1,5 @@
-package Despacho.Modelo.Registro;
-import Despacho.Modelo.Usuarios.Usuario;
+package Despacho.Data.Registro;
+import Despacho.Data.Usuarios.Usuario;
 import java.util.*;
 
 public class AuthService {

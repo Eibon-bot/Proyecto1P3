@@ -1,4 +1,4 @@
-package Despacho.Modelo.Usuarios;
+package Despacho.Data.Usuarios;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,5 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Farmaceutico extends Usuario {
     public Farmaceutico(String id, String nombre, String clave) {
         super(id, nombre, clave, "farmaceutico");
+    }
+    public Farmaceutico(Usuario u) {
+        super(u.getId(), u.getNombre(), u.getClave(), "farmaceutico");
     }
 }

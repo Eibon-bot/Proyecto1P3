@@ -1,4 +1,4 @@
-package Despacho.Modelo.entidades;
+package Despacho.Data.entidades;
 
 public class Medicamento {
 

@@ -1,10 +1,11 @@
-package Despacho.Modelo.Usuarios;
+package Despacho.Data.Usuarios;
 
 public abstract class Usuario {
     protected String id;
     protected String nombre;
     protected String clave;
     protected String rol;
+
 
     public Usuario(String id, String nombre, String clave, String rol) {
         this.id = id;

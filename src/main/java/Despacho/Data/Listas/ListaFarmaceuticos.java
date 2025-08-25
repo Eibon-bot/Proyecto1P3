@@ -1,10 +1,9 @@
-package Despacho.Modelo.Listas;
+package Despacho.Data.Listas;
 
-import javax.lang.model.element.Name;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
-import Despacho.Modelo.Usuarios.Farmaceutico;
+import Despacho.Data.Usuarios.Farmaceutico;
 
 @XmlRootElement(name="ListaFarmaceuticos")
 @XmlAccessorType(XmlAccessType.FIELD)
