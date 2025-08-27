@@ -1,4 +1,4 @@
-package Despacho.Presentation;
+package Despacho.Presentation.Login;
 
 import java.beans.PropertyChangeListener;
 import Despacho.AbstractModel;
