@@ -46,6 +46,15 @@ public class ViewPrincipal implements PropertyChangeListener {
     private JButton borrarButtonMed;
     private JButton buscarButtonMed;
     private JButton reporteButtonMed;
+    private JPanel Prescribir;
+    private JButton buscarPacienteButton;
+    private JButton agregarMedicamentoButton;
+    private JSpinner spinner1;
+    private JTable table1;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JButton descartarMedicamentoButton;
+    private JButton detallesButton;
 
     public JPanel getPanel1() {
         return panel1;
