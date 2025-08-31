@@ -1,7 +1,7 @@
 package Despacho.Presentation.View;
 
-import Despacho.Presentation.Controller;
-import Despacho.Presentation.Model;
+import Despacho.Presentation.Login.Controller;
+import Despacho.Presentation.Login.Model;
 import Despacho.Data.Usuarios.Usuario;
 
 import javax.swing.*;

@@ -1,8 +1,9 @@
-package Despacho.Presentation;
+package Despacho.Presentation.AgregarFarma;
 
-import java.beans.PropertyChangeListener;
 import Despacho.AbstractModel;
 import Despacho.Data.Usuarios.Usuario;
+
+import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
     Usuario current;
