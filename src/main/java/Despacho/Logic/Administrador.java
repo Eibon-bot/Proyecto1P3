@@ -1,4 +1,4 @@
-package Despacho.Data.Usuarios;
+package Despacho.Logic;
 
 public class Administrador extends Usuario {
     public Administrador(String id, String nombre, String clave) {

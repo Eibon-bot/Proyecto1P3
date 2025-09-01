@@ -1,8 +1,9 @@
-package Despacho.Presentation.Login;
+package Despacho.Presentation.Farmaceutico;
 
-import java.beans.PropertyChangeListener;
 import Despacho.AbstractModel;
 import Despacho.Logic.Usuario;
+
+import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
     Usuario current;

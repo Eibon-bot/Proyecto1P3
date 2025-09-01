@@ -1,7 +1,8 @@
 package Despacho.Presentation.View;
 
-import Despacho.Presentation.AgregarFarma.Controller;
-import Despacho.Presentation.AgregarFarma.Model;
+import Despacho.Presentation.Farmaceutico.Controller;
+import Despacho.Presentation.Farmaceutico.Model;
+
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -63,6 +64,7 @@ public class ViewPrincipal implements PropertyChangeListener {
     //-------- MVC ---------
     Controller controller;
     Model model;
+//    Controller controllerAF;
 
     public void setController(Controller controller) {
         this.controller = controller;

@@ -3,10 +3,10 @@ package Despacho.Data.Listas;
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
-import Despacho.Data.Usuarios.Farmaceutico;
-import Despacho.Data.Usuarios.Medico;
-import Despacho.Data.entidades.Medicamento;
-import Despacho.Data.entidades.Receta;
+import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Medico;
+import Despacho.Logic.Medicamento;
+import Despacho.Logic.Receta;
 
 @XmlRootElement(name = "Listas")
 @XmlAccessorType(XmlAccessType.FIELD)

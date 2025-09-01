@@ -1,4 +1,4 @@
-package Despacho.Data.Usuarios;
+package Despacho.Logic;
 
 public abstract class Usuario {
     protected String id;

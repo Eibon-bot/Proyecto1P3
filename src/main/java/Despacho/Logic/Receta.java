@@ -1,4 +1,4 @@
-package Despacho.Data.entidades;
+package Despacho.Logic;
 
 
 import java.time.LocalDate;

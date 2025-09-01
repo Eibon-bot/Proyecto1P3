@@ -1,7 +1,7 @@
-package Despacho.Presentation.AgregarFarma;
+package Despacho.Presentation.Medico;
 
 import Despacho.AbstractModel;
-import Despacho.Data.Usuarios.Usuario;
+import Despacho.Logic.Usuario;
 
 import java.beans.PropertyChangeListener;
 
@@ -30,6 +30,4 @@ public class Model extends AbstractModel {
         this.current = usuario;
         firePropertyChange(CURRENT);
     }
-
-
 }

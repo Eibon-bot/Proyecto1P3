@@ -2,11 +2,11 @@ package Despacho.Presentation.Login;
 
 
 import Despacho.Data.Registro.AuthService;
-import Despacho.Data.Usuarios.Administrador;
-import Despacho.Data.Usuarios.Farmaceutico;
-import Despacho.Data.Usuarios.Medico;
+import Despacho.Logic.Administrador;
+import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Medico;
 import Despacho.Presentation.View.login;
-import Despacho.Data.Usuarios.Usuario;
+import Despacho.Logic.Usuario;
 
 import javax.swing.*;
 

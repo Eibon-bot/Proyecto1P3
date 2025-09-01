@@ -7,7 +7,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
-import Despacho.Data.entidades.Medicamento;
+import Despacho.Logic.Medicamento;
 import org.w3c.dom.*;
 
 public class MedicamentoDAO {

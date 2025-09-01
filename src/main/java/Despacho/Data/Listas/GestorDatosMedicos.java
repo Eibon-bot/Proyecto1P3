@@ -1,6 +1,6 @@
 package Despacho.Data.Listas;
 
-import Despacho.Data.Usuarios.Medico;
+import Despacho.Logic.Medico;
 import javax.xml.bind.*;
 import java.io.File;
 import java.util.ArrayList;

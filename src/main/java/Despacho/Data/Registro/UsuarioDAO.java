@@ -7,10 +7,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
-import Despacho.Data.Usuarios.Administrador;
-import Despacho.Data.Usuarios.Farmaceutico;
-import Despacho.Data.Usuarios.Medico;
-import Despacho.Data.Usuarios.Usuario;
+import Despacho.Logic.Administrador;
+import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Medico;
+import Despacho.Logic.Usuario;
 import org.w3c.dom.*;
 
 public class UsuarioDAO {
