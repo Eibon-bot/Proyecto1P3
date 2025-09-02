@@ -1,6 +1,8 @@
 package Despacho.Data.Listas;
 
 import Despacho.Logic.Medico;
+import Despacho.Logic.Usuario;
+
 import javax.xml.bind.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -37,6 +39,20 @@ public class GestorDatosMedicos {
             e.printStackTrace();
             return new ArrayList<>();
         }
+    }
+    public void cambiarClave(String id, String claveActual, String claveNueva) throws Exception {
+        List<Medico> medicos = cargar();
+        for (Medico m : medicos) {
+            if (m.getId().equals(id)) {
+                if (!m.validarClave(claveActual)) {
+                    throw new Exception("Clave actual incorrecta");
+                }
+                m.setClave(claveNueva);
+                guardar(medicos);
+                return;
+            }
+        }
+        throw new Exception("Médico no encontrado");
     }
 }
 

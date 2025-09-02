@@ -14,4 +14,5 @@ public class FarmaAdmin {
     private JButton buscarButtonFarma;
     private JButton reporteButtonFarma;
     private JComboBox comboBoxFar;
+    private JPanel IngresarFarmacetas;
 }

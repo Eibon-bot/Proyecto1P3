@@ -1,29 +1,30 @@
 package Despacho.Data.Registro;
+import Despacho.Data.Listas.GestorDatosFarmaceuticos;
+import Despacho.Data.Listas.GestorDatosMedicos;
+import Despacho.Logic.Medico;
 import Despacho.Logic.Usuario;
 import java.util.*;
 
 public class AuthService {
-    private final UsuarioDAO dao;
+    private final GestorDatosMedicos GestorMed;
+    private final GestorDatosFarmaceuticos GestorFarma;
+
     private final Map<String, Usuario> usuarios = new HashMap<>();
 
-    public AuthService(UsuarioDAO dao) throws Exception {
-        this.dao = dao;
+    public AuthService(UsuarioDAO dao, GestorDatosMedicos gestorMed, GestorDatosFarmaceuticos gestorFarma) throws Exception {
+        GestorMed = gestorMed;
+        GestorFarma = gestorFarma;
         cargarEnMemoria();
     }
-
     private void cargarEnMemoria() throws Exception {
-        for (Usuario u : dao.cargarUsuarios()) {
+        for (Usuario u : GestorMed.cargar()) {
+            usuarios.put(u.getId(), u);
+        }
+        for (Usuario u : GestorFarma.cargar()) {
             usuarios.put(u.getId(), u);
         }
     }
 
-    public void registrarUsuario(Usuario nuevo) throws Exception {
-        if (usuarios.containsKey(nuevo.getId())) {
-            throw new Exception("El ID ya existe: " + nuevo.getId());
-        }
-        usuarios.put(nuevo.getId(), nuevo);
-        dao.guardarUsuarios(new ArrayList<>(usuarios.values()));
-    }
 
     public Usuario login(String id, String clave) throws Exception {
         Usuario u = usuarios.get(id);
@@ -38,10 +39,11 @@ public class AuthService {
         if (u == null) {
             throw new Exception("Usuario no encontrado");
         }
-        if (!u.validarClave(claveActual)) {
-            throw new Exception("Clave actual incorrecta");
+        if (u instanceof Medico) {
+           GestorMed.cambiarClave(id, claveActual, claveNueva);
         }
-        u.setClave(claveNueva);
-        dao.guardarUsuarios(new ArrayList<>(usuarios.values()));
+        if (u instanceof Despacho.Logic.Farmaceutico) {
+            GestorFarma.cambiarClave(id, claveActual, claveNueva);
+        }
     }
 }
