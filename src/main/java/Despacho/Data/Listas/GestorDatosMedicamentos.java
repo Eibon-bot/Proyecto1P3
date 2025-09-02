@@ -11,13 +11,13 @@ public class GestorDatosMedicamentos {
 
     public void guardar(List<Medicamento> lista) {
         try {
-            Listas listas = new Listas();
-            lista.forEach(listas::agregarMedicamento);
+            Data data = new Data();
+            lista.forEach(data::agregarMedicamento);
 
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Marshaller m = ctx.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(listas, archivo);
+            m.marshal(data, archivo);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -28,10 +28,10 @@ public class GestorDatosMedicamentos {
             return new ArrayList<>();
         }
         try {
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Unmarshaller um = ctx.createUnmarshaller();
-            Listas listas = (Listas) um.unmarshal(archivo);
-            return listas.getMedicamentos();
+            Data data = (Data) um.unmarshal(archivo);
+            return data.getMedicamentos();
         } catch (JAXBException e) {
             e.printStackTrace();
             return new ArrayList<>();

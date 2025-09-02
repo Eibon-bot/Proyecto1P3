@@ -4,7 +4,6 @@ import Despacho.Presentation.View.*;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
 import Despacho.Data.Registro.AuthService;
-import Despacho.Data.Registro.UsuarioDAO;
 
 import javax.swing.*;
 public class App {

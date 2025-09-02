@@ -1,12 +1,13 @@
 package Despacho.Presentation.Farmaceutico;
 
 import Despacho.AbstractModel;
+import Despacho.Logic.Farmaceutico;
 import Despacho.Logic.Usuario;
 
 import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
-    Usuario current;
+    Farmaceutico current;
 
 
     public static final String CURRENT = "current";
@@ -22,12 +23,12 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT);
     }
 
-    public Usuario getCurrent() {
+    public Farmaceutico getCurrent() {
         return current;
     }
 
-    public void setCurrent(Usuario usuario) {
-        this.current = usuario;
+    public void setCurrent(Farmaceutico farmaceutico) {
+        this.current = Farmaceutico;
         firePropertyChange(CURRENT);
     }
 

@@ -12,13 +12,13 @@ public class GestorDatosRecetas {
 
     public void guardar(List<Receta> lista) {
         try {
-            Listas listas = new Listas();
-            lista.forEach(listas::agregarReceta);
+            Data data = new Data();
+            lista.forEach(data::agregarReceta);
 
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Marshaller m = ctx.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(listas, archivo);
+            m.marshal(data, archivo);
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -30,10 +30,10 @@ public class GestorDatosRecetas {
             return new ArrayList<>();
         }
         try {
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Unmarshaller um = ctx.createUnmarshaller();
-            Listas listas = (Listas) um.unmarshal(archivo);
-            return listas.getRecetas();
+            Data data = (Data) um.unmarshal(archivo);
+            return data.getRecetas();
 
         } catch (JAXBException e) {
             e.printStackTrace();

@@ -8,9 +8,14 @@ import Despacho.Logic.Medico;
 import Despacho.Logic.Medicamento;
 import Despacho.Logic.Receta;
 
-@XmlRootElement(name = "Listas")
+@XmlRootElement(name = "data")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Listas {
+public class Data {
+
+    private GestorDatosMedicamentos gestorMedicamentos;
+    private GestorDatosFarmaceuticos gestorFarmaceuticos;
+    private GestorDatosMedicos gestorMedicos;
+    private GestorDatosRecetas gestorRecetas;
 
     @XmlElementWrapper(name = "ListaFarmaceuticos")
     @XmlElement(name = "farmaceutico")
@@ -28,19 +33,36 @@ public class Listas {
     @XmlElement(name = "receta")
     private List<Receta> recetas = new ArrayList<>();
 
+    public Data() {
+        medicos = new ArrayList<>();
+        farmaceuticos = new ArrayList<>();
+        medicamentos = new ArrayList<>();
+        recetas = new ArrayList<>();
+
+            gestorMedicos = new GestorDatosMedicos();
+            medicos = gestorMedicos.cargar();
+            gestorFarmaceuticos = new GestorDatosFarmaceuticos();
+            farmaceuticos = gestorFarmaceuticos.cargar();
+            gestorMedicamentos = new GestorDatosMedicamentos();
+            medicamentos= gestorMedicamentos.cargar();
+            gestorRecetas = new GestorDatosRecetas();
+            recetas = gestorRecetas.cargar();
+    }
     // ====== Métodos Farmacéuticos ======
     public List<Farmaceutico> getFarmaceuticos() {
-        return Collections.unmodifiableList(farmaceuticos);
+        return farmaceuticos;
     }
 
     public void agregarFarmaceutico(Farmaceutico f) {
         if (f == null) return;
         farmaceuticos.add(f);
+        gestorFarmaceuticos.guardar(farmaceuticos);
     }
 
-    public boolean eliminarFarmaceutico(Farmaceutico f) {
-        if (f == null) return false;
-        return farmaceuticos.remove(f);
+    public void eliminarFarmaceutico(Farmaceutico f) {
+        if (f == null) return;
+        farmaceuticos.remove(f);
+        gestorFarmaceuticos.guardar(farmaceuticos);
     }
 
     public Optional<Farmaceutico> buscarFarmaceuticoPorNombre(String nombre) {
@@ -53,17 +75,19 @@ public class Listas {
 
     // ====== Métodos Medicamentos ======
     public List<Medicamento> getMedicamentos() {
-        return Collections.unmodifiableList(medicamentos);
+        return medicamentos;
     }
 
     public void agregarMedicamento(Medicamento m) {
         if (m == null) return;
         medicamentos.add(m);
+        gestorMedicamentos.guardar(medicamentos);
     }
 
-    public boolean eliminarMedicamento(Medicamento m) {
-        if (m == null) return false;
-        return medicamentos.remove(m);
+    public void eliminarMedicamento(Medicamento m) {
+        if (m == null) return ;
+        medicamentos.remove(m);
+        gestorMedicamentos.guardar(medicamentos);
     }
 
     public Optional<Medicamento> buscarMedicamentoPorNombre(String nombre) {
@@ -87,17 +111,19 @@ public class Listas {
 
     // ====== Métodos Médicos ======
     public List<Medico> getMedicos() {
-        return Collections.unmodifiableList(medicos);
+        return medicos;
     }
 
     public void agregarMedico(Medico m) {
         if (m == null) return;
         medicos.add(m);
+        gestorMedicos.guardar(medicos);
     }
 
-    public boolean eliminarMedico(Medico m) {
-        if (m == null) return false;
-        return medicos.remove(m);
+    public void eliminarMedico(Medico m) {
+        if (m == null) return;
+        medicos.remove(m);
+        gestorMedicos.guardar(medicos);
     }
 
     public Optional<Medico> buscarMedicoPorNombre(String nombre) {
@@ -110,17 +136,19 @@ public class Listas {
 
     // ====== Métodos Recetas ======
     public List<Receta> getRecetas() {
-        return Collections.unmodifiableList(recetas);
+        return recetas;
     }
 
     public void agregarReceta(Receta r) {
         if (r == null) return;
         recetas.add(r);
+        gestorRecetas.guardar(recetas);
     }
 
-    public boolean eliminarReceta(Receta r) {
-        if (r == null) return false;
-        return recetas.remove(r);
+    public void eliminarReceta(Receta r) {
+        if (r == null) return;
+        recetas.remove(r);
+        gestorRecetas.guardar(recetas);
     }
 
     public Optional<Receta> buscarRecetaPorCodigo(String codigo) {

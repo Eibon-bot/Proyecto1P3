@@ -1,7 +1,6 @@
 package Despacho.Data.Listas;
 
 import Despacho.Logic.Medico;
-import Despacho.Logic.Usuario;
 
 import javax.xml.bind.*;
 import java.io.File;
@@ -14,13 +13,13 @@ public class GestorDatosMedicos {
     public void guardar(List<Medico> lista) {
         try {
             // Envolvemos solo los médicos en el wrapper Listas
-            Listas listas = new Listas();
-            lista.forEach(listas::agregarMedico);
+            Data data = new Data();
+            lista.forEach(data::agregarMedico);
 
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Marshaller m = ctx.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(listas, archivo);
+            m.marshal(data, archivo);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -31,10 +30,10 @@ public class GestorDatosMedicos {
             return new ArrayList<>();
         }
         try {
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Unmarshaller um = ctx.createUnmarshaller();
-            Listas listas = (Listas) um.unmarshal(archivo);
-            return listas.getMedicos();
+            Data data = (Data) um.unmarshal(archivo);
+            return data.getMedicos();
         } catch (JAXBException e) {
             e.printStackTrace();
             return new ArrayList<>();

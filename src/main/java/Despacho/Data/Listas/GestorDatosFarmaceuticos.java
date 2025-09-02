@@ -1,7 +1,6 @@
 package Despacho.Data.Listas;
 
 import Despacho.Logic.Farmaceutico;
-import Despacho.Logic.Medico;
 
 import javax.xml.bind.*;
 import java.io.File;
@@ -13,13 +12,13 @@ public class GestorDatosFarmaceuticos {
 
     public void guardar(List<Farmaceutico> lista) {
         try {
-            Listas listas = new Listas();
-            lista.forEach(listas::agregarFarmaceutico);
+            Data data = new Data();
+            lista.forEach(data::agregarFarmaceutico);
 
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Marshaller m = ctx.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(listas, archivo);
+            m.marshal(data, archivo);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -29,10 +28,10 @@ public class GestorDatosFarmaceuticos {
             return new ArrayList<>();
         }
         try {
-            JAXBContext ctx = JAXBContext.newInstance(Listas.class);
+            JAXBContext ctx = JAXBContext.newInstance(Data.class);
             Unmarshaller um = ctx.createUnmarshaller();
-            Listas listas = (Listas) um.unmarshal(archivo);
-            return listas.getFarmaceuticos();
+            Data data = (Data) um.unmarshal(archivo);
+            return data.getFarmaceuticos();
         } catch (JAXBException e) {
             e.printStackTrace();
             return new ArrayList<>();

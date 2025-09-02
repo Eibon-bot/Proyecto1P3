@@ -11,7 +11,7 @@ public class AuthService {
 
     private final Map<String, Usuario> usuarios = new HashMap<>();
 
-    public AuthService(UsuarioDAO dao, GestorDatosMedicos gestorMed, GestorDatosFarmaceuticos gestorFarma) throws Exception {
+    public AuthService( GestorDatosMedicos gestorMed, GestorDatosFarmaceuticos gestorFarma) throws Exception {
         GestorMed = gestorMed;
         GestorFarma = gestorFarma;
         cargarEnMemoria();
