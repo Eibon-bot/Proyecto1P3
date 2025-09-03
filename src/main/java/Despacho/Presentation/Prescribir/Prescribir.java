@@ -1,8 +1,10 @@
 package Despacho.Presentation.Prescribir;
 
 import Despacho.Presentation.Login.Controller;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -10,7 +12,6 @@ public class Prescribir implements PropertyChangeListener {
     private JButton buscarPacienteButton;
     private JButton agregarMedicamentoButton;
     private JTable table1;
-    private JSpinner spinner1;
     private JButton guardarButton;
     private JButton limpiarButton;
     private JButton descartarMedicamentoButton;
@@ -18,6 +19,8 @@ public class Prescribir implements PropertyChangeListener {
     private JPanel Prescribir;
     private JLabel fechaRetirolabel;
     private JLabel pacienteLabel;
+    private JPanel panelfecha;
+    private JDateChooser fechaRetiroChooser;
 
     public Prescribir() {
         buscarPacienteButton.setIcon(new ImageIcon(getClass().getResource("/pacienteBuscar.png")));
@@ -28,6 +31,11 @@ public class Prescribir implements PropertyChangeListener {
         limpiarButton.setIcon(new ImageIcon(getClass().getResource("/limpiar.png")));
         descartarMedicamentoButton.setIcon(new ImageIcon(getClass().getResource("/descartar.png")));
         detallesButton.setIcon(new ImageIcon(getClass().getResource("/lista.png")));
+
+        fechaRetiroChooser = new JDateChooser();
+        fechaRetiroChooser.setDateFormatString("dd/MM/yyyy");
+        panelfecha.setLayout(new java.awt.BorderLayout());
+        panelfecha.add(fechaRetiroChooser, BorderLayout.CENTER);
     }
 
     public JPanel getPrescribir() {
