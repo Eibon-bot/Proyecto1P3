@@ -1,20 +1,54 @@
 package Despacho.Presentation.Farmaceutico;
 
-import Despacho.Data.Registro.AuthService;
-import Despacho.Presentation.View.ViewPrincipal;
+import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Service;
 
 public class Controller {
-    ViewPrincipal view;
-    Despacho.Presentation.Farmaceutico.Model model;
-    AuthService auth;
+    FarmaAdmin view;
+    Model model;
 
-    public Controller(ViewPrincipal view, Model model, AuthService auth) {
+    public Controller(FarmaAdmin view, Model model) {
         this.view = view;
         this.model = model;
-        this.auth = auth;
         view.setController(this);
         view.setModel(model);
+
     }
+
+    public void create(Farmaceutico e) throws  Exception{
+        Service.instance().createFarmaceutico(e);
+        model.setCurrent(new f());
+        model.setList(Service.instance().findAll());
+    }
+
+    public void read(String id) throws Exception {
+        Persona e = new Persona();
+        e.setId(id);
+        try {
+            model.setCurrent(Service.instance().read(e));
+        } catch (Exception ex) {
+            Persona b = new Persona();
+            b.setId(id);
+            model.setCurrent(b);
+            throw ex;
+        }
+    }
+
+    public void clear() {
+        model.setCurrent(new Persona());
+    }
+
+    public void setDepartamento(int row) {
+        model.setDepartamento(model.getDepartamentos().get(row));
+    }
+
+    public void searchDepartamentos(String nombre) {
+        Departamento d = new Departamento();
+        d.setNombre(nombre);
+        model.setDepartamentos(Service.instance().search(d));
+    }
+    }
+
 
 
 
