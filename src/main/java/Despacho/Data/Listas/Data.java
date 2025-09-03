@@ -171,7 +171,7 @@ public class Data {
         if (idMedico == null || idMedico.isBlank()) return List.of();
         String target = idMedico.trim().toLowerCase();
         return recetas.stream()
-                .filter(r -> r.getIdMedico() != null && r.getIdMedico().toLowerCase().equals(target))
+                .filter(r -> r.getMedico().getId() != null && r.getMedico().getId().toLowerCase().equals(target))
                 .toList();
     }
 }
