@@ -46,12 +46,12 @@ public class Prescribir implements PropertyChangeListener {
     Despacho.Presentation.Prescribir.Controller controller;
     Despacho.Presentation.Prescribir.Model model;
 
-    public void setController(Controller controller) {
-//        this.controller = controller;
+    public void setController(Despacho.Presentation.Prescribir.Controller controller) {
+        this.controller = controller;
     }
 
-    public void setModel(Despacho.Presentation.Login.Model model) {
-//        this.model = model;
+    public void setModel(Despacho.Presentation.Prescribir.Model model) {
+        this.model = model;
         model.addPropertyChangeListener(this);
     }
 

@@ -11,8 +11,8 @@ public class Controller {
         public Controller(Prescribir prescribirView, Model model) {
             this.prescribirView = prescribirView;
             this.model = model;
-//            prescribirView.setController(this);
-//            prescribirView.setModel(model);
+            prescribirView.setController(this);
+            prescribirView.setModel(model);
         }
 
 
