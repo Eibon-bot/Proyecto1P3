@@ -1,8 +1,6 @@
 package Despacho.Presentation.Medico;
 
 import Despacho.Data.Registro.AuthService;
-import Despacho.Logic.Medico;
-import Despacho.Presentation.Medico.MediAdmin;
 
 public class Controller {
     MediAdmin view;

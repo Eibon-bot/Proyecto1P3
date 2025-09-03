@@ -1,4 +1,4 @@
-package Despacho.Logic;
+package Despacho.Logic.Entidades;
 
 public class Prescripcion {
 

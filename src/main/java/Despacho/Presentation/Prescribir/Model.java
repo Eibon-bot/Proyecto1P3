@@ -1,9 +1,6 @@
 package Despacho.Presentation.Prescribir;
 
 import Despacho.AbstractModel;
-import Despacho.Logic.Usuario;
-
-import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
 //    Usuario current;

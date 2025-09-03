@@ -1,4 +1,4 @@
-package Despacho.Logic;
+package Despacho.Logic.Entidades;
 
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ public class Receta {
 
     private String codigo;
     private String idPaciente;
-    private String idMedico;
+    private Medico medico;
     private LocalDate fechaEmision;
     private List<Prescripcion> medicamentos;
     private String observaciones;
@@ -18,11 +18,11 @@ public class Receta {
         this.medicamentos = new ArrayList<>();
     }
 
-    public Receta(String codigo, String idPaciente, String idMedico,
+    public Receta(String codigo, String idPaciente, Medico medico,
                   LocalDate fechaEmision, String observaciones) {
         this.codigo = codigo;
         this.idPaciente = idPaciente;
-        this.idMedico = idMedico;
+        this.medico = medico;
         this.fechaEmision = fechaEmision;
         this.medicamentos = new ArrayList<>();
         this.observaciones = observaciones;
@@ -34,8 +34,8 @@ public class Receta {
     public String getIdPaciente() { return idPaciente; }
     public void setIdPaciente(String idPaciente) { this.idPaciente = idPaciente; }
 
-    public String getIdMedico() { return idMedico; }
-    public void setIdMedico(String idMedico) { this.idMedico = idMedico; }
+    public Medico getMedico() { return medico; }
+    public void setMedico(Medico medico) { this.medico = medico; }
 
     public LocalDate getFechaEmision() { return fechaEmision; }
     public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
@@ -55,7 +55,7 @@ public class Receta {
         return "Receta{" +
                 "codigo='" + codigo + '\'' +
                 ", idPaciente='" + idPaciente + '\'' +
-                ", idMedico='" + idMedico + '\'' +
+                ", idMedico='" + medico.getId() + '\'' +
                 ", fechaEmision=" + fechaEmision +
                 ", medicamentos=" + medicamentos +
                 ", observaciones='" + observaciones + '\'' +

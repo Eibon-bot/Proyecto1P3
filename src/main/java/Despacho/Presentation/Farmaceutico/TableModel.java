@@ -1,5 +1,5 @@
 package Despacho.Presentation.Farmaceutico;
-import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.AbstractTableModel;
 import java.util.List;
 

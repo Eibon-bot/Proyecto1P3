@@ -1,7 +1,7 @@
 package Despacho.Presentation.Medico;
 
 import Despacho.AbstractModel;
-import Despacho.Logic.Usuario;
+import Despacho.Logic.Entidades.Usuario;
 
 import java.beans.PropertyChangeListener;
 

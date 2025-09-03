@@ -2,7 +2,7 @@ package Despacho.Presentation.View;
 
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
-import Despacho.Logic.Usuario;
+import Despacho.Logic.Entidades.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,9 @@
 package Despacho.Data.Registro;
 import Despacho.Data.Listas.GestorDatosFarmaceuticos;
 import Despacho.Data.Listas.GestorDatosMedicos;
-import Despacho.Logic.Medico;
-import Despacho.Logic.Usuario;
+import Despacho.Logic.Entidades.Farmaceutico;
+import Despacho.Logic.Entidades.Medico;
+import Despacho.Logic.Entidades.Usuario;
 import java.util.*;
 
 public class AuthService {
@@ -42,7 +43,7 @@ public class AuthService {
         if (u instanceof Medico) {
            GestorMed.cambiarClave(id, claveActual, claveNueva);
         }
-        if (u instanceof Despacho.Logic.Farmaceutico) {
+        if (u instanceof Farmaceutico) {
             GestorFarma.cambiarClave(id, claveActual, claveNueva);
         }
     }
