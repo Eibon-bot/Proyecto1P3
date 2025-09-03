@@ -19,8 +19,10 @@ public class login implements PropertyChangeListener {
     private JButton ingresarButton;
     private JButton cancelarButton;
     private JButton cambiarClaveButton;
+    private JLabel icono;
 
     public login() {
+        icono.setIcon(new ImageIcon(getClass().getResource("/hospital.png")));
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
