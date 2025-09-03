@@ -5,27 +5,21 @@ public class Medicamento {
     private String codigo;
     private String nombre;
     private String descripcion;
-    private String laboratorio;
     private int stock;
-    private double precio;
 
     public Medicamento() {}
 
-    public Medicamento(String codigo, String nombre, String descripcion,
-                       String laboratorio, int stock, double precio) {
+    public Medicamento(String codigo, String nombre, String descripcion, int stock) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.laboratorio = laboratorio;
         this.stock = stock;
-        this.precio = precio;
     }
 
-    public Medicamento(String codigo, String nombre, int stock, double precio, String descripcion) {
+    public Medicamento(String codigo, String nombre, int stock, String descripcion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.stock = stock;
-        this.precio = precio;
         this.descripcion = descripcion;
     }
 
@@ -38,14 +32,10 @@ public class Medicamento {
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getLaboratorio() { return laboratorio; }
-    public void setLaboratorio(String laboratorio) { this.laboratorio = laboratorio; }
 
     public int getStock() { return stock; }
     public void setStock(int stock) { this.stock = stock; }
 
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
 
     @Override
     public String toString() {
@@ -53,9 +43,7 @@ public class Medicamento {
                 "codigo='" + codigo + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", laboratorio='" + laboratorio + '\'' +
                 ", stock=" + stock +
-                ", precio=" + precio +
                 '}';
     }
 }
