@@ -1,7 +1,7 @@
 package Despacho.Presentation.Farmaceutico;
 
 import Despacho.AbstractModel;
-import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Entidades.Farmaceutico;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package Despacho.Presentation.Farmaceutico;
 
 import Despacho.App;
-import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Entidades.Farmaceutico;
 
 import javax.swing.*;
 

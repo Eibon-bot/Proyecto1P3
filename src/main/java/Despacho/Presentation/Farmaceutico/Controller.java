@@ -1,5 +1,8 @@
 package Despacho.Presentation.Farmaceutico;
 
+import Despacho.Logic.Service;
+import Despacho.Logic.Entidades.Farmaceutico;
+
 public class Controller {
     FarmaAdmin view;
     Model model;

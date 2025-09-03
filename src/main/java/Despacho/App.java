@@ -6,6 +6,8 @@ import Despacho.Presentation.Login.Model;
 import Despacho.Data.Registro.AuthService;
 
 import javax.swing.*;
+import java.awt.*;
+
 public class App {
     public static void main(String[] args) {
         try {
@@ -32,4 +34,5 @@ public class App {
             JOptionPane.showMessageDialog(null, "Error al iniciar la aplicación: " + e.getMessage());
         }
     }
+    public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
 }
