@@ -11,7 +11,7 @@ public class Receta {
     private String idPaciente;
     private String idMedico;
     private LocalDate fechaEmision;
-    private List<MedicamentoRecetado> medicamentos;
+    private List<Prescripcion> medicamentos;
     private String observaciones;
 
     public Receta() {
@@ -40,13 +40,13 @@ public class Receta {
     public LocalDate getFechaEmision() { return fechaEmision; }
     public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
 
-    public List<MedicamentoRecetado> getMedicamentos() { return medicamentos; }
-    public void setMedicamentos(List<MedicamentoRecetado> medicamentos) { this.medicamentos = medicamentos; }
+    public List<Prescripcion> getMedicamentos() { return medicamentos; }
+    public void setMedicamentos(List<Prescripcion> medicamentos) { this.medicamentos = medicamentos; }
 
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
 
-    public void agregarMedicamento(MedicamentoRecetado med) {
+    public void agregarMedicamento(Prescripcion med) {
         medicamentos.add(med);
     }
 
