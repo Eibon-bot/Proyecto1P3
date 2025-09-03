@@ -1,4 +1,4 @@
-package Despacho.Logic;
+package Despacho.Logic.Entidades;
 
 public class Administrador extends Usuario {
     public Administrador(String id, String nombre, String clave) {

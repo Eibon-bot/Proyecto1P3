@@ -1,6 +1,6 @@
 package Despacho.Data.Listas;
 
-import Despacho.Logic.Farmaceutico;
+import Despacho.Logic.Entidades.Farmaceutico;
 
 import javax.xml.bind.*;
 import java.io.File;

@@ -1,4 +1,4 @@
-package Despacho.Logic;
+package Despacho.Logic.Entidades;
 
 
 import java.time.LocalDate;
@@ -9,20 +9,20 @@ public class Receta {
 
     private String codigo;
     private String idPaciente;
-    private String idMedico;
+    private Medico medico;
     private LocalDate fechaEmision;
-    private List<MedicamentoRecetado> medicamentos;
+    private List<Prescripcion> medicamentos;
     private String observaciones;
 
     public Receta() {
         this.medicamentos = new ArrayList<>();
     }
 
-    public Receta(String codigo, String idPaciente, String idMedico,
+    public Receta(String codigo, String idPaciente, Medico medico,
                   LocalDate fechaEmision, String observaciones) {
         this.codigo = codigo;
         this.idPaciente = idPaciente;
-        this.idMedico = idMedico;
+        this.medico = medico;
         this.fechaEmision = fechaEmision;
         this.medicamentos = new ArrayList<>();
         this.observaciones = observaciones;
@@ -34,19 +34,19 @@ public class Receta {
     public String getIdPaciente() { return idPaciente; }
     public void setIdPaciente(String idPaciente) { this.idPaciente = idPaciente; }
 
-    public String getIdMedico() { return idMedico; }
-    public void setIdMedico(String idMedico) { this.idMedico = idMedico; }
+    public Medico getMedico() { return medico; }
+    public void setMedico(Medico medico) { this.medico = medico; }
 
     public LocalDate getFechaEmision() { return fechaEmision; }
     public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
 
-    public List<MedicamentoRecetado> getMedicamentos() { return medicamentos; }
-    public void setMedicamentos(List<MedicamentoRecetado> medicamentos) { this.medicamentos = medicamentos; }
+    public List<Prescripcion> getMedicamentos() { return medicamentos; }
+    public void setMedicamentos(List<Prescripcion> medicamentos) { this.medicamentos = medicamentos; }
 
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
 
-    public void agregarMedicamento(MedicamentoRecetado med) {
+    public void agregarMedicamento(Prescripcion med) {
         medicamentos.add(med);
     }
 
@@ -55,7 +55,7 @@ public class Receta {
         return "Receta{" +
                 "codigo='" + codigo + '\'' +
                 ", idPaciente='" + idPaciente + '\'' +
-                ", idMedico='" + idMedico + '\'' +
+                ", idMedico='" + medico.getId() + '\'' +
                 ", fechaEmision=" + fechaEmision +
                 ", medicamentos=" + medicamentos +
                 ", observaciones='" + observaciones + '\'' +

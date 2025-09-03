@@ -2,7 +2,7 @@ package Despacho.Presentation.View;
 
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
-import Despacho.Logic.Usuario;
+import Despacho.Logic.Entidades.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,8 +19,10 @@ public class login implements PropertyChangeListener {
     private JButton ingresarButton;
     private JButton cancelarButton;
     private JButton cambiarClaveButton;
+    private JLabel icono;
 
     public login() {
+        icono.setIcon(new ImageIcon(getClass().getResource("/hospital.png")));
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -3,10 +3,10 @@ package Despacho.Data.Listas;
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
-import Despacho.Logic.Farmaceutico;
-import Despacho.Logic.Medico;
-import Despacho.Logic.Medicamento;
-import Despacho.Logic.Receta;
+import Despacho.Logic.Entidades.Farmaceutico;
+import Despacho.Logic.Entidades.Medico;
+import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Receta;
 
 @XmlRootElement(name = "data")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -171,7 +171,7 @@ public class Data {
         if (idMedico == null || idMedico.isBlank()) return List.of();
         String target = idMedico.trim().toLowerCase();
         return recetas.stream()
-                .filter(r -> r.getIdMedico() != null && r.getIdMedico().toLowerCase().equals(target))
+                .filter(r -> r.getMedico().getId() != null && r.getMedico().getId().toLowerCase().equals(target))
                 .toList();
     }
 }

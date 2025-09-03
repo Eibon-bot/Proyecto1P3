@@ -1,14 +1,13 @@
 package Despacho.Presentation.Medico;
 
 import Despacho.Data.Registro.AuthService;
-import Despacho.Presentation.View.ViewPrincipal;
 
 public class Controller {
-    ViewPrincipal view;
+    MediAdmin view;
     Despacho.Presentation.Medico.Model model;
     AuthService auth;
 
-//    public Controller(ViewPrincipal view, Model model, AuthService auth) {
+//    public Controller(MediAdmin view, Model model, AuthService auth) {
 //        this.view = view;
 //        this.model = model;
 //        this.auth = auth;

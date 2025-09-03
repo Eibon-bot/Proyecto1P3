@@ -2,7 +2,7 @@ package Despacho.Presentation.Login;
 
 import java.beans.PropertyChangeListener;
 import Despacho.AbstractModel;
-import Despacho.Logic.Usuario;
+import Despacho.Logic.Entidades.Usuario;
 
 public class Model extends AbstractModel {
     Usuario current;

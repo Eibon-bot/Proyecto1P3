@@ -1,11 +1,11 @@
 package Despacho.Logic;
 
 import Despacho.Data.Listas.Data;
+import Despacho.Logic.Entidades.Farmaceutico;
+import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Medico;
 
-import java.net.ProtocolFamily;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Service {
     private static Service theInstance;

@@ -2,7 +2,7 @@ package Despacho.Presentation.Pacientes;
 
 import javax.swing.*;
 
-public class Pacientes {
+public class PacientesAdmin {
     private JTextField textFieldIdPac;
     private JTextField textFieldNomPac;
     private JButton guardarButtonPac;
