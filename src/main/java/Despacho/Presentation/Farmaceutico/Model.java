@@ -2,7 +2,7 @@ package Despacho.Presentation.Farmaceutico;
 
 import Despacho.AbstractModel;
 import Despacho.Logic.Farmaceutico;
-import Despacho.Logic.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.beans.PropertyChangeListener;

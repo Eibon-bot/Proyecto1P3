@@ -13,6 +13,9 @@ public class Medico extends Usuario {
         super(id, nombre, clave, "medico");
         this.especialidad = especialidad;
     }
+    public Medico() {
+        this("", "",  "", "");
+    }
 
     public Medico(Usuario u) {
         super(u.getId(), u.getNombre(), u.getClave(), "medico");

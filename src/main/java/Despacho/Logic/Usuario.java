@@ -13,7 +13,6 @@ public abstract class Usuario {
         this.clave = clave;
         this.rol   = rol;
     }
-
     public String getId()      { return id; }
     public String getNombre()  { return nombre; }
     public String getClave()   { return clave; }
@@ -21,7 +20,7 @@ public abstract class Usuario {
 
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setClave(String clave)   { this.clave   = clave;   }
-
+    public void setId(String id) { this.id = id; }
 
     public boolean validarClave(String intento) {
         return this.clave.equals(intento);

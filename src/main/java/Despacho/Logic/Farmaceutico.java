@@ -10,7 +10,13 @@ public class Farmaceutico extends Usuario {
     public Farmaceutico(String id, String nombre, String clave) {
         super(id, nombre, clave, "farmaceutico");
     }
+
+    public Farmaceutico() {
+        this("", "",  "");
+    }
+
     public Farmaceutico(Usuario u) {
         super(u.getId(), u.getNombre(), u.getClave(), "farmaceutico");
     }
+
 }
