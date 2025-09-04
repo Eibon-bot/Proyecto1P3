@@ -170,7 +170,7 @@ public class Data {
         if (idPaciente == null || idPaciente.isBlank()) return List.of();
         String target = idPaciente.trim().toLowerCase();
         return recetas.stream()
-                .filter(r -> r.getIdPaciente() != null && r.getIdPaciente().toLowerCase().equals(target))
+                .filter(r -> r.getPaciente().getId() != null && r.getPaciente().getId().toLowerCase().equals(target))
                 .toList();
     }
 

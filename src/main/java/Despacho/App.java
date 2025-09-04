@@ -1,5 +1,6 @@
 package Despacho;
 
+import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.Prescribir.Prescribir;
 import Despacho.Presentation.View.*;
 import Despacho.Presentation.Login.Controller;
@@ -41,6 +42,9 @@ public class App {
             windowPrescribir.pack();
             windowPrescribir.setLocationRelativeTo(null); // Centrar la ventana
             windowPrescribir.setVisible(true);
+
+
+
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al iniciar la aplicación: " + e.getMessage());
