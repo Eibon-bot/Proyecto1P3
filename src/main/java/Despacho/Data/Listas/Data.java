@@ -33,6 +33,13 @@ public class Data {
     @XmlElement(name = "receta")
     private List<Receta> recetas = new ArrayList<>();
 
+
+    @XmlElementWrapper(name = "ListaPacientes")
+    @XmlElement(name = "paciente")
+    private List<Despacho.Logic.Entidades.Paciente> pacientes = new ArrayList<>();
+
+
+
     public Data() {
         medicos = new ArrayList<>();
         farmaceuticos = new ArrayList<>();
@@ -174,5 +181,34 @@ public class Data {
                 .filter(r -> r.getMedico().getId() != null && r.getMedico().getId().toLowerCase().equals(target))
                 .toList();
     }
+
+
+    // ====== Métodos Pacientes ======
+
+    public List<Despacho.Logic.Entidades.Paciente> getPacientes() {
+        return pacientes;
+    }
+
+    public void setPacientes(List<Despacho.Logic.Entidades.Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
+
+
+    public void agregarPaciente(Despacho.Logic.Entidades.Paciente p) {
+        if (p == null) return;
+        pacientes.add(p);
+
+    }
+
+    public void eliminarPaciente(Despacho.Logic.Entidades.Paciente p) {
+        if (p == null) return;
+        pacientes.remove(p);
+    }
+
+
+
 }
+
+
+
 

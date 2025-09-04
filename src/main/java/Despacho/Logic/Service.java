@@ -5,6 +5,9 @@ import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medicamento;
 import Despacho.Logic.Entidades.Medico;
 
+import Despacho.Data.Listas.GestorDatosPacientes;
+import Despacho.Logic.Entidades.Paciente;
+
 import java.util.List;
 
 public class Service {
@@ -140,4 +143,53 @@ public class Service {
     public List<Medicamento> findAllMedicamento() {
         return data.getMedicamentos();
     }
+
+
+    // =============== Pacientes===============
+    private final GestorDatosPacientes gPac = new GestorDatosPacientes();
+
+    public void createPaciente(Paciente p) throws Exception {
+        List<Paciente> all = gPac.cargar();
+        boolean exists = all.stream().anyMatch(x -> x.getId() != null && x.getId().equalsIgnoreCase(p.getId()));
+        if (exists) throw new Exception("Paciente ya existe");
+        all.add(p);
+        gPac.guardar(all);
+    }
+
+    public void deletePaciente(Paciente p) throws Exception {
+        List<Paciente> all = gPac.cargar();
+        boolean removed = all.removeIf(x -> x.getId() != null && x.getId().equalsIgnoreCase(p.getId()));
+        if (!removed) throw new Exception("Paciente no existe");
+        gPac.guardar(all);
+    }
+
+    public Paciente readPacienteById(String id) throws Exception {
+        return gPac.cargar().stream()
+                .filter(x -> x.getId() != null && x.getId().equalsIgnoreCase(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Paciente no existe"));
+    }
+
+    public List<Paciente> findAllPaciente() {
+        return gPac.cargar();
+    }
+
+
+    public List<Paciente> buscarPacientes(String texto) {
+        if (texto == null) texto = "";
+        String t = texto.trim().toLowerCase();
+        if (t.isEmpty()) return findAllPaciente();
+        List<Paciente> all = gPac.cargar();
+        List<Paciente> out = new java.util.ArrayList<>();
+        for (Paciente p : all) {
+            String id = p.getId() == null ? "" : p.getId().toLowerCase();
+            String nom = p.getNombre() == null ? "" : p.getNombre().toLowerCase();
+            if (id.contains(t) || nom.contains(t)) out.add(p);
+        }
+        return out;
+    }
+
 }
+
+
+
