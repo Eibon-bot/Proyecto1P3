@@ -1,10 +1,14 @@
 package Despacho.Presentation.Prescribir;
 
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Presentation.Login.Controller;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -36,6 +40,21 @@ public class Prescribir implements PropertyChangeListener {
         fechaRetiroChooser.setDateFormatString("dd/MM/yyyy");
         panelfecha.setLayout(new java.awt.BorderLayout());
         panelfecha.add(fechaRetiroChooser, BorderLayout.CENTER);
+
+        buscarPacienteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BuscarPacienteView dialogBuscarPaciente = new BuscarPacienteView();
+                dialogBuscarPaciente.setModal(true);
+                dialogBuscarPaciente.setLocationRelativeTo(Prescribir);
+                dialogBuscarPaciente.setVisible(true);
+
+//                if (dialogBuscarPaciente.getPacienteSeleccionado() != null) {
+//                    controller.setPaciente(dialogBuscarPaciente.getPacienteSeleccionado());
+//                }
+
+            }
+        });
     }
 
     public JPanel getPrescribir() {
@@ -58,14 +77,22 @@ public class Prescribir implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-//            case Model.CURRENT:
-//                Usuario nuevoUsuario = model.getCurrent();
+            case Despacho.Presentation.Prescribir.Model.CURRENT:
+                Paciente p = model.getCurrentPaciente();
+                if (p != null) {
+                    pacienteLabel.setText("Paciente: " + p.getNombre());
+                } else {
+                    pacienteLabel.setText("Paciente no seleccionado");
+                }
+                break;
 
-//                } else {
-
-//                }
+//            case Despacho.Presentation.Prescribir.Model.:
+//                // refrescar la tabla con medicamentos
+//                int[] cols = { /* columnas necesarias */ };
+//                table1.setModel(new MedicamentoTableModel(cols, model.getMedicamentos()));
 //                break;
         }
+
     }
 }
 
