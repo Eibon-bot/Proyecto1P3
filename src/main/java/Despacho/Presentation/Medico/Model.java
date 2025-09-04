@@ -1,33 +1,46 @@
 package Despacho.Presentation.Medico;
 
 import Despacho.AbstractModel;
-import Despacho.Logic.Entidades.Usuario;
+import Despacho.Logic.Entidades.Medico;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
-    Usuario current;
+    Medico current;
+    List<Medico> list;
 
 
     public static final String CURRENT = "current";
-
+    public static final String LIST = "list";
     public Model() {
-        current=null;
-
+        current=new Medico("","","","");
+        list=new ArrayList<Medico>();
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         super.addPropertyChangeListener(listener);
         firePropertyChange(CURRENT);
+        firePropertyChange(LIST);
     }
 
-    public Usuario getCurrent() {
+    public Medico getCurrent() {
         return current;
     }
 
-    public void setCurrent(Usuario usuario) {
-        this.current = usuario;
+    public void setCurrent(Medico current) {
+        this.current = current;
         firePropertyChange(CURRENT);
+    }
+
+    public List<Medico> getList() {
+        return list;
+    }
+
+    public void setList(List<Medico> list) {
+        this.list = list;
+        firePropertyChange(LIST);
     }
 }
