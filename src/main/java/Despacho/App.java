@@ -2,6 +2,7 @@ package Despacho;
 
 import Despacho.Data.Listas.Data;
 import Despacho.Data.Listas.XmlPersister;
+import Despacho.Logic.Service;
 import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
@@ -38,6 +39,7 @@ public class App {
             Despacho.Presentation.Farmaceutico.Controller controllerf=new Despacho.Presentation.Farmaceutico.Controller(farmaView,modelf);
             farmaView.setModel(modelf);
             farmaView.setController(controllerf);
+            modelf.setList(Service.instance().findAllFarmaceutico());
 
             JFrame farmaWindow = new JFrame("Administración de Farmacéuticos");
             farmaWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
