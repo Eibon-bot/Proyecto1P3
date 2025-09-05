@@ -1,12 +1,8 @@
 package Despacho.Logic;
 
+import Despacho.Data.Listas.XmlPersister;
 import Despacho.Data.Listas.Data;
-import Despacho.Logic.Entidades.Farmaceutico;
-import Despacho.Logic.Entidades.Medicamento;
-import Despacho.Logic.Entidades.Medico;
-
-import Despacho.Data.Listas.GestorDatosPacientes;
-import Despacho.Logic.Entidades.Paciente;
+import Despacho.Logic.Entidades.*;
 
 import java.util.List;
 
@@ -20,10 +16,21 @@ public class Service {
 
     private Data data;
 
-    private Service() {
-        data = new Data();
+    private Service(){
+        try{
+            data= XmlPersister.instance().load();
+        }
+        catch(Exception e){
+            data =  new Data();
+        }
     }
-
+    public void store(){
+        try {
+            XmlPersister.instance().store(data);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     // =============== Medicos ===============
     public void createMedico(Medico e) throws Exception {
         Medico result = data.getMedicos().stream()
@@ -31,7 +38,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result == null) {
-            data.agregarMedico(e);
+            data.getMedicos().add(e);
         } else {
             throw new Exception("Medico ya existe");
         }
@@ -43,7 +50,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.eliminarMedico(e);
+            data.getMedicos().remove(e);
         } else {
             throw new Exception("Medico no existe");
         }
@@ -71,7 +78,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result == null) {
-            data.agregarFarmaceutico(e);
+            data.getFarmaceuticos().add(e);
         } else {
             throw new Exception("Farmaceutico ya existe");
         }
@@ -83,7 +90,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.eliminarFarmaceutico(e);
+            data.getFarmaceuticos().remove(e);
         } else {
             throw new Exception("Farmaceutico no existe");
         }
@@ -111,7 +118,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result == null) {
-            data.agregarMedicamento(e);
+            data.getMedicamentos().add(e);
         } else {
             throw new Exception("El medicamento ya existe");
         }
@@ -123,7 +130,7 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.eliminarMedicamento(e);
+            data.getMedicamentos().remove(e);
         } else {
             throw new Exception("El medicamento no existe");
         }
@@ -146,48 +153,54 @@ public class Service {
 
 
     // =============== Pacientes===============
-    private final GestorDatosPacientes gPac = new GestorDatosPacientes();
 
-    public void createPaciente(Paciente p) throws Exception {
-        List<Paciente> all = gPac.cargar();
-        boolean exists = all.stream().anyMatch(x -> x.getId() != null && x.getId().equalsIgnoreCase(p.getId()));
-        if (exists) throw new Exception("Paciente ya existe");
-        all.add(p);
-        gPac.guardar(all);
-    }
-
-    public void deletePaciente(Paciente p) throws Exception {
-        List<Paciente> all = gPac.cargar();
-        boolean removed = all.removeIf(x -> x.getId() != null && x.getId().equalsIgnoreCase(p.getId()));
-        if (!removed) throw new Exception("Paciente no existe");
-        gPac.guardar(all);
-    }
-
-    public Paciente readPacienteById(String id) throws Exception {
-        return gPac.cargar().stream()
-                .filter(x -> x.getId() != null && x.getId().equalsIgnoreCase(id))
+    public void createPaciente(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Paciente no existe"));
-    }
-
-    public List<Paciente> findAllPaciente() {
-        return gPac.cargar();
-    }
-
-
-    public List<Paciente> buscarPacientes(String texto) {
-        if (texto == null) texto = "";
-        String t = texto.trim().toLowerCase();
-        if (t.isEmpty()) return findAllPaciente();
-        List<Paciente> all = gPac.cargar();
-        List<Paciente> out = new java.util.ArrayList<>();
-        for (Paciente p : all) {
-            String id = p.getId() == null ? "" : p.getId().toLowerCase();
-            String nom = p.getNombre() == null ? "" : p.getNombre().toLowerCase();
-            if (id.contains(t) || nom.contains(t)) out.add(p);
+                .orElse(null);
+        if (result == null) {
+            data.getPacientes().add(e);
+        } else {
+            throw new Exception("El Paciente ya existe");
         }
-        return out;
     }
+
+    public void deletePaciente(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(m -> m.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getPacientes().remove(e);
+        } else {
+            throw new Exception("El Paciente no existe");
+        }
+    }
+
+    public Paciente readPaciente(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            return result;
+        } else {
+            throw new Exception("Paciente no existe");
+        }
+    }
+
+    public List<Medico> findAllMedicos() {return data.getMedicos();}
+    public List<Farmaceutico> findAllFarmaceuticos() {
+        return data.getFarmaceuticos();
+    }
+    public List<Medicamento> findAllMedicamentos() {
+        return data.getMedicamentos();
+    }
+    public List<Paciente> findAllPaciente() { return data.getPacientes(); }
+    public List<Receta> findAllRecetas() { return data.getRecetas(); }
+
+
 
 }
 

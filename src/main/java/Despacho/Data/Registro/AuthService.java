@@ -1,7 +1,5 @@
 package Despacho.Data.Registro;
 
-import Despacho.Data.Listas.GestorDatosFarmaceuticos;
-import Despacho.Data.Listas.GestorDatosMedicos;
 import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Usuario;

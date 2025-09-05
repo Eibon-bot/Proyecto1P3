@@ -14,11 +14,7 @@ public class Controller {
         this.model = model;
         view.setController(this);
         view.setModel(model);
-
-
-        List<Paciente> all = Service.instance().findAllPaciente();
-        model.setList(all);
-        model.setCurrent(new Paciente());
+        model.setList(Service.instance().findAllPaciente());
     }
 
     public void create(Paciente p) throws Exception {
@@ -32,11 +28,22 @@ public class Controller {
         model.setList(Service.instance().findAllPaciente());
         model.setCurrent(new Paciente());
     }
-
-
-    public void search(String texto) {
-        model.setList(Service.instance().buscarPacientes(texto));
+    public void read(String id) throws Exception {
+        Paciente e = new Paciente();
+        e.setId(id);
+        try {
+            model.setCurrent(Service.instance().readPaciente(e));
+        } catch (Exception ex) {
+            Paciente b = new Paciente();
+            b.setId(id);
+            model.setCurrent(b);
+            throw ex;
+        }
     }
+
+
+
+
 
 
     public void selectFromList(Paciente p) {

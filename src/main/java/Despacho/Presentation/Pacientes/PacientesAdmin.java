@@ -73,7 +73,11 @@ public class PacientesAdmin implements PropertyChangeListener {
 
         buscarButtonPac.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
-                controller.search(textFieldBusqPac.getText());
+                try {
+                    controller.read(textFieldBusqPac.getText());
+                } catch (Exception ex) {
+                     JOptionPane.showMessageDialog(IngresarPaciente, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
