@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <data>
-    <ListaFarmaceuticos/>
+    <ListaFarmaceuticos>
+        <farmaceutico>
+            <clave></clave>
+            <id>farma2</id>
+            <nombre>juan</nombre>
+        </farmaceutico>
+    </ListaFarmaceuticos>
     <ListaMedicamentos/>
     <ListaMedicos/>
     <ListaRecetas/>

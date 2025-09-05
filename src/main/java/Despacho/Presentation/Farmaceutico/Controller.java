@@ -16,11 +16,13 @@ public class Controller {
 
     public void create(Farmaceutico e) throws  Exception{
         Service.instance().createFarmaceutico(e);
+        Service.instance().store();
         model.setCurrent(new Farmaceutico());
         model.setList(Service.instance().findAllFarmaceutico());
     }
     public void delete(Farmaceutico e) throws Exception {
         Service.instance().deleteFarmaceutico(e);
+        Service.instance().store();
         model.setCurrent(new Farmaceutico());
         model.setList(Service.instance().findAllFarmaceutico());
     }
