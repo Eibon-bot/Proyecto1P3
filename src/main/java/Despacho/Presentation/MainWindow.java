@@ -13,7 +13,7 @@ public class MainWindow extends JFrame {
         this.user = user;
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(1000, 650));
+        setMinimumSize(new Dimension(1000, 450));
 
         JTabbedPane tabs = new JTabbedPane();
 

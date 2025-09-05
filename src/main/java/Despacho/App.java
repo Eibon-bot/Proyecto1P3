@@ -1,5 +1,8 @@
 package Despacho;
 
+import Despacho.Data.Listas.Data;
+import Despacho.Data.Listas.XmlPersister;
+import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
@@ -15,10 +18,8 @@ public class App {
         try { UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); } catch (Exception ignored) {}
 
         try {
-            GestorDatosFarmaceuticos gf = new GestorDatosFarmaceuticos();
-            GestorDatosMedicos gm = new GestorDatosMedicos();
             Model model = new Model();
-            AuthService auth = new AuthService(gm, gf);
+            AuthService auth = new AuthService();
             login loginView = new login();
             Controller controller = new Controller(loginView, model, auth);
 
@@ -29,9 +30,27 @@ public class App {
             window.setLocationRelativeTo(null);
             window.setVisible(true);
 
+
+            // para probar
+
+            FarmaAdmin farmaView = new FarmaAdmin();
+            Despacho.Presentation.Farmaceutico.Model modelf=new Despacho.Presentation.Farmaceutico.Model();
+            Despacho.Presentation.Farmaceutico.Controller controllerf=new Despacho.Presentation.Farmaceutico.Controller(farmaView,modelf);
+            farmaView.setModel(modelf);
+            farmaView.setController(controllerf);
+
+            JFrame farmaWindow = new JFrame("Administración de Farmacéuticos");
+            farmaWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            farmaWindow.setContentPane(farmaView.getPanel());
+            farmaWindow.pack();
+            farmaWindow.setLocationRelativeTo(null);
+            farmaWindow.setVisible(true);
+
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al iniciar la aplicación: " + e.getMessage());
         }
     }
 }
+
 

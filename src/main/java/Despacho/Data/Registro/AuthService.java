@@ -1,5 +1,7 @@
 package Despacho.Data.Registro;
 
+import Despacho.Data.Listas.Data;
+import Despacho.Data.Listas.XmlPersister;
 import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Usuario;
@@ -10,36 +12,32 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AuthService {
-    private final GestorDatosMedicos GestorMed;
-    private final GestorDatosFarmaceuticos GestorFarma;
-
     private final Map<String, Usuario> usuarios = new HashMap<>();
 
-    public AuthService(GestorDatosMedicos gestorMed, GestorDatosFarmaceuticos gestorFarma) throws Exception {
-        this.GestorMed = gestorMed;
-        this.GestorFarma = gestorFarma;
+    public AuthService() throws Exception {
         cargarEnMemoria();
     }
 
     private void cargarEnMemoria() throws Exception {
+        Data data = XmlPersister.instance().load();
 
-
-        for (Usuario u : GestorMed.cargar()) {
-            if (u != null && u.getId() != null) {
-                usuarios.put(u.getId(), u);
-            }
-        }
-        for (Usuario u : GestorFarma.cargar()) {
-            if (u != null && u.getId() != null) {
-                usuarios.put(u.getId(), u);
+        // Cargar médicos
+        for (Medico m : data.getMedicos()) {
+            if (m != null && m.getId() != null) {
+                usuarios.put(m.getId(), m);
             }
         }
 
-        // ---- SEED EN MEMORIA  ----
+        // Cargar farmacéuticos
+        for (Farmaceutico f : data.getFarmaceuticos()) {
+            if (f != null && f.getId() != null) {
+                usuarios.put(f.getId(), f);
+            }
+        }
 
+        // ---- SEED EN MEMORIA ----
         usuarios.putIfAbsent("m1", new Medico("m1", "Dr. Demo", "m1", "General"));
         usuarios.putIfAbsent("f1", new Farmaceutico("f1", "Farma Demo", "f1"));
-        // ------------------------------------------------
     }
 
     public Usuario login(String id, String clave) throws Exception {
@@ -58,34 +56,33 @@ public class AuthService {
         if (u == null) throw new Exception("Usuario no encontrado");
         if (claveNueva == null || claveNueva.isEmpty()) throw new Exception("La nueva clave no puede estar vacía");
 
+        // Validar clave actual
+        if (!u.validarClave(claveActual)) throw new Exception("Clave actual incorrecta");
+
+        // Cambiar en memoria
+        u.setClave(claveNueva);
+        usuarios.put(id, u);
+
+        // Persistir en archivo XML
+        Data data = XmlPersister.instance().load();
 
         if (u instanceof Medico) {
-            GestorMed.cambiarClave(id, claveActual, claveNueva);
-
-            List<Medico> medicos = GestorMed.cargar();
-            for (Medico m : medicos) {
+            for (Medico m : data.getMedicos()) {
                 if (Objects.equals(m.getId(), id)) {
-                    usuarios.put(id, m);
-                    return;
+                    m.setClave(claveNueva);
+                    break;
                 }
             }
         } else if (u instanceof Farmaceutico) {
-            GestorFarma.cambiarClave(id, claveActual, claveNueva);
-
-
-            List<Farmaceutico> farmas = GestorFarma.cargar();
-            for (Farmaceutico f : farmas) {
+            for (Farmaceutico f : data.getFarmaceuticos()) {
                 if (Objects.equals(f.getId(), id)) {
-                    usuarios.put(id, f);
-                    return;
+                    f.setClave(claveNueva);
+                    break;
                 }
             }
-        } else {
-
-            if (!u.validarClave(claveActual)) throw new Exception("Clave actual incorrecta");
-
-            u.setClave(claveNueva);
-            usuarios.put(id, u);
         }
+
+        XmlPersister.instance().store(data);
     }
 }
+
