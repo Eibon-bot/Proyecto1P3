@@ -86,18 +86,20 @@ public class Service {
 
     public void deleteFarmaceutico(Farmaceutico e) throws Exception {
         Farmaceutico result = data.getFarmaceuticos().stream()
-                .filter(m -> m.getId().equals(e.getId()))
+                .filter(f -> f.getId().equals(e.getId()))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.getFarmaceuticos().remove(e);
+            data.getFarmaceuticos().remove(result);
+            store();
         } else {
             throw new Exception("Farmaceutico no existe");
         }
     }
-    public Farmaceutico readFarmaceutico(Farmaceutico e) throws Exception {
+
+    public Farmaceutico readFarmaceutico(String nombre) throws Exception {
         Farmaceutico result = data.getFarmaceuticos().stream()
-                .filter(i -> i.getId().equals(e.getId()))
+                .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
         if (result != null) {

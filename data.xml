@@ -3,8 +3,8 @@
     <ListaFarmaceuticos>
         <farmaceutico>
             <clave></clave>
-            <id>farma2</id>
-            <nombre>juan</nombre>
+            <id>farma3</id>
+            <nombre>pedro</nombre>
         </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos/>

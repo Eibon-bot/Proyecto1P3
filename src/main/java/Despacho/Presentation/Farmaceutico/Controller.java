@@ -28,10 +28,8 @@ public class Controller {
     }
 
     public void read(String nombre) throws Exception {
-        Farmaceutico e = new Farmaceutico();
-        e.setNombre(nombre);
         try {
-            model.setCurrent(Service.instance().readFarmaceutico(e));
+            model.setCurrent(Service.instance().readFarmaceutico(nombre));
         } catch (Exception ex) {
             Farmaceutico b = new Farmaceutico();
             b.setNombre(nombre);
