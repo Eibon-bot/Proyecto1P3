@@ -38,26 +38,29 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result == null) {
+            e.setClave(e.getId());
             data.getMedicos().add(e);
+            store();
         } else {
-            throw new Exception("Medico ya existe");
+            throw new Exception("Farmaceutico ya existe");
         }
     }
 
     public void deleteMedico(Medico e) throws Exception {
         Medico result = data.getMedicos().stream()
-                .filter(m -> m.getId().equals(e.getId()))
+                .filter(f -> f.getId().equals(e.getId()))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.getMedicos().remove(e);
+            data.getMedicos().remove(result);
+            store();
         } else {
             throw new Exception("Medico no existe");
         }
     }
-    public Medico readMedico(Medico e) throws Exception {
+    public Medico readMedico(String nombre) throws Exception {
         Medico result = data.getMedicos().stream()
-                .filter(i -> i.getId().equals(e.getId()))
+                .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
@@ -69,6 +72,22 @@ public class Service {
 
     public List<Medico> findAllMedico() {
         return data.getMedicos();
+    }
+
+    public String generarNuevoIdMedico() {
+        List<Medico> lista = Service.instance().findAllMedico();
+        int max = 0;
+        for (Medico m : lista) {
+            String id = m.getId();
+            if (id != null && id.startsWith("MED-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(6));
+                    if (num > max) max = num;
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        int nuevo = max + 1;
+        return String.format("MED-%04d", nuevo);
     }
 
     // =============== Farmaceuticos ===============

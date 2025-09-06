@@ -33,7 +33,14 @@
         </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos/>
-    <ListaMedicos/>
+    <ListaMedicos>
+        <medico>
+            <clave>MED-0006</clave>
+            <id>MED-0006</id>
+            <nombre>andrea</nombre>
+            <especialidad>pedriatria</especialidad>
+        </medico>
+    </ListaMedicos>
     <ListaRecetas/>
     <ListaPacientes/>
 </data>

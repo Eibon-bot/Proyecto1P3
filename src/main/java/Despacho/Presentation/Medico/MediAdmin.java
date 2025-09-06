@@ -89,6 +89,7 @@ public class MediAdmin implements PropertyChangeListener {
     Despacho.Presentation.Medico.Model model;
 
     public void setController(Controller controller) {
+        controller.clear();
         this.controller = controller;
     }
 
@@ -101,8 +102,8 @@ public class MediAdmin implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Despacho.Presentation.Farmaceutico.Model.LIST:
-                int[] cols = {Despacho.Presentation.Farmaceutico.TableModel.ID, Despacho.Presentation.Farmaceutico.TableModel.NOMBRE};
+            case Despacho.Presentation.Medico.Model.LIST:
+                int[] cols = {Despacho.Presentation.Medico.TableModel.ID, Despacho.Presentation.Medico.TableModel.NOMBRE, Despacho.Presentation.Medico.TableModel.ESPECIALIDAD};
                 meditable.setModel(new TableModel(cols,model.getList()));
                 break;
             case Model.CURRENT:
@@ -124,6 +125,7 @@ public class MediAdmin implements PropertyChangeListener {
         Medico e = new Medico();
         e.setId(textFieldIdMed.getText());
         e.setNombre(textFieldNomMed.getText());
+        e.setEspecialidad(textFieldEspMed.getText());
 
         return e;
     }
@@ -146,6 +148,15 @@ public class MediAdmin implements PropertyChangeListener {
         } else {
             textFieldNomMed.setBackground(null);
             textFieldNomMed.setToolTipText(null);
+        }
+
+        if (textFieldEspMed.getText().isEmpty()) {
+            valid = false;
+            textFieldEspMed.setBackground(App.BACKGROUND_ERROR);
+            textFieldEspMed.setToolTipText("Especialidad requerida");
+        } else {
+            textFieldEspMed.setBackground(null);
+            textFieldEspMed.setToolTipText(null);
         }
 
         return valid;

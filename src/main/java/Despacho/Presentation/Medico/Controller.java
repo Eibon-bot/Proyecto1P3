@@ -1,5 +1,6 @@
 package Despacho.Presentation.Medico;
 
+import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Medico;
 
@@ -16,20 +17,20 @@ public class Controller {
 
     public void create(Medico e) throws  Exception{
         Service.instance().createMedico(e);
-        model.setCurrent(new Medico());
-        model.setList(Service.instance().findAllMedico());
+        Service.instance().store();
+        clear();
+        model.setList(Service.instance().findAllMedicos());
     }
     public void delete(Medico e) throws Exception {
         Service.instance().deleteMedico(e);
+        Service.instance().store();
         model.setCurrent(new Medico());
         model.setList(Service.instance().findAllMedico());
     }
 
     public void read(String nombre) throws Exception {
-        Medico e = new Medico();
-        e.setNombre(nombre);
         try {
-            model.setCurrent(Service.instance().readMedico(e));
+            model.setCurrent(Service.instance().readMedico(nombre));
         } catch (Exception ex) {
             Medico b = new Medico();
             b.setNombre(nombre);
@@ -39,7 +40,9 @@ public class Controller {
     }
 
     public void clear() {
-        model.setCurrent(new Medico());
+        Medico m= new Medico();
+        m.setId(Service.instance().generarNuevoIdMedico());
+        model.setCurrent(m);
     }
 
 }

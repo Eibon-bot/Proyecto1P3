@@ -4,6 +4,7 @@ import Despacho.Data.Listas.Data;
 import Despacho.Data.Listas.XmlPersister;
 import Despacho.Logic.Service;
 import Despacho.Presentation.Farmaceutico.FarmaAdmin;
+import Despacho.Presentation.Medico.MediAdmin;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
@@ -34,19 +35,19 @@ public class App {
 
             // para probar
 
-            FarmaAdmin farmaView = new FarmaAdmin();
-            Despacho.Presentation.Farmaceutico.Model modelf=new Despacho.Presentation.Farmaceutico.Model();
-            Despacho.Presentation.Farmaceutico.Controller controllerf=new Despacho.Presentation.Farmaceutico.Controller(farmaView,modelf);
-            farmaView.setModel(modelf);
-            farmaView.setController(controllerf);
-            modelf.setList(Service.instance().findAllFarmaceutico());
+            MediAdmin MedView = new MediAdmin();
+            Despacho.Presentation.Medico.Model modelm=new Despacho.Presentation.Medico.Model();
+            Despacho.Presentation.Medico.Controller controllerm=new Despacho.Presentation.Medico.Controller(MedView,modelm);
+            MedView.setModel(modelm);
+            MedView.setController(controllerm);
+            modelm.setList(Service.instance().findAllMedicos());
 
-            JFrame farmaWindow = new JFrame("Administración de Farmacéuticos");
-            farmaWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            farmaWindow.setContentPane(farmaView.getPanel());
-            farmaWindow.pack();
-            farmaWindow.setLocationRelativeTo(null);
-            farmaWindow.setVisible(true);
+            JFrame mediWindow = new JFrame("Administración de Medicos");
+            mediWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            mediWindow.setContentPane(MedView.getPanel());
+            mediWindow.pack();
+            mediWindow.setLocationRelativeTo(null);
+            mediWindow.setVisible(true);
 
 
         } catch (Exception e) {
