@@ -20,8 +20,9 @@ public class PacientesAdmin implements PropertyChangeListener {
     private JTextField textFieldBusqPac;
     private JButton buscarButtonPac;
     private JButton reporteButtonPac;  // (opcional; por ahora queda sin handler real)
-    private JComboBox<Paciente> comboBoxPac;
+//    private JComboBox<Paciente> comboBoxPac;
     private JPanel IngresarPaciente;
+    private JTable tablePacientes;
 
 
     private Controller controller;
@@ -89,32 +90,35 @@ public class PacientesAdmin implements PropertyChangeListener {
         });
 
 
-        comboBoxPac.setRenderer(new DefaultListCellRenderer() {
-            @Override public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                                    boolean isSelected, boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value instanceof Paciente) {
-                    Paciente p = (Paciente) value;
-                    setText((p.getId() != null ? p.getId() : "") + " - " + (p.getNombre() != null ? p.getNombre() : ""));
-                } else if (value == null && index == -1) {
-                    setText("");
-                }
-                return this;
-            }
-        });
-        comboBoxPac.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
-                Object sel = comboBoxPac.getSelectedItem();
-                if (sel instanceof Paciente) controller.selectFromList((Paciente) sel);
-            }
-        });
+//        comboBoxPac.setRenderer(new DefaultListCellRenderer() {
+//            @Override public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+//                                                                    boolean isSelected, boolean cellHasFocus) {
+//                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+//                if (value instanceof Paciente) {
+//                    Paciente p = (Paciente) value;
+//                    setText((p.getId() != null ? p.getId() : "") + " - " + (p.getNombre() != null ? p.getNombre() : ""));
+//                } else if (value == null && index == -1) {
+//                    setText("");
+//                }
+//                return this;
+//            }
+//        });
+//        comboBoxPac.addActionListener(new ActionListener() {
+//            @Override public void actionPerformed(ActionEvent e) {
+//                Object sel = comboBoxPac.getSelectedItem();
+//                if (sel instanceof Paciente) controller.selectFromList((Paciente) sel);
+//            }
+//        });
     }
 
 
     public JPanel getPanel() { return IngresarPaciente; }
 
 
-    public void setController(Controller controller) { this.controller = controller; }
+    public void setController(Controller controller) {
+        controller.clear();
+        this.controller = controller; }
+
     public void setModel(Model model) {
         this.model = model;
         this.model.addPropertyChangeListener(this);
@@ -124,34 +128,20 @@ public class PacientesAdmin implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model.LIST:
-                DefaultComboBoxModel<Paciente> cbm = new DefaultComboBoxModel<>();
-                for (Paciente p : model.getList()) cbm.addElement(p);
-                comboBoxPac.setModel(cbm);
+            case Despacho.Presentation.Pacientes.Model.LIST:
+                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE};
+                tablePacientes.setModel(new TableModelPacientes(cols,model.getList()));
                 break;
-
-            case Model.CURRENT:
-                Paciente c = model.getCurrent();
-                textFieldIdPac.setText(c.getId() == null ? "" : c.getId());
-                textFieldNomPac.setText(c.getNombre() == null ? "" : c.getNombre());
-
-
-                textFieldIdPac.setBackground(null); textFieldIdPac.setToolTipText(null);
-                textFieldNomPac.setBackground(null); textFieldNomPac.setToolTipText(null);
-
-
-                ComboBoxModel<Paciente> modelCB = comboBoxPac.getModel();
-                for (int i = 0; i < modelCB.getSize(); i++) {
-                    Paciente pi = modelCB.getElementAt(i);
-                    if (pi != null && c.getId() != null && c.getId().equalsIgnoreCase(pi.getId())) {
-                        comboBoxPac.setSelectedIndex(i);
-                        break;
-                    }
-                }
+            case Despacho.Presentation.Pacientes.Model.CURRENT:
+                textFieldIdPac.setText(model.getCurrent().getId());
+                textFieldNomPac.setText(model.getCurrent().getNombre());
+                textFieldIdPac.setBackground(null);
+                textFieldIdPac.setToolTipText(null);
+                textFieldNomPac.setBackground(null);
+                textFieldNomPac.setToolTipText(null);
                 break;
         }
-        IngresarPaciente.revalidate();
-        IngresarPaciente.repaint();
+        this.IngresarPaciente.revalidate();
     }
 
 

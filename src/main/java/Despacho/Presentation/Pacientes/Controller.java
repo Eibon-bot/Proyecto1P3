@@ -1,5 +1,6 @@
 package Despacho.Presentation.Pacientes;
 
+import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
 
@@ -14,37 +15,31 @@ public class Controller {
         this.model = model;
         view.setController(this);
         view.setModel(model);
+    }
+
+    public void create(Paciente e) throws  Exception{
+        Service.instance().createPaciente(e);
+        Service.instance().store();
+        clear();
         model.setList(Service.instance().findAllPaciente());
     }
 
-    public void create(Paciente p) throws Exception {
-        Service.instance().createPaciente(p);
-        model.setList(Service.instance().findAllPaciente());
+    public void delete(Paciente e) throws Exception {
+        Service.instance().deletePaciente(e);
+        Service.instance().store();
         model.setCurrent(new Paciente());
-    }
-
-    public void delete(Paciente p) throws Exception {
-        Service.instance().deletePaciente(p);
         model.setList(Service.instance().findAllPaciente());
-        model.setCurrent(new Paciente());
     }
-    public void read(String id) throws Exception {
-        Paciente e = new Paciente();
-        e.setId(id);
+    public void read(String nombre) throws Exception {
         try {
-            model.setCurrent(Service.instance().readPaciente(e));
+            model.setCurrent(Service.instance().readPaciente(nombre));
         } catch (Exception ex) {
             Paciente b = new Paciente();
-            b.setId(id);
+            b.setNombre(nombre);
             model.setCurrent(b);
             throw ex;
         }
     }
-
-
-
-
-
 
     public void selectFromList(Paciente p) {
         if (p != null) {
@@ -53,6 +48,8 @@ public class Controller {
     }
 
     public void clear() {
-        model.setCurrent(new Paciente());
+        Paciente p = new Paciente();
+        p.setId(Service.instance().generarNuevoIdPaciente());
+        model.setCurrent(p);
     }
 }

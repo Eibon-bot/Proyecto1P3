@@ -42,5 +42,10 @@
         </medico>
     </ListaMedicos>
     <ListaRecetas/>
-    <ListaPacientes/>
+    <ListaPacientes>
+        <paciente>
+            <id>PAC-0001</id>
+            <nombre>isaac</nombre>
+        </paciente>
+    </ListaPacientes>
 </data>

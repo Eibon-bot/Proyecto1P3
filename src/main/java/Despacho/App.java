@@ -5,6 +5,7 @@ import Despacho.Data.Listas.XmlPersister;
 import Despacho.Logic.Service;
 import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.Medico.MediAdmin;
+import Despacho.Presentation.Pacientes.PacientesAdmin;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
@@ -35,19 +36,19 @@ public class App {
 
             // para probar
 
-            MediAdmin MedView = new MediAdmin();
-            Despacho.Presentation.Medico.Model modelm=new Despacho.Presentation.Medico.Model();
-            Despacho.Presentation.Medico.Controller controllerm=new Despacho.Presentation.Medico.Controller(MedView,modelm);
-            MedView.setModel(modelm);
-            MedView.setController(controllerm);
-            modelm.setList(Service.instance().findAllMedicos());
+            PacientesAdmin pView = new PacientesAdmin();
+            Despacho.Presentation.Pacientes.Model modelm=new Despacho.Presentation.Pacientes.Model();
+            Despacho.Presentation.Pacientes.Controller controllerm=new Despacho.Presentation.Pacientes.Controller(pView,modelm);
+            pView.setModel(modelm);
+            pView.setController(controllerm);
+            modelm.setList(Service.instance().findAllPaciente());
 
-            JFrame mediWindow = new JFrame("Administración de Medicos");
-            mediWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            mediWindow.setContentPane(MedView.getPanel());
-            mediWindow.pack();
-            mediWindow.setLocationRelativeTo(null);
-            mediWindow.setVisible(true);
+            JFrame pacWindow = new JFrame("Administración de Pacientes");
+            pacWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            pacWindow.setContentPane(pView.getPanel());
+            pacWindow.pack();
+            pacWindow.setLocationRelativeTo(null);
+            pacWindow.setVisible(true);
 
 
         } catch (Exception e) {

@@ -210,19 +210,20 @@ public class Service {
 
     public void deletePaciente(Paciente e) throws Exception {
         Paciente result = data.getPacientes().stream()
-                .filter(m -> m.getId().equals(e.getId()))
+                .filter(f -> f.getId().equals(e.getId()))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.getPacientes().remove(e);
+            data.getPacientes().remove(result);
+            store();
         } else {
-            throw new Exception("El Paciente no existe");
+            throw new Exception("Paciente no existe");
         }
     }
 
-    public Paciente readPaciente(Paciente e) throws Exception {
+    public Paciente readPaciente(String nombre) throws Exception {
         Paciente result = data.getPacientes().stream()
-                .filter(i -> i.getId().equals(e.getId()))
+                .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
@@ -230,6 +231,23 @@ public class Service {
         } else {
             throw new Exception("Paciente no existe");
         }
+    }
+
+
+    public String generarNuevoIdPaciente() {
+        List<Paciente> lista = Service.instance().findAllPaciente();
+        int max = 0;
+        for (Paciente p : lista) {
+            String id = p.getId();
+            if (id != null && id.startsWith("PAC-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(6));
+                    if (num > max) max = num;
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        int nuevo = max + 1;
+        return String.format("PAC-%04d", nuevo);
     }
 
     public List<Medico> findAllMedicos() {return data.getMedicos();}
