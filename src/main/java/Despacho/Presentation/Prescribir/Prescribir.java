@@ -45,9 +45,14 @@ public class Prescribir implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BuscarPacienteView dialogBuscarPaciente = new BuscarPacienteView();
+                dialogBuscarPaciente.setController(controller);
+                dialogBuscarPaciente.setModel(model);
+
+                controller.loadPacientes();
+
                 dialogBuscarPaciente.setModal(true);
-                dialogBuscarPaciente.setLocationRelativeTo(Prescribir);
                 dialogBuscarPaciente.setVisible(true);
+
 
 //                if (dialogBuscarPaciente.getPacienteSeleccionado() != null) {
 //                    controller.setPaciente(dialogBuscarPaciente.getPacienteSeleccionado());

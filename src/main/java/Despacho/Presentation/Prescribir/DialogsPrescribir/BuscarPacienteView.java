@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 
 public class BuscarPacienteView extends JDialog implements PropertyChangeListener {
@@ -35,6 +36,7 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
         TextFieldBuscarP.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
+                if (controller == null) return;
                 switch (comboBox1.getSelectedItem().toString()) {
                     case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
                     case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
@@ -88,18 +90,14 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model.PACIENTE:
-                int[] cols = {Despacho.Presentation.Prescribir.TableModelPacientes.ID};
-                table1.setModel(new TableModelPacientes(cols,model.getListPaciente()));
+            case Model.LISTPACIENTE:
+                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE};
+                table1.setModel(new TableModelPacientes(cols, model.getListPaciente()));
                 break;
         }
         this.contentPane.revalidate();
+
     }
-
-
-
-
-
 
     }
 

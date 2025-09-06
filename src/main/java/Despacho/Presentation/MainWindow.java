@@ -1,6 +1,7 @@
 package Despacho.Presentation;
 
 import Despacho.Logic.Entidades.Usuario;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +64,7 @@ public class MainWindow extends JFrame {
     private JPanel buildPrescribirTab() {
         var view = new Despacho.Presentation.Prescribir.Prescribir();
         var model = new Despacho.Presentation.Prescribir.Model();
-        new Despacho.Presentation.Prescribir.Controller(view, model);
+        var controller = new Despacho.Presentation.Prescribir.Controller(view, model);
         return view.getPrescribir();
     }
 }

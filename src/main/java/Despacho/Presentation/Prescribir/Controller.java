@@ -30,6 +30,11 @@ public class Controller {
         model.setCurrentPaciente(model.getListPaciente().get(row));
         }
 
+        public void loadPacientes() {
+        model.setListPaciente(Service.instance().findAllPaciente());
+        }
+
+
 
 
 
