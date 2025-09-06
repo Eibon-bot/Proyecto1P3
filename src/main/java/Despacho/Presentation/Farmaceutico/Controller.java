@@ -17,7 +17,7 @@ public class Controller {
     public void create(Farmaceutico e) throws  Exception{
         Service.instance().createFarmaceutico(e);
         Service.instance().store();
-        model.setCurrent(new Farmaceutico());
+        clear();
         model.setList(Service.instance().findAllFarmaceutico());
     }
     public void delete(Farmaceutico e) throws Exception {
@@ -39,7 +39,9 @@ public class Controller {
     }
 
     public void clear() {
-        model.setCurrent(new Farmaceutico());
+        Farmaceutico f = new Farmaceutico();
+        f.setId(Service.instance().generarNuevoIdFarma());
+        model.setCurrent(f);
     }
 
 }

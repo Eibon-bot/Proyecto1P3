@@ -2,9 +2,34 @@
 <data>
     <ListaFarmaceuticos>
         <farmaceutico>
-            <clave></clave>
-            <id>farma3</id>
+            <clave>FARMA-0001</clave>
+            <id>FARMA-0001</id>
+            <nombre>ana</nombre>
+        </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0002</clave>
+            <id>FARMA-0002</id>
             <nombre>pedro</nombre>
+        </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0003</clave>
+            <id>FARMA-0003</id>
+            <nombre>juan</nombre>
+        </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0004</clave>
+            <id>FARMA-0004</id>
+            <nombre>maria</nombre>
+        </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0005</clave>
+            <id>FARMA-0005</id>
+            <nombre>luis</nombre>
+        </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0006</clave>
+            <id>FARMA-0006</id>
+            <nombre>matias</nombre>
         </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos/>

@@ -78,11 +78,14 @@ public class Service {
                 .findFirst()
                 .orElse(null);
         if (result == null) {
+            e.setClave(e.getId());
             data.getFarmaceuticos().add(e);
+            store();
         } else {
             throw new Exception("Farmaceutico ya existe");
         }
     }
+
 
     public void deleteFarmaceutico(Farmaceutico e) throws Exception {
         Farmaceutico result = data.getFarmaceuticos().stream()
@@ -112,6 +115,24 @@ public class Service {
     public List<Farmaceutico> findAllFarmaceutico() {
         return data.getFarmaceuticos();
     }
+
+
+    public String generarNuevoIdFarma() {
+        List<Farmaceutico> lista = Service.instance().findAllFarmaceutico();
+        int max = 0;
+        for (Farmaceutico f : lista) {
+            String id = f.getId();
+            if (id != null && id.startsWith("FARMA-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(6));
+                    if (num > max) max = num;
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        int nuevo = max + 1;
+        return String.format("FARMA-%04d", nuevo);
+    }
+
 
     // =============== Medicamento ===============
     public void createMedicamento(Medicamento e) throws Exception {

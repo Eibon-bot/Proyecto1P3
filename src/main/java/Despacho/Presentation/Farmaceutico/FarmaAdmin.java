@@ -26,6 +26,7 @@ public class FarmaAdmin implements PropertyChangeListener {
     private JTable farmatable;
 
     public FarmaAdmin() {
+
         guardarButtonFarma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,6 +89,7 @@ public class FarmaAdmin implements PropertyChangeListener {
     Model model;
 
     public void setController(Controller controller) {
+        controller.clear();
         this.controller = controller;
     }
 
