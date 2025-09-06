@@ -1,4 +1,163 @@
 package Despacho.Presentation.Medicamentos;
 
-public class MedicaAdmin {
+import Despacho.App;
+import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Service;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class MedicaAdmin implements PropertyChangeListener {
+    private JTable tableMedicamentos;
+    private JTextField codigoTextField;
+    private JTextField nombreTextField;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JButton borrarButton;
+    private JTextField presentacionTextField;
+    private JTextField codigoBuscar;
+    private JButton buscarButton;
+    private JButton reporteButton;
+    private JPanel menumedicamentos;
+
+    public MedicaAdmin() {
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validate()) {
+                    Medicamento n = take();
+                    // Solo ahora llamamos al Service para generar el código
+                    n.setCodigo(Service.instance().generarNuevoCodMedicamento(nombreTextField.getText()));
+                    try {
+                        controller.create(n);
+                        JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        });
+
+        borrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validate()) {
+                    Medicamento n = take();
+                    try {
+                        controller.delete(n);
+                        JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+
+
+            }
+        });
+
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.read(codigoBuscar.getText());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.clear();
+            }
+        });
+
+    }
+
+    public JPanel getPanel() {
+        return menumedicamentos;
+    }
+
+    Despacho.Presentation.Medicamentos.ControllerMedicamentos controller;
+    Despacho.Presentation.Medicamentos.ModelMedicamentos model;
+
+    public void setController(ControllerMedicamentos controller) {
+        controller.clear();
+        this.controller = controller;
+    }
+
+    public void setModel(Despacho.Presentation.Medicamentos.ModelMedicamentos model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case ModelMedicamentos.LIST:
+                int[] cols = {Despacho.Presentation.Medicamentos.TableModelMedicamentos.COD, Despacho.Presentation.Medicamentos.TableModelMedicamentos.NOMBRE, Despacho.Presentation.Medicamentos.TableModelMedicamentos.PRESENTACION};
+                tableMedicamentos.setModel(new TableModelMedicamentos(cols, model.getList()));
+                break;
+            case ModelMedicamentos.CURRENT:
+                codigoTextField.setText(model.getCurrent().getCodigo());
+                nombreTextField.setText(model.getCurrent().getNombre());
+                presentacionTextField.setText(model.getCurrent().getPresentacion());
+                codigoTextField.setBackground(null);
+                codigoTextField.setToolTipText(null);
+                nombreTextField.setBackground(null);
+                nombreTextField.setToolTipText(null);
+                presentacionTextField.setBackground(null);
+                presentacionTextField.setToolTipText(null);
+                break;
+        }
+        this.menumedicamentos.revalidate();
+    }
+
+    public Medicamento take() {
+        Medicamento e = new Medicamento();
+        e.setCodigo(codigoTextField.getText());
+        e.setNombre(nombreTextField.getText());
+        e.setPresentacion(presentacionTextField.getText());
+
+        return e;
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+//        if (codigoTextField.getText().isEmpty()) {
+//            valid = false;
+//            codigoTextField.setBackground(App.BACKGROUND_ERROR);
+//            codigoTextField.setToolTipText("codigo requerido");
+//        } else {
+//            codigoTextField.setBackground(null);
+//            codigoTextField.setToolTipText(null);
+//        }
+
+        if (nombreTextField.getText().isEmpty()) {
+            valid = false;
+            nombreTextField.setBackground(App.BACKGROUND_ERROR);
+            nombreTextField.setToolTipText("Nombre requerido");
+        } else {
+            nombreTextField.setBackground(null);
+            nombreTextField.setToolTipText(null);
+        }
+
+        if (presentacionTextField.getText().isEmpty()) {
+            valid = false;
+            presentacionTextField.setBackground(App.BACKGROUND_ERROR);
+            presentacionTextField.setToolTipText("Presentación requerida");
+        } else {
+            presentacionTextField.setBackground(null);
+            presentacionTextField.setToolTipText(null);
+        }
+
+        return valid;
+    }
 }

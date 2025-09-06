@@ -170,18 +170,19 @@ public class Service {
 
     public void deleteMedicamento(Medicamento e) throws Exception {
         Medicamento result = data.getMedicamentos().stream()
-                .filter(m -> m.getCodigo().equals(e.getCodigo()))
+                .filter(f -> f.getCodigo().equals(e.getCodigo()))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
-            data.getMedicamentos().remove(e);
+            data.getMedicamentos().remove(result);
+            store();
         } else {
-            throw new Exception("El medicamento no existe");
+            throw new Exception("Medicamento no existe");
         }
     }
-    public Medicamento readMedicamento(Medicamento e) throws Exception {
+    public Medicamento readMedicamento(String cod) throws Exception {
         Medicamento result = data.getMedicamentos().stream()
-                .filter(i -> i.getCodigo().equals(e.getCodigo()))
+                .filter(f -> f.getCodigo().equalsIgnoreCase(cod))
                 .findFirst()
                 .orElse(null);
         if (result != null) {
@@ -190,6 +191,27 @@ public class Service {
             throw new Exception("Medicamento no existe");
         }
     }
+
+    public String generarNuevoCodMedicamento(String nombre) {
+        String prefijo = nombre.trim().toUpperCase();
+        prefijo = prefijo.length() >= 3 ? prefijo.substring(0, 3) : prefijo;
+        List<Medicamento> lista = Service.instance().findAllMedicamento();
+        int max = 0;
+
+        for (Medicamento f : lista) {
+            String cod = f.getCodigo();
+            if (cod != null && cod.startsWith(prefijo + "-")) {
+                try {
+                    int num = Integer.parseInt(cod.substring(prefijo.length() + 1));
+                    if (num > max) max = num;
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+
+        int nuevo = max + 1;
+        return String.format("%s-%03d", prefijo, nuevo);
+    }
+
 
     public List<Medicamento> findAllMedicamento() {
         return data.getMedicamentos();

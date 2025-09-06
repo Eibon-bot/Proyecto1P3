@@ -3,25 +3,18 @@ package Despacho.Logic.Entidades;
 public class Medicamento {
 
     private String codigo;
-    private String nombre;
-    private String descripcion;
-    private int stock;
+    private String nombre=" ";
+    private String presentacion;
 
     public Medicamento() {}
 
-    public Medicamento(String codigo, String nombre, String descripcion, int stock) {
+    public Medicamento(String codigo, String nombre, String presentacion) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.stock = stock;
+        this.presentacion = presentacion;
     }
 
-    public Medicamento(String codigo, String nombre, int stock, String descripcion) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.stock = stock;
-        this.descripcion = descripcion;
-    }
+
 
     public String getCodigo() { return codigo; }
     public void setCodigo(String codigo) { this.codigo = codigo; }
@@ -29,12 +22,10 @@ public class Medicamento {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public String getPresentacion() { return presentacion; }
+    public void setPresentacion(String presentacion) { this.presentacion = presentacion; }
 
 
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
 
 
     @Override
@@ -42,8 +33,7 @@ public class Medicamento {
         return "Medicamento{" +
                 "codigo='" + codigo + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", stock=" + stock +
+                ", presentacion='" + presentacion + '\'' +
                 '}';
     }
 }

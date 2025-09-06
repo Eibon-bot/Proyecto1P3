@@ -77,7 +77,7 @@ public class Prescribir implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Despacho.Presentation.Prescribir.Model.CURRENT:
+            case Model.PACIENTE:
                 Paciente p = model.getCurrentPaciente();
                 if (p != null) {
                     pacienteLabel.setText("Paciente: " + p.getNombre());
