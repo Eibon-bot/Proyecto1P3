@@ -1,14 +1,26 @@
 package Despacho.Presentation.Prescribir.DialogsPrescribir;
 
-import javax.swing.*;
-import java.awt.event.*;
+import Despacho.App;
+import Despacho.Logic.Entidades.Paciente;
+import Despacho.Presentation.Prescribir.Controller;
+import Despacho.Presentation.Prescribir.Model;
+import Despacho.Presentation.Prescribir.TableModelPacientes;
 
-public class BuscarPacienteView extends JDialog {
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+
+public class BuscarPacienteView extends JDialog implements PropertyChangeListener {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JComboBox comboBox1;
-    private JTextField textField1;
+    private JTextField TextFieldBuscarP;
     private JTable table1;
 
     public BuscarPacienteView() {
@@ -19,48 +31,76 @@ public class BuscarPacienteView extends JDialog {
         pack();
         setLocationRelativeTo(null);
 
+
+        TextFieldBuscarP.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                switch (comboBox1.getSelectedItem().toString()) {
+                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
+                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
+            }}
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                switch (comboBox1.getSelectedItem().toString()) {
+                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
+                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                switch (comboBox1.getSelectedItem().toString()) {
+                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
+                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
+                }
+            }
+        });
+
+
         buttonOK.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                if (table1.getSelectedRow() >= 0) {
+                    controller.setPaciente(table1.getSelectedRow());
+                }
             }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                BuscarPacienteView.this.setVisible(false);
             }
         });
+    }
+    Controller controller;
+    Model model;
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    public void setModel(Model model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case Model.PACIENTE:
+                int[] cols = {Despacho.Presentation.Prescribir.TableModelPacientes.ID};
+                table1.setModel(new TableModelPacientes(cols,model.getListPaciente()));
+                break;
+        }
+        this.contentPane.revalidate();
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+
+
+
+
+
     }
 
-    public static void main(String[] args) {
-        BuscarPacienteView dialog = new BuscarPacienteView();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
-}
+

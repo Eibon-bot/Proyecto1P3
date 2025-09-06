@@ -4,7 +4,9 @@ import Despacho.Data.Listas.XmlPersister;
 import Despacho.Data.Listas.Data;
 import Despacho.Logic.Entidades.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Service {
     private static Service theInstance;
@@ -260,9 +262,19 @@ public class Service {
     public List<Paciente> findAllPaciente() { return data.getPacientes(); }
     public List<Receta> findAllRecetas() { return data.getRecetas(); }
 
-
-
-
+    //Otras funciones
+    public List<Paciente> searchPacienteNombre( Paciente e) {
+        return data.getPacientes().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getNombre))
+                .collect(Collectors.toList());
+    }
+    public List<Paciente> searchPacienteId( Paciente e) {
+        return data.getPacientes().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getNombre))
+                .collect(Collectors.toList());
+    }
 
 
 }

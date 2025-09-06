@@ -1,6 +1,6 @@
 package Despacho.Presentation.Medico;
 
-import Despacho.Logic.Entidades.Farmaceutico;
+
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Medico;
 

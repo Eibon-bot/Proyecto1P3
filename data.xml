@@ -44,7 +44,7 @@
     <ListaRecetas/>
     <ListaPacientes>
         <paciente>
-            <id>PAC-0001</id>
+            <id>Pac-123</id>
             <nombre>isaac</nombre>
         </paciente>
     </ListaPacientes>

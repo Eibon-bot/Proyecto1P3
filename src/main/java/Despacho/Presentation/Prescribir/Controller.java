@@ -1,8 +1,8 @@
 package Despacho.Presentation.Prescribir;
-
-import Despacho.Presentation.Prescribir.Prescribir;
-
-import javax.swing.*;
+import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Receta;
+import Despacho.Logic.Service;
+import Despacho.Logic.Entidades.Paciente;
 
 public class Controller {
         Prescribir prescribirView;
@@ -14,6 +14,22 @@ public class Controller {
             prescribirView.setController(this);
             prescribirView.setModel(model);
         }
+
+        //Buscar Paciente Metodos
+        public void searchPacienteNombre(String nombre) {
+            Paciente p = new Paciente();
+            p.setNombre(nombre);
+            model.setListPaciente(Service.instance().searchPacienteNombre(p));
+        }
+        public void searchPacienteId(String id) {
+        Paciente p = new Paciente();
+        p.setId(id);
+        model.setListPaciente(Service.instance().searchPacienteId(p));
+        }
+        public void setPaciente(int row) {
+        model.setCurrentPaciente(model.getListPaciente().get(row));
+        }
+
 
 
 
