@@ -34,22 +34,14 @@
     </ListaFarmaceuticos>
     <ListaMedicamentos>
         <medicamento>
-            <codigo>IBU-001</codigo>
-            <nombre> ibuprofeno</nombre>
-            <presentacion>pastillas</presentacion>
-            <stock>0</stock>
-        </medicamento>
-        <medicamento>
             <codigo>ALG-001</codigo>
             <nombre> algo</nombre>
             <presentacion>inyeccion</presentacion>
-            <stock>0</stock>
         </medicamento>
         <medicamento>
             <codigo>IBU-002</codigo>
             <nombre> ibuprofeno</nombre>
             <presentacion>pastilla</presentacion>
-            <stock>0</stock>
         </medicamento>
     </ListaMedicamentos>
     <ListaMedicos>

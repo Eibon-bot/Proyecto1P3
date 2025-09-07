@@ -6,6 +6,7 @@ import Despacho.Presentation.Prescribir.Controller;
 import Despacho.Presentation.Prescribir.Model;
 import Despacho.Presentation.Prescribir.TableModelPacientes;
 
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -16,11 +17,12 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 
+
 public class BuscarPacienteView extends JDialog implements PropertyChangeListener {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JComboBox comboBox1;
+    private JComboBox<String> comboBox1;
     private JTextField TextFieldBuscarP;
     private JTable table1;
 
@@ -34,28 +36,30 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
 
 
         TextFieldBuscarP.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
+            private void ejecutarBusqueda() {
                 if (controller == null) return;
+                if (comboBox1.getSelectedIndex() == -1) return;
                 switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
-            }}
+                    case "Nombre":
+                        controller.searchPacienteNombre(TextFieldBuscarP.getText());
+                        break;
+                    case "ID":
+                        controller.searchPacienteId(TextFieldBuscarP.getText());
+                        break;
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
                 }
             }
-
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                ejecutarBusqueda();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                ejecutarBusqueda();
+            }
             @Override
             public void changedUpdate(DocumentEvent e) {
-                switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
-                }
+                ejecutarBusqueda();
             }
         });
 

@@ -85,7 +85,7 @@
                 <properties>
                   <model>
                     <item value="Nombre"/>
-                    <item value="Id"/>
+                    <item value="ID"/>
                   </model>
                 </properties>
               </component>

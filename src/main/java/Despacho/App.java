@@ -7,6 +7,7 @@ import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.Medicamentos.MedicaAdmin;
 import Despacho.Presentation.Medico.MediAdmin;
 import Despacho.Presentation.Pacientes.PacientesAdmin;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
@@ -50,6 +51,7 @@ public class App {
             pacWindow.pack();
             pacWindow.setLocationRelativeTo(null);
             pacWindow.setVisible(true);
+
 
 
         } catch (Exception e) {
