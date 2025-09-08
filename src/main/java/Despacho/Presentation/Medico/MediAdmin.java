@@ -2,11 +2,13 @@ package Despacho.Presentation.Medico;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Medico;
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Presentation.Medico.Controller;
 import Despacho.Presentation.Medico.Model;
 import Despacho.Presentation.Medico.TableModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -24,22 +26,42 @@ public class MediAdmin implements PropertyChangeListener {
     private JButton reporteButtonMed;
     private JTable meditable;
     private JPanel MenuMedicos;
+    private JPanel panellistado;
+    private boolean editing = false;
 
 
     public MediAdmin() {
+
+        meditable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && meditable.getSelectedRow() >= 0) {
+                int row = meditable.getSelectedRow();
+                controller.setMedico(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(meditable);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
         guardarButtonMed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validate()) {
-                    Medico n = take();
-                    try {
-                        controller.create(n);
-                        JOptionPane.showMessageDialog(MenuMedicos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(MenuMedicos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                if (!validate()) return;
 
+                Medico p = take();
+                try {
+                    if (editing) {
+                        controller.update(p);
+                    } else {
+                        controller.create(p);
+                        controller.clear();
+                    }
+                    JOptionPane.showMessageDialog(MenuMedicos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(MenuMedicos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
+
             }
         });
 
@@ -107,6 +129,8 @@ public class MediAdmin implements PropertyChangeListener {
                 meditable.setModel(new TableModel(cols,model.getList()));
                 break;
             case Model.CURRENT:
+                editing = model.getList().stream()
+                        .anyMatch(p -> p.getId().equals(model.current.getId()));
                 textFieldIdMed.setText(model.getCurrent().getId());
                 textFieldNomMed.setText(model.getCurrent().getNombre());
                 textFieldEspMed.setText(model.getCurrent().getEspecialidad());

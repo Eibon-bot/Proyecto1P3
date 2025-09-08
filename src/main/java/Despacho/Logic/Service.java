@@ -60,6 +60,15 @@ public class Service {
             throw new Exception("Medico no existe");
         }
     }
+
+    public void updateMedico(Medico p) {
+        Medico old = searchMedicoId(p).stream().findFirst().orElse(null);
+        if (old != null) {
+            old.setNombre(p.getNombre());
+            old.setEspecialidad(p.getEspecialidad());
+            store();
+        }
+    }
     public Medico readMedico(String nombre) throws Exception {
         Medico result = data.getMedicos().stream()
                 .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
@@ -321,6 +330,13 @@ public class Service {
         return data.getFarmaceuticos().stream()
                 .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
                 .sorted(Comparator.comparing(Farmaceutico::getId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Medico> searchMedicoId(Medico e) {
+        return data.getMedicos().stream()
+                .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
+                .sorted(Comparator.comparing(Medico::getId))
                 .collect(Collectors.toList());
     }
 

@@ -38,14 +38,14 @@ public class App {
 
             // para probar
 
-            FarmaAdmin pView = new FarmaAdmin();
-            Despacho.Presentation.Farmaceutico.Model modelm=new Despacho.Presentation.Farmaceutico.Model();
-            Despacho.Presentation.Farmaceutico.Controller controllerm=new Despacho.Presentation.Farmaceutico.Controller(pView,modelm);
+            MediAdmin pView = new MediAdmin();
+            Despacho.Presentation.Medico.Model modelm=new Despacho.Presentation.Medico.Model();
+            Despacho.Presentation.Medico.Controller controllerm=new Despacho.Presentation.Medico.Controller(pView,modelm);
             pView.setModel(modelm);
             pView.setController(controllerm);
-            modelm.setList(Service.instance().findAllFarmaceutico());
+            modelm.setList(Service.instance().findAllMedicos());
 
-            JFrame pacWindow = new JFrame("Administración de Medicamentos");
+            JFrame pacWindow = new JFrame("Administración de Medicos");
             pacWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             pacWindow.setContentPane(pView.getPanel());
             pacWindow.pack();

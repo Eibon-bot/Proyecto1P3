@@ -1,6 +1,7 @@
 package Despacho.Presentation.Medico;
 
 
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Medico;
 
@@ -26,6 +27,17 @@ public class Controller {
         Service.instance().store();
         model.setCurrent(new Medico());
         model.setList(Service.instance().findAllMedico());
+    }
+
+    public void setMedico(int row) {
+        Medico m = model.getList().get(row);
+        model.setCurrent(m);
+    }
+
+
+    public void update(Medico m) throws Exception {
+        Service.instance().updateMedico(m);
+        model.setList(Service.instance().findAllMedicos());
     }
 
     public void read(String nombre) throws Exception {

@@ -59,7 +59,7 @@
             <clave>MED-0006</clave>
             <id>MED-0006</id>
             <nombre>andrea</nombre>
-            <especialidad>pedriatria</especialidad>
+            <especialidad>geriatria</especialidad>
         </medico>
     </ListaMedicos>
     <ListaRecetas/>
