@@ -138,6 +138,8 @@ public class FarmaAdmin implements PropertyChangeListener {
                 farmatable.setModel(new TableModel(cols,model.getList()));
                 break;
             case Model.CURRENT:
+                editing = model.getList().stream()
+                        .anyMatch(p -> p.getId().equals(model.current.getId()));
                 textFieldIdFarma.setText(model.getCurrent().getId());
                 textFieldNomFarma.setText(model.getCurrent().getNombre());
                 textFieldIdFarma.setBackground(null);

@@ -53,6 +53,16 @@
             <nombre> ibuprofeno</nombre>
             <presentacion>pastilla</presentacion>
         </medicamento>
+        <medicamento>
+            <codigo></codigo>
+            <nombre> neumonill</nombre>
+            <presentacion>pastillas</presentacion>
+        </medicamento>
+        <medicamento>
+            <codigo>PAR-001</codigo>
+            <nombre> paracetamol</nombre>
+            <presentacion>inyeccion</presentacion>
+        </medicamento>
     </ListaMedicamentos>
     <ListaMedicos>
         <medico>

@@ -1,6 +1,7 @@
 package Despacho.Presentation.Medicamentos;
 
 import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
 
 public class ControllerMedicamentos {
@@ -24,6 +25,17 @@ public class ControllerMedicamentos {
         Service.instance().deleteMedicamento(e);
         Service.instance().store();
         model.setCurrent(new Medicamento());
+        model.setList(Service.instance().findAllMedicamento());
+    }
+
+    public void setMedicamento(int row) {
+        Medicamento p = model.getList().get(row);
+        model.setCurrent(p);
+    }
+
+
+    public void update(Medicamento p) throws Exception {
+        Service.instance().updateMedicamento(p);
         model.setList(Service.instance().findAllMedicamento());
     }
 

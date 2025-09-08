@@ -197,6 +197,15 @@ public class Service {
             throw new Exception("Medicamento no existe");
         }
     }
+
+    public void updateMedicamento(Medicamento p) {
+        Medicamento old = searchMedicamentoCod(p).stream().findFirst().orElse(null);
+        if (old != null) {
+            old.setNombre(p.getNombre());
+            old.setPresentacion(p.getPresentacion());
+            store();
+        }
+    }
     public Medicamento readMedicamento(String cod) throws Exception {
         Medicamento result = data.getMedicamentos().stream()
                 .filter(f -> f.getCodigo().equalsIgnoreCase(cod))
@@ -337,6 +346,13 @@ public class Service {
         return data.getMedicos().stream()
                 .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
                 .sorted(Comparator.comparing(Medico::getId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Medicamento> searchMedicamentoCod(Medicamento e) {
+        return data.getMedicamentos().stream()
+                .filter(i -> i.getCodigo() != null && i.getCodigo().toLowerCase().contains(e.getCodigo().toLowerCase()))
+                .sorted(Comparator.comparing(Medicamento::getCodigo))
                 .collect(Collectors.toList());
     }
 

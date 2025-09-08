@@ -52,6 +52,20 @@ public class App {
             pacWindow.setLocationRelativeTo(null);
             pacWindow.setVisible(true);
 
+            MedicaAdmin mView = new MedicaAdmin();
+            Despacho.Presentation.Medicamentos.ModelMedicamentos modelme=new Despacho.Presentation.Medicamentos.ModelMedicamentos();
+            Despacho.Presentation.Medicamentos.ControllerMedicamentos controllerme=new Despacho.Presentation.Medicamentos.ControllerMedicamentos(mView,modelme);
+            mView.setModel(modelme);
+            mView.setController(controllerme);
+            modelme.setList(Service.instance().findAllMedicamento());
+
+            JFrame meWindow = new JFrame("Administración de Medicamentos");
+            meWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            meWindow.setContentPane(mView.getPanel());
+            meWindow.pack();
+            meWindow.setLocationRelativeTo(null);
+            meWindow.setVisible(true);
+
 
 
         } catch (Exception e) {

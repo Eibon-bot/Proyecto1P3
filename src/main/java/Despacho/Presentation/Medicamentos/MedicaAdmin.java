@@ -2,9 +2,12 @@ package Despacho.Presentation.Medicamentos;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -22,23 +25,45 @@ public class MedicaAdmin implements PropertyChangeListener {
     private JButton buscarButton;
     private JButton reporteButton;
     private JPanel menumedicamentos;
+    private JPanel panellistado;
+    private boolean editing = false;
 
     public MedicaAdmin() {
+
+
+
+
+        tableMedicamentos.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tableMedicamentos.getSelectedRow() >= 0) {
+                int row = tableMedicamentos.getSelectedRow();
+                controller.setMedicamento(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(tableMedicamentos);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validate()) {
-                    Medicamento n = take();
-                    // Solo ahora llamamos al Service para generar el código
-                    n.setCodigo(Service.instance().generarNuevoCodMedicamento(nombreTextField.getText()));
-                    try {
-                        controller.create(n);
-                        JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                if (!validate()) return;
 
+                Medicamento p = take();
+                p.setCodigo(Service.instance().generarNuevoCodMedicamento(nombreTextField.getText()));
+                try {
+                    if (editing) {
+                        controller.update(p);
+                    } else {
+                        controller.create(p);
+                        controller.clear();
+                    }
+                    JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
+
             }
         });
 
@@ -106,6 +131,8 @@ public class MedicaAdmin implements PropertyChangeListener {
                 tableMedicamentos.setModel(new TableModelMedicamentos(cols, model.getList()));
                 break;
             case ModelMedicamentos.CURRENT:
+                editing = model.getList().stream()
+                        .anyMatch(p -> p.getCodigo().equals(model.current.getCodigo()));
                 codigoTextField.setText(model.getCurrent().getCodigo());
                 nombreTextField.setText(model.getCurrent().getNombre());
                 presentacionTextField.setText(model.getCurrent().getPresentacion());
