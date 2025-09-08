@@ -36,6 +36,11 @@
             <id>FARMA-0007</id>
             <nombre>alejandro</nombre>
         </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0008</clave>
+            <id>FARMA-0008</id>
+            <nombre>sanchez</nombre>
+        </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos>
         <medicamento>
