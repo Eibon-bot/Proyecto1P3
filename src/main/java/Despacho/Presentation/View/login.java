@@ -23,6 +23,9 @@ public class login implements PropertyChangeListener {
 
     public login() {
         icono.setIcon(new ImageIcon(getClass().getResource("/hospital.png")));
+        ingresarButton.setIcon(new ImageIcon(getClass().getResource("/ingresar.png")));
+        cancelarButton.setIcon(new ImageIcon(getClass().getResource("/cancel.png")));
+        cambiarClaveButton.setIcon(new ImageIcon(getClass().getResource("/clave.png")));
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

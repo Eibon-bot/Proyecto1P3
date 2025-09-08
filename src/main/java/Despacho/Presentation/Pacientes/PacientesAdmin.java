@@ -38,6 +38,12 @@ public class PacientesAdmin implements PropertyChangeListener {
     private Model model;
 
     public PacientesAdmin() {
+        buscarButtonPac.setIcon(new ImageIcon(getClass().getResource("/pacienteBuscar.png")));
+        guardarButtonPac.setIcon(new ImageIcon(getClass().getResource("/guardar.png")));
+        limpiarButtonPac.setIcon(new ImageIcon(getClass().getResource("/limpiar.png")));
+        borrarButtonPac.setIcon(new ImageIcon(getClass().getResource("/descartar.png")));
+        reporteButtonPac.setIcon(new ImageIcon(getClass().getResource("/reporte.png")));
+
         fecha = new JDateChooser();
         fecha.setDateFormatString("dd/MM/yyyy");
         panelFecha.setLayout(new java.awt.BorderLayout());
@@ -64,10 +70,10 @@ public class PacientesAdmin implements PropertyChangeListener {
                 Paciente p = take();
                 try {
                     if (editing) {
-                        controller.update(p); // actualizar paciente existente
+                        controller.update(p);
                     } else {
-                        controller.create(p); // crear nuevo paciente
-                        controller.clear();          // limpiar para siguiente registro
+                        controller.create(p);
+                        controller.clear();
                     }
                     JOptionPane.showMessageDialog(IngresarPaciente, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
