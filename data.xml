@@ -58,5 +58,17 @@
             <id>Pac-123</id>
             <nombre>isaac</nombre>
         </paciente>
+        <paciente>
+            <id>PAC-0001</id>
+            <nombre>mario</nombre>
+        </paciente>
+        <paciente>
+            <id>PAC-0002</id>
+            <nombre>susan</nombre>
+        </paciente>
+        <paciente>
+            <id>PAC-0003</id>
+            <nombre>sonia</nombre>
+        </paciente>
     </ListaPacientes>
 </data>

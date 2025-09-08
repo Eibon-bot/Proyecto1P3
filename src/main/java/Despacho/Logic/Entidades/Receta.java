@@ -12,20 +12,20 @@ public class Receta {
     private Medico medico;
     private LocalDate fechaEmision;
     private List<Prescripcion> medicamentos;
-    private String observaciones;
+    private String estado;
 
     public Receta() {
         this.medicamentos = new ArrayList<>();
     }
 
     public Receta(String codigo, Paciente paciente, Medico medico,
-                  LocalDate fechaEmision, String observaciones) {
+                  LocalDate fechaEmision, String estado) {
         this.codigo = codigo;
         this.paciente=paciente;
         this.medico = medico;
         this.fechaEmision = fechaEmision;
         this.medicamentos = new ArrayList<>();
-        this.observaciones = observaciones;
+        this.estado = estado;
     }
 
     public String getCodigo() { return codigo; }
@@ -43,8 +43,8 @@ public class Receta {
     public List<Prescripcion> getMedicamentos() { return medicamentos; }
     public void setMedicamentos(List<Prescripcion> medicamentos) { this.medicamentos = medicamentos; }
 
-    public String getObservaciones() { return observaciones; }
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
     public void agregarMedicamento(Prescripcion med) {
         medicamentos.add(med);
@@ -58,7 +58,7 @@ public class Receta {
                 ", idMedico='" + medico.getId() + '\'' +
                 ", fechaEmision=" + fechaEmision +
                 ", medicamentos=" + medicamentos +
-                ", observaciones='" + observaciones + '\'' +
+                ", estado='" + estado + '\'' +
                 '}';
     }
 }

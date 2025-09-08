@@ -23,6 +23,8 @@ public class PacientesAdmin implements PropertyChangeListener {
 //    private JComboBox<Paciente> comboBoxPac;
     private JPanel IngresarPaciente;
     private JTable tablePacientes;
+    private JTextField textField1;
+    private JTextField textField2;
 
 
     private Controller controller;
