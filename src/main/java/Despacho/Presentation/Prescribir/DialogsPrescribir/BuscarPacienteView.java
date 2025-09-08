@@ -34,30 +34,31 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
 
 
         TextFieldBuscarP.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
+            private void buscar() {
                 if (controller == null) return;
-                switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
-            }}
+                String criterio = comboBox1.getSelectedItem() != null ? comboBox1.getSelectedItem().toString() : "Nombre";
+                String texto = TextFieldBuscarP.getText();
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
+                switch (criterio) {
+                    case "Nombre":
+                        controller.searchPacienteNombre(texto);
+                        break;
+                    case "ID":
+                        controller.searchPacienteId(texto);
+                        break;
                 }
             }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
-                switch (comboBox1.getSelectedItem().toString()) {
-                    case "Nombre": controller.searchPacienteNombre(TextFieldBuscarP.getText());
-                    case "ID": controller.searchPacienteId(TextFieldBuscarP.getText());
-                }
-            }
+            public void insertUpdate(DocumentEvent e) { buscar(); }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) { buscar(); }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) { buscar(); }
         });
+
 
 
         buttonOK.addActionListener(new ActionListener() {
