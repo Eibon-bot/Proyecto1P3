@@ -40,6 +40,17 @@ public class Controller {
             throw ex;
         }
     }
+    public void setPaciente(int row) {
+        Paciente p = model.getList().get(row);
+        model.setCurrent(p);
+    }
+
+
+    public void update(Paciente p) throws Exception {
+        Service.instance().updatePaciente(p);
+        model.setList(Service.instance().findAllPaciente());
+    }
+
 
     public void selectFromList(Paciente p) {
         if (p != null) {
@@ -52,4 +63,6 @@ public class Controller {
         p.setId(Service.instance().generarNuevoIdPaciente());
         model.setCurrent(p);
     }
+
+
 }

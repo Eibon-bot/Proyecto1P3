@@ -67,20 +67,22 @@
             <nombre>susan</nombre>
         </paciente>
         <paciente>
+            <fechaNacimiento>20/09/2025</fechaNacimiento>
             <id>PAC-0003</id>
             <nombre>sonia</nombre>
-        </paciente>
-        <paciente>
-            <fechaNacimiento>5-07-2006</fechaNacimiento>
-            <id>PAC-0004</id>
-            <nombre>carolina</nombre>
-            <telefono>82759084</telefono>
+            <telefono>82838283</telefono>
         </paciente>
         <paciente>
             <fechaNacimiento>13/06/1990</fechaNacimiento>
             <id>PAC-0005</id>
             <nombre>yulisa</nombre>
             <telefono>82838283</telefono>
+        </paciente>
+        <paciente>
+            <fechaNacimiento>20/09/2025</fechaNacimiento>
+            <id>PAC-0006</id>
+            <nombre>andres</nombre>
+            <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
 </data>

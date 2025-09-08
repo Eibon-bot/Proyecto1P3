@@ -245,6 +245,17 @@ public class Service {
         }
     }
 
+    public void updatePaciente(Paciente p) {
+        Paciente old = searchPacienteId(p).stream().findFirst().orElse(null);
+        if (old != null) {
+            old.setNombre(p.getNombre());
+            old.setFechaNacimiento(p.getFechaNacimiento());
+            old.setTelefono(p.getTelefono());
+            store();
+        }
+    }
+
+
     public Paciente readPaciente(String nombre) throws Exception {
         Paciente result = data.getPacientes().stream()
                 .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
@@ -291,12 +302,13 @@ public class Service {
                 .sorted(Comparator.comparing(Paciente::getNombre))
                 .collect(Collectors.toList());
     }
-    public List<Paciente> searchPacienteId( Paciente e) {
+    public List<Paciente> searchPacienteId(Paciente e) {
         return data.getPacientes().stream()
-                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
-                .sorted(Comparator.comparing(Paciente::getNombre))
+                .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getId))
                 .collect(Collectors.toList());
     }
+
 
 
 }

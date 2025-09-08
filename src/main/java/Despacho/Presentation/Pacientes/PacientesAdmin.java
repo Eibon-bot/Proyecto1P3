@@ -28,7 +28,10 @@ public class PacientesAdmin implements PropertyChangeListener {
     private JTextField textFieldFN;
     private JTextField textFieldNum;
     private JPanel panelFecha;
+    private JPanel panellistado;
     private JDateChooser fecha;
+    private boolean editing = false;
+
 
 
     private Controller controller;
@@ -41,16 +44,36 @@ public class PacientesAdmin implements PropertyChangeListener {
         panelFecha.add(fecha, BorderLayout.CENTER);
 
 
+        tablePacientes.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tablePacientes.getSelectedRow() >= 0) {
+                int row = tablePacientes.getSelectedRow();
+                controller.setPaciente(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(tablePacientes);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
+
+
         guardarButtonPac.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
-                if (validateForm()) {
-                    try {
-                        controller.create(take());
-                        JOptionPane.showMessageDialog(IngresarPaciente, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(IngresarPaciente, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                if (!validateForm()) return;
+
+                Paciente p = take();
+                try {
+                    if (editing) {
+                        controller.update(p); // actualizar paciente existente
+                    } else {
+                        controller.create(p); // crear nuevo paciente
+                        controller.clear();          // limpiar para siguiente registro
                     }
+                    JOptionPane.showMessageDialog(IngresarPaciente, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(IngresarPaciente, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
 
@@ -139,19 +162,29 @@ public class PacientesAdmin implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Despacho.Presentation.Pacientes.Model.LIST:
-                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE, TableModelPacientes.FECHANACIMIENTO, TableModelPacientes.TELEFONO};
-                tablePacientes.setModel(new TableModelPacientes(cols,model.getList()));
+                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE,
+                        TableModelPacientes.FECHANACIMIENTO, TableModelPacientes.TELEFONO};
+                tablePacientes.setModel(new TableModelPacientes(cols, model.getList()));
                 break;
+
             case Despacho.Presentation.Pacientes.Model.CURRENT:
-                textFieldIdPac.setText(model.getCurrent().getId());
-                textFieldNomPac.setText(model.getCurrent().getNombre());
+                Paciente current = model.getCurrent();
+                textFieldIdPac.setText(current.getId());
+                textFieldNomPac.setText(current.getNombre());
+                textFieldNum.setText(current.getTelefono());
+
                 try {
-                    Date d = new SimpleDateFormat("dd/MM/yyyy").parse(model.getCurrent().getFechaNacimiento());
-                    fecha.setDate(d);  // Le paso la fecha al JDateChooser
+                    Date d = new SimpleDateFormat("dd/MM/yyyy").parse(current.getFechaNacimiento());
+                    fecha.setDate(d);
                 } catch (Exception ex) {
-                    fecha.setDate(null);  // Si hay error (por ejemplo fecha vacía o mal formada), limpio el campo
+                    fecha.setDate(null);
                 }
-                textFieldNum.setText(model.getCurrent().getTelefono());
+
+                // Configurar campos para edición
+                editing = model.getList().stream()
+                        .anyMatch(p -> p.getId().equals(current.getId()));
+
+                // Reset de colores y tooltips
                 textFieldIdPac.setBackground(null);
                 textFieldIdPac.setToolTipText(null);
                 textFieldNomPac.setBackground(null);
@@ -160,6 +193,7 @@ public class PacientesAdmin implements PropertyChangeListener {
                 panelFecha.setToolTipText(null);
                 textFieldNum.setBackground(null);
                 textFieldNum.setToolTipText(null);
+
                 break;
         }
         this.IngresarPaciente.revalidate();
