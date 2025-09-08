@@ -76,5 +76,11 @@
             <nombre>carolina</nombre>
             <telefono>82759084</telefono>
         </paciente>
+        <paciente>
+            <fechaNacimiento>13/06/1990</fechaNacimiento>
+            <id>PAC-0005</id>
+            <nombre>yulisa</nombre>
+            <telefono>82838283</telefono>
+        </paciente>
     </ListaPacientes>
 </data>

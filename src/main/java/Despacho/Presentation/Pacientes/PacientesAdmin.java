@@ -2,11 +2,15 @@ package Despacho.Presentation.Pacientes;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Paciente;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PacientesAdmin implements PropertyChangeListener {
 
@@ -23,12 +27,18 @@ public class PacientesAdmin implements PropertyChangeListener {
     private JTable tablePacientes;
     private JTextField textFieldFN;
     private JTextField textFieldNum;
+    private JPanel panelFecha;
+    private JDateChooser fecha;
 
 
     private Controller controller;
     private Model model;
 
     public PacientesAdmin() {
+        fecha = new JDateChooser();
+        fecha.setDateFormatString("dd/MM/yyyy");
+        panelFecha.setLayout(new java.awt.BorderLayout());
+        panelFecha.add(fecha, BorderLayout.CENTER);
 
 
         guardarButtonPac.addActionListener(new ActionListener() {
@@ -135,14 +145,19 @@ public class PacientesAdmin implements PropertyChangeListener {
             case Despacho.Presentation.Pacientes.Model.CURRENT:
                 textFieldIdPac.setText(model.getCurrent().getId());
                 textFieldNomPac.setText(model.getCurrent().getNombre());
-                textFieldFN.setText(model.getCurrent().getFechaNacimiento());
+                try {
+                    Date d = new SimpleDateFormat("dd/MM/yyyy").parse(model.getCurrent().getFechaNacimiento());
+                    fecha.setDate(d);  // Le paso la fecha al JDateChooser
+                } catch (Exception ex) {
+                    fecha.setDate(null);  // Si hay error (por ejemplo fecha vacía o mal formada), limpio el campo
+                }
                 textFieldNum.setText(model.getCurrent().getTelefono());
                 textFieldIdPac.setBackground(null);
                 textFieldIdPac.setToolTipText(null);
                 textFieldNomPac.setBackground(null);
                 textFieldNomPac.setToolTipText(null);
-                textFieldFN.setBackground(null);
-                textFieldFN.setToolTipText(null);
+                panelFecha.setBackground(null);
+                panelFecha.setToolTipText(null);
                 textFieldNum.setBackground(null);
                 textFieldNum.setToolTipText(null);
                 break;
@@ -155,7 +170,10 @@ public class PacientesAdmin implements PropertyChangeListener {
         Paciente p = new Paciente();
         p.setId(textFieldIdPac.getText().trim());
         p.setNombre(textFieldNomPac.getText().trim());
-        p.setFechaNacimiento(textFieldFN.getText().trim());
+        if (fecha.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            p.setFechaNacimiento(sdf.format(fecha.getDate()));
+        }
         p.setTelefono(textFieldNum.getText().trim());
 
         return p;
@@ -182,13 +200,13 @@ public class PacientesAdmin implements PropertyChangeListener {
             textFieldNomPac.setToolTipText(null);
         }
 
-        if(textFieldFN.getText().trim().isEmpty()){
+        if (fecha.getDate() == null) {
             ok = false;
-            textFieldFN.setBackground(App.BACKGROUND_ERROR);
-            textFieldFN.setToolTipText("Fecha de Nacimiento requerida");
+            panelFecha.setBackground(App.BACKGROUND_ERROR);
+            panelFecha.setToolTipText("Fecha de Nacimiento requerida");
         } else {
-            textFieldFN.setBackground(null);
-            textFieldFN.setToolTipText(null);
+            panelFecha.setBackground(null);
+            panelFecha.setToolTipText(null);
         }
 
         if(textFieldNum.getText().trim().isEmpty()){
