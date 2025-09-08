@@ -1,5 +1,6 @@
 package Despacho.Presentation.Farmaceutico;
 
+import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Farmaceutico;
 
@@ -20,10 +21,20 @@ public class Controller {
         clear();
         model.setList(Service.instance().findAllFarmaceutico());
     }
+
+    public void setFarmaceutico(int row) {
+        Farmaceutico f = model.getList().get(row);
+        model.setCurrent(f);
+    }
     public void delete(Farmaceutico e) throws Exception {
         Service.instance().deleteFarmaceutico(e);
         Service.instance().store();
         model.setCurrent(new Farmaceutico());
+        model.setList(Service.instance().findAllFarmaceutico());
+    }
+
+    public void update(Farmaceutico f) throws Exception {
+        Service.instance().updateFarmaceutico(f);
         model.setList(Service.instance().findAllFarmaceutico());
     }
 

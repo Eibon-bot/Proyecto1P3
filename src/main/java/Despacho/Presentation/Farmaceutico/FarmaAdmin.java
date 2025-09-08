@@ -2,9 +2,11 @@ package Despacho.Presentation.Farmaceutico;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Farmaceutico;
+import Despacho.Logic.Entidades.Paciente;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -21,41 +23,70 @@ public class FarmaAdmin implements PropertyChangeListener {
     private JTextField textFieldBusqFarma;
     private JButton buscarButtonFarma;
     private JButton reporteButtonFarma;
-    private JComboBox tableFarma;
     private JPanel IngresarFarmaceutas;
     private JTable farmatable;
+    private JPanel panellistado;
+    private boolean editing = false;
 
     public FarmaAdmin() {
+
+        buscarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/pacienteBuscar.png")));
+        guardarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/guardar.png")));
+        limpiarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/limpiar.png")));
+        borrarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/descartar.png")));
+        reporteButtonFarma.setIcon(new ImageIcon(getClass().getResource("/reporte.png")));
+
+        farmatable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && farmatable.getSelectedRow() >= 0) {
+                int row = farmatable.getSelectedRow();
+                controller.setFarmaceutico(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(farmatable);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
 
         guardarButtonFarma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validate()) {
-                    Farmaceutico n = take();
-                    try {
-                        controller.create(n);
-                        JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                if (!validate()) return;
 
+                Farmaceutico p = take();
+                try {
+                    if (editing) {
+                        controller.update(p);
+                    } else {
+                        controller.create(p);
+                        controller.clear();
+                    }
+                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
+
             }
         });
 
         borrarButtonFarma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validate()) {
-                    Farmaceutico n = take();
-                    try {
-                        controller.delete(n);
-                        JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
+                String id = textFieldIdFarma.getText().trim();
+                if (id.isEmpty()) {
+                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "Id requerido para borrar", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
+                try {
+                    Farmaceutico f = new Farmaceutico();
+                    f.setId(id);
+                    controller.delete(f);
+                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO ELIMINADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+
 
 
             }
@@ -114,6 +145,8 @@ public class FarmaAdmin implements PropertyChangeListener {
                 textFieldNomFarma.setBackground(null);
                 textFieldNomFarma.setToolTipText(null);
                 break;
+
+
         }
         this.IngresarFarmaceutas.revalidate();
     }

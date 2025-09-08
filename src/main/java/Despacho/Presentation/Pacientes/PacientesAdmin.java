@@ -186,11 +186,11 @@ public class PacientesAdmin implements PropertyChangeListener {
                     fecha.setDate(null);
                 }
 
-                // Configurar campos para edición
+
                 editing = model.getList().stream()
                         .anyMatch(p -> p.getId().equals(current.getId()));
 
-                // Reset de colores y tooltips
+
                 textFieldIdPac.setBackground(null);
                 textFieldIdPac.setToolTipText(null);
                 textFieldNomPac.setBackground(null);

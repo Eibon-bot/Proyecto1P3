@@ -31,6 +31,11 @@
             <id>FARMA-0006</id>
             <nombre>matias</nombre>
         </farmaceutico>
+        <farmaceutico>
+            <clave>FARMA-0007</clave>
+            <id>FARMA-0007</id>
+            <nombre>alejandro</nombre>
+        </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos>
         <medicamento>

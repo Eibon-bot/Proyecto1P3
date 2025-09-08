@@ -121,6 +121,14 @@ public class Service {
         }
     }
 
+    public void updateFarmaceutico(Farmaceutico p) {
+        Farmaceutico old = searchFarmaceuticoId(p).stream().findFirst().orElse(null);
+        if (old != null) {
+            old.setNombre(p.getNombre());
+            store();
+        }
+    }
+
     public Farmaceutico readFarmaceutico(String nombre) throws Exception {
         Farmaceutico result = data.getFarmaceuticos().stream()
                 .filter(f -> f.getNombre().equalsIgnoreCase(nombre))
@@ -306,6 +314,13 @@ public class Service {
         return data.getPacientes().stream()
                 .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
                 .sorted(Comparator.comparing(Paciente::getId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Farmaceutico> searchFarmaceuticoId(Farmaceutico e) {
+        return data.getFarmaceuticos().stream()
+                .filter(i -> i.getId() != null && i.getId().toLowerCase().contains(e.getId().toLowerCase()))
+                .sorted(Comparator.comparing(Farmaceutico::getId))
                 .collect(Collectors.toList());
     }
 
