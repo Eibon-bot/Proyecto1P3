@@ -9,6 +9,7 @@ import Despacho.Presentation.Prescribir.TableModelPacientes;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -23,8 +24,21 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
     private JComboBox comboBox1;
     private JTextField TextFieldBuscarP;
     private JTable table1;
+    private JPanel panellistado;
 
     public BuscarPacienteView() {
+
+        table1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
+                int row = table1.getSelectedRow();
+                controller.setPaciente(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(table1);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -66,6 +80,7 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
             public void actionPerformed(ActionEvent e) {
                 if (table1.getSelectedRow() >= 0) {
                     controller.setPaciente(table1.getSelectedRow());
+                    SwingUtilities.getWindowAncestor(buttonOK).dispose();
                 }
             }
         });
@@ -92,7 +107,7 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LISTPACIENTE:
-                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE};
+                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE, TableModelPacientes.FECHANACIMIENTO, TableModelPacientes.TELEFONO};
                 table1.setModel(new TableModelPacientes(cols, model.getListPaciente()));
                 break;
         }
