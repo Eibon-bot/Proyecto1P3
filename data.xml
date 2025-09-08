@@ -70,5 +70,11 @@
             <id>PAC-0003</id>
             <nombre>sonia</nombre>
         </paciente>
+        <paciente>
+            <fechaNacimiento>5-07-2006</fechaNacimiento>
+            <id>PAC-0004</id>
+            <nombre>carolina</nombre>
+            <telefono>82759084</telefono>
+        </paciente>
     </ListaPacientes>
 </data>

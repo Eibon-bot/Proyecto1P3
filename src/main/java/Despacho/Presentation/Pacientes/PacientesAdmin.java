@@ -4,7 +4,6 @@ import Despacho.App;
 import Despacho.Logic.Entidades.Paciente;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,12 +18,11 @@ public class PacientesAdmin implements PropertyChangeListener {
     private JButton borrarButtonPac;
     private JTextField textFieldBusqPac;
     private JButton buscarButtonPac;
-    private JButton reporteButtonPac;  // (opcional; por ahora queda sin handler real)
-//    private JComboBox<Paciente> comboBoxPac;
+    private JButton reporteButtonPac;
     private JPanel IngresarPaciente;
     private JTable tablePacientes;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField textFieldFN;
+    private JTextField textFieldNum;
 
 
     private Controller controller;
@@ -131,16 +129,22 @@ public class PacientesAdmin implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Despacho.Presentation.Pacientes.Model.LIST:
-                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE};
+                int[] cols = {TableModelPacientes.ID, TableModelPacientes.NOMBRE, TableModelPacientes.FECHANACIMIENTO, TableModelPacientes.TELEFONO};
                 tablePacientes.setModel(new TableModelPacientes(cols,model.getList()));
                 break;
             case Despacho.Presentation.Pacientes.Model.CURRENT:
                 textFieldIdPac.setText(model.getCurrent().getId());
                 textFieldNomPac.setText(model.getCurrent().getNombre());
+                textFieldFN.setText(model.getCurrent().getFechaNacimiento());
+                textFieldNum.setText(model.getCurrent().getTelefono());
                 textFieldIdPac.setBackground(null);
                 textFieldIdPac.setToolTipText(null);
                 textFieldNomPac.setBackground(null);
                 textFieldNomPac.setToolTipText(null);
+                textFieldFN.setBackground(null);
+                textFieldFN.setToolTipText(null);
+                textFieldNum.setBackground(null);
+                textFieldNum.setToolTipText(null);
                 break;
         }
         this.IngresarPaciente.revalidate();
@@ -151,6 +155,8 @@ public class PacientesAdmin implements PropertyChangeListener {
         Paciente p = new Paciente();
         p.setId(textFieldIdPac.getText().trim());
         p.setNombre(textFieldNomPac.getText().trim());
+        p.setFechaNacimiento(textFieldFN.getText().trim());
+        p.setTelefono(textFieldNum.getText().trim());
 
         return p;
     }
@@ -174,6 +180,24 @@ public class PacientesAdmin implements PropertyChangeListener {
         } else {
             textFieldNomPac.setBackground(null);
             textFieldNomPac.setToolTipText(null);
+        }
+
+        if(textFieldFN.getText().trim().isEmpty()){
+            ok = false;
+            textFieldFN.setBackground(App.BACKGROUND_ERROR);
+            textFieldFN.setToolTipText("Fecha de Nacimiento requerida");
+        } else {
+            textFieldFN.setBackground(null);
+            textFieldFN.setToolTipText(null);
+        }
+
+        if(textFieldNum.getText().trim().isEmpty()){
+            ok = false;
+            textFieldNum.setBackground(App.BACKGROUND_ERROR);
+            textFieldNum.setToolTipText("Número de Teléfono requerido");
+        } else {
+            textFieldNum.setBackground(null);
+            textFieldNum.setToolTipText(null);
         }
 
         return ok;
