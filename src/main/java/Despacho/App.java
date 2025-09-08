@@ -38,12 +38,12 @@ public class App {
 
             // para probar
 
-            PacientesAdmin pView = new PacientesAdmin();
-            Despacho.Presentation.Pacientes.Model modelm=new Despacho.Presentation.Pacientes.Model();
-                Despacho.Presentation.Pacientes.Controller controllerm=new Despacho.Presentation.Pacientes.Controller(pView,modelm);
+            MedicaAdmin pView = new MedicaAdmin();
+            Despacho.Presentation.Medicamentos.ModelMedicamentos modelm=new Despacho.Presentation.Medicamentos.ModelMedicamentos();
+            Despacho.Presentation.Medicamentos.ControllerMedicamentos controllerm=new Despacho.Presentation.Medicamentos.ControllerMedicamentos(pView,modelm);
             pView.setModel(modelm);
             pView.setController(controllerm);
-            modelm.setList(Service.instance().findAllPaciente());
+            modelm.setList(Service.instance().findAllMedicamento());
 
             JFrame pacWindow = new JFrame("Administración de Medicamentos");
             pacWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

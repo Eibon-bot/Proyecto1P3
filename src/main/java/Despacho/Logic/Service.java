@@ -293,8 +293,8 @@ public class Service {
     }
     public List<Paciente> searchPacienteId( Paciente e) {
         return data.getPacientes().stream()
-                .filter(i -> i.getId().toLowerCase().contains(e.getId().toLowerCase()))
-                .sorted(Comparator.comparing(Paciente::getId))
+                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getNombre))
                 .collect(Collectors.toList());
     }
 
