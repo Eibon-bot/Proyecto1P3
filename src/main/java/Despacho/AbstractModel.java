@@ -21,4 +21,9 @@ public abstract class AbstractModel {
     protected void firePropertyChange(String propertyName) {
         propertyChangeSupport.firePropertyChange(propertyName, null, null);
     }
+
+    protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
 }

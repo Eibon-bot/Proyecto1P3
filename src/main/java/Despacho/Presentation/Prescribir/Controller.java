@@ -1,8 +1,13 @@
 package Despacho.Presentation.Prescribir;
 import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Receta;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Paciente;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
         Prescribir prescribirView;
@@ -51,6 +56,31 @@ public class Controller {
     public void loadMedicamentos() {
         model.setListmedicamento(Service.instance().findAllMedicamento());
     }
+
+    public Medico getCurrentMedico() {
+        return model.getCurrentMedico();
+    }
+
+    public void setCurrentMedico(Medico medico) {
+        model.setCurrentMedico(medico);
+    }
+
+    public void guardarReceta(LocalDate fechaRetiro) {
+        Receta receta = new Receta();
+        receta.setPaciente(model.getCurrentPaciente());
+        receta.setMedico(model.getCurrentMedico());
+        receta.setFechaEmision(LocalDate.now());
+        receta.setFechaRetiro(fechaRetiro);
+        receta.setPrescripciones(new ArrayList<>(model.getCurrentReceta().getPrescripciones()));
+        receta.setEstado("Confeccionada");
+
+        List<Receta> recetas = model.getListReceta();
+        recetas.add(receta);
+        model.setListReceta(recetas);
+        model.setCurrentReceta(receta);
+    }
+
+
 
 
 

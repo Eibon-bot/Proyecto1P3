@@ -1,5 +1,8 @@
 package Despacho.Presentation.Prescribir.DialogsPrescribir;
 
+import Despacho.Logic.Entidades.Medicamento;
+import Despacho.Logic.Entidades.Prescripcion;
+import Despacho.Logic.Entidades.Receta;
 import Despacho.Presentation.Medicamentos.TableModelMedicamentos;
 import Despacho.Presentation.Prescribir.Controller;
 import Despacho.Presentation.Prescribir.Model;
@@ -20,6 +23,12 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
     private JTextField textFieldBuscar;
     private JTable table1;
     private JPanel panellistado;
+    private Prescripcion prescripcionSeleccionada;
+
+    public Prescripcion getPrescripcionSeleccionada() {
+        return prescripcionSeleccionada;
+    }
+
 
     public AgregarMedicamento() {
         table1.getSelectionModel().addListSelectionListener(e -> {
@@ -39,6 +48,29 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
         setTitle("Agregar Medicamento");
         pack();
         setLocationRelativeTo(null);
+/// //////////////////////////////////////////////////////////
+        table1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
+                Medicamento med = model.getListaMedicamentos().get(table1.getSelectedRow());
+                model.setCurrentMedicamento(med);
+
+                if (model.getCurrentReceta() == null) {
+                    model.setCurrentReceta(new Receta());
+                }
+
+                ModificarDetalle dialog = new ModificarDetalle(med);
+                dialog.setModal(true);
+                dialog.setVisible(true);
+
+                Prescripcion nueva = dialog.getPrescripcion();
+                if (nueva != null) {
+                    model.agregarPrescripcionTemp(nueva);
+                }
+
+            }
+        });
+
+
 
         textFieldBuscar.getDocument().addDocumentListener(new DocumentListener() {
             private void filter() {

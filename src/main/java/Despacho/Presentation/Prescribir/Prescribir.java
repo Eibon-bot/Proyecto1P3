@@ -1,10 +1,13 @@
 package Despacho.Presentation.Prescribir;
 
 import Despacho.Logic.Entidades.Paciente;
+import Despacho.Logic.Entidades.Prescripcion;
+import Despacho.Logic.Entidades.Receta;
 import Despacho.Logic.Service;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Prescribir.DialogsPrescribir.AgregarMedicamento;
 import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
+import Despacho.Presentation.TableModelPres;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -13,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class Prescribir implements PropertyChangeListener {
     private JButton buscarPacienteButton;
@@ -26,6 +32,7 @@ public class Prescribir implements PropertyChangeListener {
     private JLabel fechaRetirolabel;
     private JLabel pacienteLabel;
     private JPanel panelfecha;
+    private JPanel panellistado;
     private JDateChooser fechaRetiroChooser;
 
     public Prescribir() {
@@ -42,6 +49,49 @@ public class Prescribir implements PropertyChangeListener {
         fechaRetiroChooser.setDateFormatString("dd/MM/yyyy");
         panelfecha.setLayout(new java.awt.BorderLayout());
         panelfecha.add(fechaRetiroChooser, BorderLayout.CENTER);
+
+        table1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
+                int row = table1.getSelectedRow();
+                controller.setPaciente(row);
+            }
+        });
+
+        panellistado.setLayout(new BorderLayout());
+
+        JScrollPane scrollPane = new JScrollPane(table1);
+        scrollPane.setPreferredSize(new Dimension(500, 150));
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(guardarButton);
+        panelBotones.add(limpiarButton);
+        panelBotones.add(descartarMedicamentoButton);
+        panelBotones.add(detallesButton);
+        panellistado.add(panelBotones, BorderLayout.SOUTH);
+
+
+
+
+
+
+        guardarButton.addActionListener(e -> {
+            if (fechaRetiroChooser.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione una fecha de retiro.");
+                return;
+            }
+
+            Date date = fechaRetiroChooser.getDate();
+            LocalDate fechaRetiro = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+            controller.guardarReceta(fechaRetiro);
+
+            JOptionPane.showMessageDialog(null, "Receta guardada correctamente");
+        });
+
+
+
 
         buscarPacienteButton.addActionListener(new ActionListener() {
             @Override
@@ -107,6 +157,17 @@ public class Prescribir implements PropertyChangeListener {
                     pacienteLabel.setText("Paciente no seleccionado");
                 }
                 break;
+            case "PRESCRIPCION_TEMP":
+                int[] cols = {
+                        TableModelPres.MEDICAMENTO,
+                        TableModelPres.PRESENTACION,
+                        TableModelPres.CANTIDAD,
+                        TableModelPres.DURACION,
+                        TableModelPres.INDICACIONES
+                };
+                table1.setModel(new TableModelPres(cols, model.getPrescripcionesTemp()));
+                break;
+
 
 //            case Despacho.Presentation.Prescribir.Model.:
 //                // refrescar la tabla con medicamentos
