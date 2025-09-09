@@ -67,30 +67,21 @@ public class Controller {
 
     public void guardarReceta(LocalDate fechaRetiro) {
 
-
-
-        // Crear la receta
         Receta receta = new Receta();
         receta.setPaciente(model.getCurrentPaciente());
-        receta.setMedico(model.getCurrentMedico()); // viene del login
+        receta.setMedico(model.getCurrentMedico());
         receta.setFechaEmision(LocalDate.now());
         receta.setFechaRetiro(fechaRetiro);
         receta.setPrescripciones(new ArrayList<>(model.getPrescripcionesTemp()));
         receta.setEstado("Confeccionada");
 
-        // Agregar la receta directamente al Service (data)
         Service.instance().findAllRecetas().add(receta);
-
-        // Guardar en XML
         Service.instance().store();
-
-        // Actualizar el modelo local
         List<Receta> recetas = model.getListReceta();
         recetas.add(receta);
         model.setListReceta(recetas);
         model.setCurrentReceta(receta);
 
-        // Limpiar prescripciones temporales
         model.limpiarPrescripcionesTemp();
     }
 
