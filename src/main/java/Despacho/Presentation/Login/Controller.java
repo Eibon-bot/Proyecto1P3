@@ -26,8 +26,6 @@ public class Controller {
     public void ingresar(String id, String clave) {
         try {
             Usuario u = auth.login(id, clave);
-
-
             String rol = (u.getRol() == null) ? "" : u.getRol().toLowerCase();
             Usuario usuarioActual;
             switch (rol) {
@@ -43,22 +41,16 @@ public class Controller {
                 default:
                     usuarioActual = u;
             }
-
             model.setCurrent(usuarioActual);
-
-
             final Usuario usuarioFinal = usuarioActual;
 
             SwingUtilities.invokeLater(() -> {
                 JFrame main = new MainWindow(usuarioFinal);
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);
-
-
                 java.awt.Window w = SwingUtilities.getWindowAncestor(view.getLogin());
                 if (w != null) w.dispose();
             });
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
             model.setCurrent(null);

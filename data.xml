@@ -63,6 +63,11 @@
             <nombre> paracetamol</nombre>
             <presentacion>inyeccion</presentacion>
         </medicamento>
+        <medicamento>
+            <codigo>PAR-001</codigo>
+            <nombre> Paracetamol</nombre>
+            <presentacion>pastilla para todo</presentacion>
+        </medicamento>
     </ListaMedicamentos>
     <ListaMedicos>
         <medico>

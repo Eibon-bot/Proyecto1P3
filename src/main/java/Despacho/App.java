@@ -1,13 +1,8 @@
 package Despacho;
 
-import Despacho.Data.Listas.Data;
-import Despacho.Data.Listas.XmlPersister;
 import Despacho.Logic.Service;
-import Despacho.Presentation.Farmaceutico.FarmaAdmin;
 import Despacho.Presentation.Medicamentos.MedicaAdmin;
 import Despacho.Presentation.Medico.MediAdmin;
-import Despacho.Presentation.Pacientes.PacientesAdmin;
-import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
@@ -18,60 +13,56 @@ import java.awt.*;
 
 public class App {
     public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
+    private static final boolean DEBUG_OPEN_ADMIN_SCREENS = false;
 
     public static void main(String[] args) {
         try { UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); } catch (Exception ignored) {}
 
-        try {
-            Model model = new Model();
-            AuthService auth = new AuthService();
-            login loginView = new login();
-            Controller controller = new Controller(loginView, model, auth);
+        SwingUtilities.invokeLater(() -> {
+            try {
+                Model model = new Model();
+                AuthService auth = new AuthService();
+                login loginView = new login();
+                new Controller(loginView, model, auth);
 
-            JFrame window = new JFrame("Login");
-            window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            window.setContentPane(loginView.getLogin());
-            window.pack();
-            window.setLocationRelativeTo(null);
-            window.setVisible(true);
+                JFrame window = new JFrame("Login");
+                window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                window.setContentPane(loginView.getLogin());
+                window.pack();
+                window.setLocationRelativeTo(null);
+                window.setVisible(true);
 
+                if (DEBUG_OPEN_ADMIN_SCREENS) {
+                    MediAdmin mView = new MediAdmin();
+                    Despacho.Presentation.Medico.Model medModel = new Despacho.Presentation.Medico.Model();
+                    new Despacho.Presentation.Medico.Controller(mView, medModel);
+                    mView.setModel(medModel);
+                    mView.setController(new Despacho.Presentation.Medico.Controller(mView, medModel));
+                    medModel.setList(Service.instance().findAllMedicos());
+                    JFrame medWin = new JFrame("Administración de Medicos");
+                    medWin.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    medWin.setContentPane(mView.getPanel());
+                    medWin.pack();
+                    medWin.setLocationRelativeTo(null);
+                    medWin.setVisible(true);
 
-            // para probar
-
-            MediAdmin pView = new MediAdmin();
-            Despacho.Presentation.Medico.Model modelm=new Despacho.Presentation.Medico.Model();
-            Despacho.Presentation.Medico.Controller controllerm=new Despacho.Presentation.Medico.Controller(pView,modelm);
-            pView.setModel(modelm);
-            pView.setController(controllerm);
-            modelm.setList(Service.instance().findAllMedicos());
-
-            JFrame pacWindow = new JFrame("Administración de Medicos");
-            pacWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            pacWindow.setContentPane(pView.getPanel());
-            pacWindow.pack();
-            pacWindow.setLocationRelativeTo(null);
-            pacWindow.setVisible(true);
-
-            MedicaAdmin mView = new MedicaAdmin();
-            Despacho.Presentation.Medicamentos.ModelMedicamentos modelme=new Despacho.Presentation.Medicamentos.ModelMedicamentos();
-            Despacho.Presentation.Medicamentos.ControllerMedicamentos controllerme=new Despacho.Presentation.Medicamentos.ControllerMedicamentos(mView,modelme);
-            mView.setModel(modelme);
-            mView.setController(controllerme);
-            modelme.setList(Service.instance().findAllMedicamento());
-
-            JFrame meWindow = new JFrame("Administración de Medicamentos");
-            meWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            meWindow.setContentPane(mView.getPanel());
-            meWindow.pack();
-            meWindow.setLocationRelativeTo(null);
-            meWindow.setVisible(true);
-
-
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al iniciar la aplicación: " + e.getMessage());
-        }
+                    MedicaAdmin medsView = new MedicaAdmin();
+                    Despacho.Presentation.Medicamentos.ModelMedicamentos medsModel = new Despacho.Presentation.Medicamentos.ModelMedicamentos();
+                    new Despacho.Presentation.Medicamentos.ControllerMedicamentos(medsView, medsModel);
+                    medsView.setModel(medsModel);
+                    medsView.setController(new Despacho.Presentation.Medicamentos.ControllerMedicamentos(medsView, medsModel));
+                    medsModel.setList(Service.instance().findAllMedicamento());
+                    JFrame medsWin = new JFrame("Administración de Medicamentos");
+                    medsWin.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    medsWin.setContentPane(medsView.getPanel());
+                    medsWin.pack();
+                    medsWin.setLocationRelativeTo(null);
+                    medsWin.setVisible(true);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al iniciar la aplicación: " + e.getMessage());
+            }
+        });
     }
 }
-
 
