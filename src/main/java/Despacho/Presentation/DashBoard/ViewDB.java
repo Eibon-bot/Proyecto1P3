@@ -1,6 +1,6 @@
-
 package Despacho.Presentation.DashBoard;
 
+import Despacho.Logic.Entidades.Medicamento;
 import javax.swing.*;
 
 public class ViewDB {
@@ -12,11 +12,12 @@ public class ViewDB {
     private JComboBox comboBox5;
 
     private JButton aplicarRangoButton;
-    private JList<String> medList;
+    private JList<Medicamento> medList;
     private JButton aplicarSeleccionButton;
 
     private JPanel lineChart;
     private JPanel pieChart;
+    private JComboBox<String> comboBox3;
 
     public JPanel getPanel() { return panel1; }
 
@@ -26,8 +27,9 @@ public class ViewDB {
     public JComboBox getHastaMonth() { return comboBox5; }
 
     public JButton getAplicarRangoButton() { return aplicarRangoButton; }
-    public JList<String> getMedList() { return medList; }
+    public JList<Medicamento> getMedList() { return medList; }
     public JButton getAplicarSeleccionButton() { return aplicarSeleccionButton; }
+    public JComboBox<String> getMedsCombo() { return comboBox3; }
 
     public LineChart getLineChart() { return (LineChart) lineChart; }
     public PieChart getPieChart() { return (PieChart) pieChart; }
@@ -37,3 +39,5 @@ public class ViewDB {
         pieChart = new PieChart();
     }
 }
+
+

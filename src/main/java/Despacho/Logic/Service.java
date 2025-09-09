@@ -378,6 +378,14 @@ public class Service {
 
 
 
+
+    public Medicamento findMedicamentoByNombre(String nombre) {
+        return data.getMedicamentos().stream()
+                .filter(m -> m.getNombre() != null && m.getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .orElse(null);
+    }
+
 }
 
 
