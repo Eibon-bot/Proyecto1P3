@@ -33,6 +33,27 @@ public class Controller {
         public void loadPacientes() {
         model.setListPaciente(Service.instance().findAllPaciente());
         }
+    public void searchMedicamentoNombre(String nombre) {
+        Medicamento p = new Medicamento();
+        p.setNombre(nombre);
+        model.setListmedicamento(Service.instance().searchMedicamentoNombre(p));
+    }
+    public void searchMedicamentoCod(String cod) {
+        Medicamento p = new Medicamento();
+        p.setCodigo(cod);
+        model.setListmedicamento(Service.instance().searchMedicamentoCod(p));
+    }
+
+    public void setMedicamento(int row) {
+        model.setCurrentMedicamento(model.getListaMedicamentos().get(row));
+    }
+
+    public void loadMedicamentos() {
+        model.setListmedicamento(Service.instance().findAllMedicamento());
+    }
+
+
+
 
 
 

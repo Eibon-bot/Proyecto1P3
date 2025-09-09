@@ -13,18 +13,21 @@ public class Model extends AbstractModel {
     Paciente paciente;
     Receta receta;
     Medicamento medicamento;
+    private List<Medicamento> listaMedicamentos;
     private List<Receta> listReceta;
     private List<Paciente> listPaciente;
 
     public static final String PACIENTE = "paciente";
     public static final String RECETA = "receta";
     public static final String MEDICAMENTO = "medicamento";
+    public static final String LISTMEDICAMENTO = "listMedicamento";
     public static final String LISTPACIENTE = "listPaciente";
     public static final String LISTRECETA = "listReceta";
     public Model() {
         paciente=null;
         receta=null;
         medicamento=null;
+        listaMedicamentos=new ArrayList<>();
         listReceta=new ArrayList<>();
         listPaciente = new ArrayList<>();
 
@@ -36,6 +39,7 @@ public class Model extends AbstractModel {
         firePropertyChange(PACIENTE);
         firePropertyChange(RECETA);
         firePropertyChange(MEDICAMENTO);
+        firePropertyChange(LISTMEDICAMENTO);
     }
 
     public Paciente getCurrentPaciente() {
@@ -70,6 +74,16 @@ public class Model extends AbstractModel {
         this.listPaciente = listPaciente;
         firePropertyChange(LISTPACIENTE);
     }
+
+    public List<Medicamento> getListaMedicamentos() {
+        return listaMedicamentos;
+    }
+    public void setListmedicamento(List<Medicamento> listMedicamento) {
+        this.listaMedicamentos = listMedicamento;
+        firePropertyChange(LISTMEDICAMENTO);
+    }
+
+
     public List<Receta> getListReceta() {
         return listReceta;
     }

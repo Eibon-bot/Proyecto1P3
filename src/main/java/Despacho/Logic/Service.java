@@ -356,6 +356,13 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+    public List<Medicamento> searchMedicamentoNombre( Medicamento e) {
+        return data.getMedicamentos().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Medicamento::getNombre))
+                .collect(Collectors.toList());
+    }
+
 
 
 }

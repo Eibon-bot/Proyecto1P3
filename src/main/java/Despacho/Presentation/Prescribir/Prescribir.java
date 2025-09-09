@@ -1,7 +1,9 @@
 package Despacho.Presentation.Prescribir;
 
 import Despacho.Logic.Entidades.Paciente;
+import Despacho.Logic.Service;
 import Despacho.Presentation.Login.Controller;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.AgregarMedicamento;
 import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 import com.toedter.calendar.JDateChooser;
 
@@ -57,6 +59,21 @@ public class Prescribir implements PropertyChangeListener {
 //                if (dialogBuscarPaciente.getPacienteSeleccionado() != null) {
 //                    controller.setPaciente(dialogBuscarPaciente.getPacienteSeleccionado());
 //                }
+
+            }
+        });
+        agregarMedicamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.loadMedicamentos();
+                AgregarMedicamento dialogAgregarMedicamento = new AgregarMedicamento();
+                dialogAgregarMedicamento.setController(controller);
+                dialogAgregarMedicamento.setModel(model);
+
+                controller.loadPacientes();
+
+                dialogAgregarMedicamento.setModal(true);
+                dialogAgregarMedicamento.setVisible(true);
 
             }
         });

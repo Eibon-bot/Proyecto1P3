@@ -1,63 +1,112 @@
 package Despacho.Presentation.Prescribir.DialogsPrescribir;
 
-import javax.swing.*;
-import java.awt.event.*;
+import Despacho.Presentation.Medicamentos.TableModelMedicamentos;
+import Despacho.Presentation.Prescribir.Controller;
+import Despacho.Presentation.Prescribir.Model;
 
-public class AgregarMedicamento extends JDialog {
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class AgregarMedicamento extends JDialog implements PropertyChangeListener {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JComboBox comboBox1;
-    private JTextField textField1;
+    private JTextField textFieldBuscar;
     private JTable table1;
+    private JPanel panellistado;
 
     public AgregarMedicamento() {
+        table1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
+                int row = table1.getSelectedRow();
+                controller.setPaciente(row);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(table1);
+        panellistado.setLayout(new BorderLayout());
+        panellistado.add(scrollPane, BorderLayout.CENTER);
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setTitle("Agregar Medicamento");
+        pack();
+        setLocationRelativeTo(null);
+
+        textFieldBuscar.getDocument().addDocumentListener(new DocumentListener() {
+            private void filter() {
+                if (controller == null) return;
+                String criterio = comboBox1.getSelectedItem().toString();
+                String texto = textFieldBuscar.getText();
+
+                switch (criterio) {
+                    case "Nombre":
+                        controller.searchMedicamentoNombre(texto);
+                        break;
+                    case "Código":
+                        controller.searchMedicamentoCod(texto);
+                        break;
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) { filter(); }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) { filter(); }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) { filter(); }
+        });
 
         buttonOK.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                if (table1.getSelectedRow() >= 0) {
+                    controller.setMedicamento(table1.getSelectedRow());
+//                    SwingUtilities.getWindowAncestor(buttonOK).dispose();
+                }
             }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                AgregarMedicamento.this.setVisible(false);
             }
         });
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
+        }
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    Controller controller;
+    Model model;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    public void setModel(Model model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case Model.LISTMEDICAMENTO:
+                int[] cols = {TableModelMedicamentos.COD, TableModelMedicamentos.NOMBRE, TableModelMedicamentos.PRESENTACION};
+                table1.setModel(new TableModelMedicamentos(cols, model.getListaMedicamentos()));
+                break;
+        }
+        this.contentPane.revalidate();
+
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
-
-    public static void main(String[] args) {
-        AgregarMedicamento dialog = new AgregarMedicamento();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }
+
