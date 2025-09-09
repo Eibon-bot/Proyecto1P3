@@ -1,15 +1,21 @@
 package Despacho.Logic.Entidades;
 
 
+import Despacho.Logic.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Receta {
 
 
     private Paciente paciente;
     private Medico medico;
+
     private LocalDate fechaEmision;
     private LocalDate fechaRetiro;
     private List<Prescripcion> prescripciones;
@@ -36,9 +42,11 @@ public class Receta {
     public Medico getMedico() { return medico; }
     public void setMedico(Medico medico) { this.medico = medico; }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getFechaEmision() { return fechaEmision; }
     public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getFechaRetiro() { return fechaRetiro; }
     public void setFechaRetiro(LocalDate fechaRetiro) { this.fechaRetiro = fechaRetiro; }
 

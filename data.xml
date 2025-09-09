@@ -89,7 +89,58 @@
             <especialidad>ada</especialidad>
         </medico>
     </ListaMedicos>
-    <ListaRecetas/>
+    <ListaRecetas>
+        <receta>
+            <estado>Confeccionada</estado>
+            <paciente>
+                <id>PAC-0005</id>
+                <nombre>yulisa</nombre>
+                <fechaNacimiento>13/06/1990</fechaNacimiento>
+                <telefono>82838283</telefono>
+            </paciente>
+            <prescripciones>
+                <cantidad>20</cantidad>
+                <duracion>15</duracion>
+                <indicaciones>fwef</indicaciones>
+                <medicamento>
+                    <codigo>PAR-002</codigo>
+                    <nombre> paracetamol</nombre>
+                    <presentacion>200g</presentacion>
+                </medicamento>
+            </prescripciones>
+        </receta>
+        <receta>
+            <estado>Confeccionada</estado>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <paciente>
+                <id>PAC-0005</id>
+                <nombre>yulisa</nombre>
+                <fechaNacimiento>13/06/1990</fechaNacimiento>
+                <telefono>82838283</telefono>
+            </paciente>
+            <prescripciones>
+                <cantidad>9</cantidad>
+                <duracion>14</duracion>
+                <indicaciones>wsfvfsge</indicaciones>
+                <medicamento>
+                    <codigo>IBU-002</codigo>
+                    <nombre> ibuprofeno</nombre>
+                    <presentacion>pastilla</presentacion>
+                </medicamento>
+            </prescripciones>
+            <prescripciones>
+                <cantidad>7</cantidad>
+                <duracion>3</duracion>
+                <indicaciones>bdbd</indicaciones>
+                <medicamento>
+                    <codigo>PAR-002</codigo>
+                    <nombre> paracetamol</nombre>
+                    <presentacion>200g</presentacion>
+                </medicamento>
+            </prescripciones>
+        </receta>
+    </ListaRecetas>
     <ListaPacientes>
         <paciente>
             <id>Pac-123</id>
@@ -104,21 +155,21 @@
             <nombre>susan</nombre>
         </paciente>
         <paciente>
-            <fechaNacimiento>20/09/2025</fechaNacimiento>
             <id>PAC-0003</id>
             <nombre>sonia</nombre>
+            <fechaNacimiento>20/09/2025</fechaNacimiento>
             <telefono>82838283</telefono>
         </paciente>
         <paciente>
-            <fechaNacimiento>13/06/1990</fechaNacimiento>
             <id>PAC-0005</id>
             <nombre>yulisa</nombre>
+            <fechaNacimiento>13/06/1990</fechaNacimiento>
             <telefono>82838283</telefono>
         </paciente>
         <paciente>
-            <fechaNacimiento>20/09/2025</fechaNacimiento>
             <id>PAC-0006</id>
             <nombre>andres</nombre>
+            <fechaNacimiento>20/09/2025</fechaNacimiento>
             <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
