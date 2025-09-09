@@ -21,7 +21,6 @@ public class MedicaAdmin implements PropertyChangeListener {
     private JTextField presentacionTextField;
     private JTextField textFieldBuscar;
     private JButton buscarButton;
-    private JButton reporteButton;
     private JPanel MenuMedicamentos;
     private JPanel panellistado;
     private JComboBox BusquedaBox;

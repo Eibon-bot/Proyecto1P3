@@ -19,7 +19,6 @@ public class MediAdmin implements PropertyChangeListener {
     private JButton borrarButtonMed;
     private JTextField textFieldBusqMed;
     private JButton buscarButtonMed;
-    private JButton reporteButtonMed;
     private JTable meditable;
     private JPanel MenuMedicos;
     private JPanel panellistado;

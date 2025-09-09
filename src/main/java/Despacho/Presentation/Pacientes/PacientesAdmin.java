@@ -22,7 +22,6 @@ public class PacientesAdmin implements PropertyChangeListener {
     private JButton borrarButtonPac;
     private JTextField textFieldBusqPac;
     private JButton buscarButtonPac;
-    private JButton reporteButtonPac;
     private JPanel IngresarPaciente;
     private JTable tablePacientes;
     private JTextField textFieldFN;
@@ -42,7 +41,6 @@ public class PacientesAdmin implements PropertyChangeListener {
         guardarButtonPac.setIcon(new ImageIcon(getClass().getResource("/guardar.png")));
         limpiarButtonPac.setIcon(new ImageIcon(getClass().getResource("/limpiar.png")));
         borrarButtonPac.setIcon(new ImageIcon(getClass().getResource("/descartar.png")));
-        reporteButtonPac.setIcon(new ImageIcon(getClass().getResource("/reporte.png")));
 
         fecha = new JDateChooser();
         fecha.setDateFormatString("dd/MM/yyyy");
@@ -122,32 +120,10 @@ public class PacientesAdmin implements PropertyChangeListener {
         });
 
 
-        reporteButtonPac.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(IngresarPaciente, "Reporte no implementado aún.");
-            }
-        });
 
 
-//        comboBoxPac.setRenderer(new DefaultListCellRenderer() {
-//            @Override public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-//                                                                    boolean isSelected, boolean cellHasFocus) {
-//                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-//                if (value instanceof Paciente) {
-//                    Paciente p = (Paciente) value;
-//                    setText((p.getId() != null ? p.getId() : "") + " - " + (p.getNombre() != null ? p.getNombre() : ""));
-//                } else if (value == null && index == -1) {
-//                    setText("");
-//                }
-//                return this;
-//            }
-//        });
-//        comboBoxPac.addActionListener(new ActionListener() {
-//            @Override public void actionPerformed(ActionEvent e) {
-//                Object sel = comboBoxPac.getSelectedItem();
-//                if (sel instanceof Paciente) controller.selectFromList((Paciente) sel);
-//            }
-//        });
+
+
     }
 
 

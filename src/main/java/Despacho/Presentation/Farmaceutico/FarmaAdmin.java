@@ -21,7 +21,6 @@ public class FarmaAdmin implements PropertyChangeListener {
     private JButton borrarButtonFarma;
     private JTextField textFieldBusqFarma;
     private JButton buscarButtonFarma;
-    private JButton reporteButtonFarma;
     private JPanel MenuFarmaceutas;
     private JTable farmatable;
     private JPanel panellistado;
@@ -34,7 +33,6 @@ public class FarmaAdmin implements PropertyChangeListener {
         guardarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/guardar.png")));
         limpiarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/limpiar.png")));
         borrarButtonFarma.setIcon(new ImageIcon(getClass().getResource("/descartar.png")));
-        reporteButtonFarma.setIcon(new ImageIcon(getClass().getResource("/reporte.png")));
 
         farmatable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && farmatable.getSelectedRow() >= 0) {
