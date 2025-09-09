@@ -71,6 +71,18 @@
             <nombre>andrea</nombre>
             <especialidad>geriatria</especialidad>
         </medico>
+        <medico>
+            <clave>MED-0007</clave>
+            <id>MED-0007</id>
+            <nombre>GOku</nombre>
+            <especialidad>magia</especialidad>
+        </medico>
+        <medico>
+            <clave>MED-0008</clave>
+            <id>MED-0008</id>
+            <nombre>gohan</nombre>
+            <especialidad>ada</especialidad>
+        </medico>
     </ListaMedicos>
     <ListaRecetas/>
     <ListaPacientes>

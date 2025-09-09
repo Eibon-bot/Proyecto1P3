@@ -100,7 +100,7 @@ public class MedicaAdmin implements PropertyChangeListener {
                         case "Nombre":
                             controller.searchMedicamentoNombre(texto);
                             break;
-                        case "ID":
+                        case "Codigo":
                             controller.searchMedicamentoCodigo(texto);
                             break;
                     }
