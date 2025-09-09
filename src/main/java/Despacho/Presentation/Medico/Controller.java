@@ -57,6 +57,16 @@ public class Controller {
         model.setCurrent(m);
     }
 
+    public void searchMedicoNombre(String nombre) {
+        Medico p = new Medico();
+        p.setNombre(nombre);
+        model.setList(Service.instance().searchMedicoNombre(p));
+    }
+    public void searchMedicoId(String id) {
+        Medico p = new Medico();
+        p.setId(id);
+        model.setList(Service.instance().searchMedicoId(p));
+    }
 }
 
 

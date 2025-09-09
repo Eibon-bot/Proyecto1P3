@@ -349,6 +349,19 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+    public List<Farmaceutico> searchFarmaceuticoNombre(Farmaceutico e) {
+        return data.getFarmaceuticos().stream()
+                .filter(i -> i.getNombre() != null && i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Farmaceutico::getNombre))
+                .collect(Collectors.toList());
+    }
+
+    public List<Medico> searchMedicoNombre(Medico e) {
+        return data.getMedicos().stream()
+                .filter(i -> i.getNombre() != null && i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Medico::getNombre))
+                .collect(Collectors.toList());
+    }
     public List<Medicamento> searchMedicamentoCod(Medicamento e) {
         return data.getMedicamentos().stream()
                 .filter(i -> i.getCodigo() != null && i.getCodigo().toLowerCase().contains(e.getCodigo().toLowerCase()))

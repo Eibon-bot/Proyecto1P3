@@ -1,5 +1,6 @@
 package Despacho.Presentation.Farmaceutico;
 
+import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Farmaceutico;
@@ -55,6 +56,16 @@ public class Controller {
         model.setCurrent(f);
     }
 
+    public void searchFarmaceuticoNombre(String nombre) {
+        Farmaceutico p = new Farmaceutico();
+        p.setNombre(nombre);
+        model.setList(Service.instance().searchFarmaceuticoNombre(p));
+    }
+    public void searchFarmaceuticoId(String id) {
+        Farmaceutico p = new Farmaceutico();
+        p.setId(id);
+        model.setList(Service.instance().searchFarmaceuticoId(p));
+    }
 }
 
 

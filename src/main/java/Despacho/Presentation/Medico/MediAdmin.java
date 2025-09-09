@@ -2,10 +2,6 @@ package Despacho.Presentation.Medico;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Medico;
-import Despacho.Logic.Entidades.Paciente;
-import Despacho.Presentation.Medico.Controller;
-import Despacho.Presentation.Medico.Model;
-import Despacho.Presentation.Medico.TableModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +23,7 @@ public class MediAdmin implements PropertyChangeListener {
     private JTable meditable;
     private JPanel MenuMedicos;
     private JPanel panellistado;
+    private JComboBox BusquedaBox;
     private boolean editing = false;
 
 
@@ -87,8 +84,20 @@ public class MediAdmin implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.read(textFieldBusqMed.getText());
-                } catch (Exception ex) {
+                    if (controller == null) return;
+                    String criterio = BusquedaBox.getSelectedItem() != null ? BusquedaBox.getSelectedItem().toString() : "Nombre";
+                    String texto = textFieldBusqMed.getText();
+
+                    switch (criterio) {
+                        case "Nombre":
+                            controller.searchMedicoNombre(texto);
+                            break;
+                        case "ID":
+                            controller.searchMedicoId(texto);
+                            break;
+                    }
+
+            } catch (Exception ex) {
                     JOptionPane.showMessageDialog(MenuMedicos, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
             }

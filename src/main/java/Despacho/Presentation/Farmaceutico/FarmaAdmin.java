@@ -2,7 +2,6 @@ package Despacho.Presentation.Farmaceutico;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Farmaceutico;
-import Despacho.Logic.Entidades.Paciente;
 
 import javax.swing.*;
 
@@ -23,9 +22,10 @@ public class FarmaAdmin implements PropertyChangeListener {
     private JTextField textFieldBusqFarma;
     private JButton buscarButtonFarma;
     private JButton reporteButtonFarma;
-    private JPanel IngresarFarmaceutas;
+    private JPanel MenuFarmaceutas;
     private JTable farmatable;
     private JPanel panellistado;
+    private JComboBox BusquedaBox;
     private boolean editing = false;
 
     public FarmaAdmin() {
@@ -60,9 +60,9 @@ public class FarmaAdmin implements PropertyChangeListener {
                         controller.create(p);
                         controller.clear();
                     }
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
 
@@ -74,16 +74,16 @@ public class FarmaAdmin implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 String id = textFieldIdFarma.getText().trim();
                 if (id.isEmpty()) {
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "Id requerido para borrar", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas, "Id requerido para borrar", "Aviso", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 try {
                     Farmaceutico f = new Farmaceutico();
                     f.setId(id);
                     controller.delete(f);
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, "REGISTRO ELIMINADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas, "REGISTRO ELIMINADO", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
 
@@ -96,9 +96,28 @@ public class FarmaAdmin implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.read(textFieldBusqFarma.getText());
+                    if (controller == null) return;
+
+                    String criterio = BusquedaBox.getSelectedItem() != null
+                            ? BusquedaBox.getSelectedItem().toString()
+                            : "Nombre";
+
+                    String texto = textFieldBusqFarma.getText();
+
+                    switch (criterio) {
+                        case "Nombre":
+                            controller.searchFarmaceuticoNombre(texto);
+                            break;
+                        case "ID":
+                            controller.searchFarmaceuticoId(texto);
+                            break;
+                    }
+
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(IngresarFarmaceutas, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuFarmaceutas,
+                            ex.getMessage(),
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -113,7 +132,7 @@ public class FarmaAdmin implements PropertyChangeListener {
     }
 
     public JPanel getPanel() {
-        return IngresarFarmaceutas;
+        return MenuFarmaceutas;
     }
 
     Controller controller;
@@ -150,7 +169,7 @@ public class FarmaAdmin implements PropertyChangeListener {
 
 
         }
-        this.IngresarFarmaceutas.revalidate();
+        this.MenuFarmaceutas.revalidate();
     }
 
     public Farmaceutico take() {

@@ -55,4 +55,15 @@ public class ControllerMedicamentos {
 //        m.setCodigo(Service.instance().generarNuevoCodMedicamento(m.getNombre()));
         model.setCurrent(m);
     }
+    public void searchMedicamentoNombre(String nombre) {
+        Medicamento p = new Medicamento();
+        p.setNombre(nombre);
+        model.setList(Service.instance().searchMedicamentoNombre(p));
+    }
+
+    public void searchMedicamentoCodigo(String id) {
+        Medicamento p = new Medicamento();
+        p.setCodigo(id);
+        model.setList(Service.instance().searchMedicamentoCod(p));
+    }
 }

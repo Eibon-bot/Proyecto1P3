@@ -2,9 +2,7 @@ package Despacho.Presentation.Medicamentos;
 
 import Despacho.App;
 import Despacho.Logic.Entidades.Medicamento;
-import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Service;
-import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,11 +19,12 @@ public class MedicaAdmin implements PropertyChangeListener {
     private JButton limpiarButton;
     private JButton borrarButton;
     private JTextField presentacionTextField;
-    private JTextField codigoBuscar;
+    private JTextField textFieldBuscar;
     private JButton buscarButton;
     private JButton reporteButton;
-    private JPanel menumedicamentos;
+    private JPanel MenuMedicamentos;
     private JPanel panellistado;
+    private JComboBox BusquedaBox;
     private boolean editing = false;
 
     public MedicaAdmin() {
@@ -58,9 +57,9 @@ public class MedicaAdmin implements PropertyChangeListener {
                         controller.create(p);
                         controller.clear();
                     }
-                    JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuMedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuMedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
 
@@ -74,9 +73,9 @@ public class MedicaAdmin implements PropertyChangeListener {
                     Medicamento n = take();
                     try {
                         controller.delete(n);
-                        JOptionPane.showMessageDialog(menumedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(MenuMedicamentos, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(MenuMedicamentos, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
@@ -89,9 +88,28 @@ public class MedicaAdmin implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.read(codigoBuscar.getText());
+                    if (controller == null) return;
+
+                    String criterio = BusquedaBox.getSelectedItem() != null
+                            ? BusquedaBox.getSelectedItem().toString()
+                            : "Nombre";
+
+                    String texto = textFieldBuscar.getText();
+
+                    switch (criterio) {
+                        case "Nombre":
+                            controller.searchMedicamentoNombre(texto);
+                            break;
+                        case "ID":
+                            controller.searchMedicamentoCodigo(texto);
+                            break;
+                    }
+
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(menumedicamentos, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(MenuMedicamentos,
+                            ex.getMessage(),
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -106,7 +124,7 @@ public class MedicaAdmin implements PropertyChangeListener {
     }
 
     public JPanel getPanel() {
-        return menumedicamentos;
+        return MenuMedicamentos;
     }
 
     Despacho.Presentation.Medicamentos.ControllerMedicamentos controller;
@@ -144,7 +162,7 @@ public class MedicaAdmin implements PropertyChangeListener {
                 presentacionTextField.setToolTipText(null);
                 break;
         }
-        this.menumedicamentos.revalidate();
+        this.MenuMedicamentos.revalidate();
     }
 
     public Medicamento take() {
