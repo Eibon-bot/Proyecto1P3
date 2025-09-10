@@ -50,7 +50,6 @@
             <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
-
     <ListaMedicamentos>
         <medicamento>
             <codigo>ALG-001</codigo>
@@ -73,7 +72,6 @@
             <presentacion>200g</presentacion>
         </medicamento>
     </ListaMedicamentos>
-
     <ListaMedicos>
         <medico>
             <id>MED-0006</id>
@@ -96,8 +94,21 @@
             <rol>medico</rol>
             <especialidad>ada</especialidad>
         </medico>
+        <medico>
+            <id>ADM-0001</id>
+            <nombre>Administrador</nombre>
+            <clave>admin</clave>
+            <rol>administrador</rol>
+            <especialidad>general</especialidad>
+        </medico>
+        <medico>
+            <id>MED-0009</id>
+            <nombre>ismael</nombre>
+            <clave>MED-0009</clave>
+            <rol>medico</rol>
+            <especialidad>pediatra</especialidad>
+        </medico>
     </ListaMedicos>
-
     <ListaPacientes>
         <paciente>
             <id>PAC-123</id>
@@ -130,105 +141,5 @@
             <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
-
-    <ListaRecetas>
-        <receta>
-            <fechaEmision>2025-09-01</fechaEmision>
-            <fechaRetiro>2025-09-10</fechaRetiro>
-            <prescripciones>
-                <medicamento>IBU-002</medicamento>
-                <cantidad>20</cantidad>
-                <indicaciones>cada 8 horas</indicaciones>
-                <duracion>15</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <fechaEmision>2025-09-05</fechaEmision>
-            <fechaRetiro>2025-09-20</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>9</cantidad>
-                <indicaciones>tomar mucho</indicaciones>
-                <duracion>14</duracion>
-            </prescripciones>
-            <prescripciones>
-                <medicamento>IBU-002</medicamento>
-                <cantidad>7</cantidad>
-                <indicaciones>cada 12 horas</indicaciones>
-                <duracion>3</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <fechaEmision>2025-09-09</fechaEmision>
-            <fechaRetiro>2025-09-11</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>69</cantidad>
-                <indicaciones>Tomar mucho</indicaciones>
-                <duracion>3</duracion>
-            </prescripciones>
-            <prescripciones>
-                <medicamento>IBU-002</medicamento>
-                <cantidad>15</cantidad>
-                <indicaciones>cada 6 horas</indicaciones>
-                <duracion>6</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <fechaEmision>2025-09-02</fechaEmision>
-            <fechaRetiro>2025-09-03</fechaRetiro>
-            <prescripciones>
-                <medicamento>IBU-002</medicamento>
-                <cantidad>2</cantidad>
-                <indicaciones>mañana y noche</indicaciones>
-                <duracion>4</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <fechaEmision>2025-09-04</fechaEmision>
-            <fechaRetiro>2025-09-05</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>12</cantidad>
-                <indicaciones>diario</indicaciones>
-                <duracion>7</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <paciente>PAC-0005</paciente>
-            <fechaEmision>2025-09-06</fechaEmision>
-            <fechaRetiro>2025-09-11</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-001</medicamento>
-                <cantidad>30</cantidad>
-                <indicaciones>1 cada 8 horas</indicaciones>
-                <duracion>10</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-
-        <receta>
-            <paciente>PAC-0002</paciente>
-            <medico>MED-0008</medico>
-            <fechaEmision>2025-09-07</fechaEmision>
-            <fechaRetiro>2025-09-10</fechaRetiro>
-            <prescripciones>
-                <medicamento>ALG-001</medicamento>
-                <cantidad>5</cantidad>
-                <indicaciones>inyección única</indicaciones>
-                <duracion>1</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-    </ListaRecetas>
+    <ListaRecetas/>
 </data>
