@@ -34,7 +34,6 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
         table1.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
                 int row = table1.getSelectedRow();
-                controller.setPaciente(row);
             }
         });
 

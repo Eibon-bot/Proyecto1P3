@@ -1,5 +1,6 @@
 package Despacho.Presentation;
 
+import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Usuario;
 import javax.swing.*;
@@ -77,6 +78,9 @@ public class MainWindow extends JFrame {
         var view = new Despacho.Presentation.Prescribir.Prescribir();
         var model = new Despacho.Presentation.Prescribir.Model();
         new Despacho.Presentation.Prescribir.Controller(view, model);
+        model.setCurrentMedico((Medico)user);
+
+
         return view.getPrescribir();
     }
 

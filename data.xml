@@ -202,5 +202,18 @@
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+        <receta>
+            <paciente>PAC-0002</paciente>
+            <medico>MED-0008</medico>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-10</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-001</medicamento>
+                <cantidad>3</cantidad>
+                <indicaciones>hola</indicaciones>
+                <duracion>4</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
     </ListaRecetas>
 </data>
