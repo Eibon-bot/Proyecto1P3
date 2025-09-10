@@ -50,28 +50,30 @@
             <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
+
     <ListaMedicamentos>
         <medicamento>
             <codigo>ALG-001</codigo>
-            <nombre> algo</nombre>
+            <nombre>algo</nombre>
             <presentacion>inyeccion</presentacion>
         </medicamento>
         <medicamento>
             <codigo>IBU-002</codigo>
-            <nombre> ibuprofeno</nombre>
+            <nombre>ibuprofeno</nombre>
             <presentacion>pastilla</presentacion>
         </medicamento>
         <medicamento>
             <codigo>PAR-001</codigo>
-            <nombre> Paracetamol</nombre>
+            <nombre>Paracetamol</nombre>
             <presentacion>pastilla para todo</presentacion>
         </medicamento>
         <medicamento>
             <codigo>PAR-002</codigo>
-            <nombre> paracetamol</nombre>
+            <nombre>paracetamol</nombre>
             <presentacion>200g</presentacion>
         </medicamento>
     </ListaMedicamentos>
+
     <ListaMedicos>
         <medico>
             <id>MED-0006</id>
@@ -95,9 +97,10 @@
             <especialidad>ada</especialidad>
         </medico>
     </ListaMedicos>
+
     <ListaPacientes>
         <paciente>
-            <id>Pac-123</id>
+            <id>PAC-123</id>
             <nombre>isaac</nombre>
         </paciente>
         <paciente>
@@ -111,46 +114,54 @@
         <paciente>
             <id>PAC-0003</id>
             <nombre>sonia</nombre>
-            <fechaNacimiento>20/09/2025</fechaNacimiento>
+            <fechaNacimiento>1995-09-20</fechaNacimiento>
             <telefono>82838283</telefono>
         </paciente>
         <paciente>
             <id>PAC-0005</id>
             <nombre>yulisa</nombre>
-            <fechaNacimiento>13/06/1990</fechaNacimiento>
+            <fechaNacimiento>1990-06-13</fechaNacimiento>
             <telefono>82838283</telefono>
         </paciente>
         <paciente>
             <id>PAC-0006</id>
             <nombre>andres</nombre>
-            <fechaNacimiento>20/09/2025</fechaNacimiento>
+            <fechaNacimiento>1998-09-20</fechaNacimiento>
             <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
+
     <ListaRecetas>
         <receta>
+            <fechaEmision>2025-09-01</fechaEmision>
+            <fechaRetiro>2025-09-10</fechaRetiro>
             <prescripciones>
+                <medicamento>IBU-002</medicamento>
                 <cantidad>20</cantidad>
-                <indicaciones>fwef</indicaciones>
+                <indicaciones>cada 8 horas</indicaciones>
                 <duracion>15</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
-            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaEmision>2025-09-05</fechaEmision>
             <fechaRetiro>2025-09-20</fechaRetiro>
             <prescripciones>
+                <medicamento>PAR-002</medicamento>
                 <cantidad>9</cantidad>
-                <indicaciones>wsfvfsge</indicaciones>
+                <indicaciones>tomar mucho</indicaciones>
                 <duracion>14</duracion>
             </prescripciones>
             <prescripciones>
+                <medicamento>IBU-002</medicamento>
                 <cantidad>7</cantidad>
-                <indicaciones>bdbd</indicaciones>
+                <indicaciones>cada 12 horas</indicaciones>
                 <duracion>3</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
             <fechaEmision>2025-09-09</fechaEmision>
             <fechaRetiro>2025-09-11</fechaRetiro>
@@ -162,56 +173,60 @@
             </prescripciones>
             <prescripciones>
                 <medicamento>IBU-002</medicamento>
-                <cantidad>666</cantidad>
-                <indicaciones>Te amo Loria</indicaciones>
-                <duracion>666</duracion>
+                <cantidad>15</cantidad>
+                <indicaciones>cada 6 horas</indicaciones>
+                <duracion>6</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
-            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaEmision>2025-09-02</fechaEmision>
             <fechaRetiro>2025-09-03</fechaRetiro>
             <prescripciones>
                 <medicamento>IBU-002</medicamento>
                 <cantidad>2</cantidad>
-                <indicaciones>Hola</indicaciones>
+                <indicaciones>mañana y noche</indicaciones>
                 <duracion>4</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
-            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaEmision>2025-09-04</fechaEmision>
             <fechaRetiro>2025-09-05</fechaRetiro>
             <prescripciones>
                 <medicamento>PAR-002</medicamento>
-                <cantidad>0</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>0</duracion>
+                <cantidad>12</cantidad>
+                <indicaciones>diario</indicaciones>
+                <duracion>7</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
             <paciente>PAC-0005</paciente>
-            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaEmision>2025-09-06</fechaEmision>
             <fechaRetiro>2025-09-11</fechaRetiro>
             <prescripciones>
                 <medicamento>PAR-001</medicamento>
-                <cantidad>0</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>0</duracion>
+                <cantidad>30</cantidad>
+                <indicaciones>1 cada 8 horas</indicaciones>
+                <duracion>10</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
+
         <receta>
             <paciente>PAC-0002</paciente>
             <medico>MED-0008</medico>
-            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaEmision>2025-09-07</fechaEmision>
             <fechaRetiro>2025-09-10</fechaRetiro>
             <prescripciones>
-                <medicamento>PAR-001</medicamento>
-                <cantidad>3</cantidad>
-                <indicaciones>hola</indicaciones>
-                <duracion>4</duracion>
+                <medicamento>ALG-001</medicamento>
+                <cantidad>5</cantidad>
+                <indicaciones>inyección única</indicaciones>
+                <duracion>1</duracion>
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
