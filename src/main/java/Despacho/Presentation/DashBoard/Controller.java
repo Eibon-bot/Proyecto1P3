@@ -27,7 +27,9 @@ public class Controller {
 
         List<Medicamento> meds = Service.instance().findAllMedicamento();
         medByName.clear();
-        for (Medicamento m : meds) medByName.put(m.getNombre(), m);
+        for (Medicamento m : meds) {
+            medByName.put(m.getNombre(), m);
+        }
 
         DefaultComboBoxModel<String> cbm =
                 new DefaultComboBoxModel<>(medByName.keySet().toArray(new String[0]));

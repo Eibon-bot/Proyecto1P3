@@ -1,11 +1,76 @@
 package Despacho.Presentation.DashBoard;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.text.AttributedString;
 import java.util.List;
 
 public class PieChart extends JPanel {
+    private DefaultPieDataset dataset;
+    private JFreeChart chart;
+
+    public PieChart() {
+        setLayout(new BorderLayout());
+        dataset = new DefaultPieDataset();
+
+        chart = ChartFactory.createPieChart(
+                "Recetas",
+                dataset,
+                true,
+                true,
+                false
+        );
+
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        plot.setCircular(true);
+        plot.setBackgroundPaint(Color.WHITE);
+
+
+        plot.setLabelGenerator(new PieSectionLabelGenerator() {
+            @Override
+            public String generateSectionLabel(PieDataset ds, Comparable key) {
+                Number value = ds.getValue(key);
+                if (value == null) return key.toString();
+
+                double total = 0.0;
+                for (int i = 0; i < ds.getItemCount(); i++) {
+                    Number v = ds.getValue(i);
+                    if (v != null) total += v.doubleValue();
+                }
+
+                double percent = total > 0 ? value.doubleValue() / total : 0.0;
+                return key.toString() + " = " + value.intValue() + " (" +
+                        new DecimalFormat("0%").format(percent) + ")";
+            }
+
+            @Override
+            public AttributedString generateAttributedSectionLabel(PieDataset dataset, Comparable key) {
+                return null;
+            }
+        });
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(400, 300));
+        add(chartPanel, BorderLayout.CENTER);
+    }
+
+    public void setData(List<Slice> slices) {
+        dataset.clear();
+        for (Slice s : slices) {
+            dataset.setValue(s.label, s.value);
+        }
+    }
+
     public static class Slice {
         public final String label;
         public final int value;
@@ -15,33 +80,6 @@ public class PieChart extends JPanel {
             this.label = label;
             this.value = value;
             this.color = color;
-        }
-    }
-
-    private final List<Slice> slices = new ArrayList<>();
-
-    public PieChart() {
-        setBackground(Color.WHITE);
-    }
-
-    public void setData(List<Slice> data) {
-        slices.clear();
-        if (data != null) slices.addAll(data);
-        repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (slices.isEmpty()) return;
-
-        int total = slices.stream().mapToInt(s -> s.value).sum();
-        int start = 0;
-        for (Slice s : slices) {
-            int angle = (int) Math.round(360.0 * s.value / total);
-            g.setColor(s.color);
-            g.fillArc(10, 10, getWidth() - 20, getHeight() - 20, start, angle);
-            start += angle;
         }
     }
 }

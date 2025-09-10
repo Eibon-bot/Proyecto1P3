@@ -11,6 +11,9 @@ import Despacho.Data.Registro.AuthService;
 import javax.swing.*;
 import java.awt.*;
 
+
+
+
 public class App {
     public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
     private static final boolean DEBUG_OPEN_ADMIN_SCREENS = false;
@@ -64,5 +67,9 @@ public class App {
             }
         });
     }
+
+
+
+
 }
 
