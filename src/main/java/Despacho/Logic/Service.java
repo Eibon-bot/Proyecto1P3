@@ -376,7 +376,43 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+    public List<Receta> searchRecetaPorIdPaciente(Receta rfiltro) {
+        return data.getRecetas().stream()
+                .filter(r -> r.getPaciente() != null
+                        && r.getPaciente().getId() != null
+                        && r.getPaciente().getId().toLowerCase()
+                        .contains(rfiltro.getPaciente().getId().toLowerCase()))
+                .filter(r -> rfiltro.getEstado() == null ||
+                        rfiltro.getEstado().equalsIgnoreCase("Todos") ||
+                        (r.getEstado() != null &&
+                                r.getEstado().equalsIgnoreCase(rfiltro.getEstado())))
+                .sorted(Comparator.comparing(r -> r.getPaciente().getId()))
+                .collect(Collectors.toList());
+    }
 
+    public List<Receta> searchRecetaPorNombrePaciente(Receta rfiltro) {
+        return data.getRecetas().stream()
+                .filter(r -> r.getPaciente() != null
+                        && r.getPaciente().getNombre() != null
+                        && r.getPaciente().getNombre().toLowerCase()
+                        .contains(rfiltro.getPaciente().getNombre().toLowerCase()))
+                .filter(r -> rfiltro.getEstado() == null ||
+                        rfiltro.getEstado().equalsIgnoreCase("Todos") ||
+                        (r.getEstado() != null &&
+                                r.getEstado().equalsIgnoreCase(rfiltro.getEstado())))
+                .sorted(Comparator.comparing(r -> r.getPaciente().getNombre()))
+                .collect(Collectors.toList());
+    }
+    public List<Receta> filtrarRecetaPorEstado(Receta rfiltro) {
+        if (rfiltro.getEstado() == null || rfiltro.getEstado().equalsIgnoreCase("Todos")) {
+            return data.getRecetas();
+        }
+        return data.getRecetas().stream()
+                .filter(r -> r.getEstado() != null &&
+                        r.getEstado().equalsIgnoreCase(rfiltro.getEstado()))
+                .sorted(Comparator.comparing(Receta::getEstado))
+                .collect(Collectors.toList());
+    }
 
 
     public Medicamento findMedicamentoByNombre(String nombre) {
