@@ -5,8 +5,9 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name="Paciente")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Paciente {
-    private String id=" ";
-    private String nombre="";
+    @XmlID
+    private String id;
+    private String nombre;
     private String fechaNacimiento;
     private String telefono;
 

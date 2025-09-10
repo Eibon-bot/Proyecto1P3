@@ -1,7 +1,11 @@
 package Despacho.Logic.Entidades;
 
-public class Medicamento {
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement(name="Medicamento")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Medicamento {
+    @XmlID
     private String codigo;
     private String nombre=" ";
     private String presentacion;

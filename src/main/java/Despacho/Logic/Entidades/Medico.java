@@ -3,7 +3,7 @@ package Despacho.Logic.Entidades;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
+import javax.xml.bind.annotation.XmlID;
 @XmlRootElement(name="Medico")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Medico extends Usuario {
@@ -23,5 +23,7 @@ public class Medico extends Usuario {
 
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String esp) { this.especialidad = esp; }
+
+
 }
 

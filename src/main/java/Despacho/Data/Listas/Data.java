@@ -32,14 +32,16 @@ public class Data {
     @XmlElement(name = "medico")
     private List<Medico> medicos = new ArrayList<>();
 
+    @XmlElementWrapper(name = "ListaPacientes")
+    @XmlElement(name = "paciente")
+    private List<Despacho.Logic.Entidades.Paciente> pacientes = new ArrayList<>();
+
     @XmlElementWrapper(name = "ListaRecetas")
     @XmlElement(name = "receta")
     private List<Receta> recetas = new ArrayList<>();
 
 
-    @XmlElementWrapper(name = "ListaPacientes")
-    @XmlElement(name = "paciente")
-    private List<Despacho.Logic.Entidades.Paciente> pacientes = new ArrayList<>();
+
 
 
 
@@ -47,8 +49,9 @@ public class Data {
         medicos = new ArrayList<>();
         farmaceuticos = new ArrayList<>();
         medicamentos = new ArrayList<>();
-        recetas = new ArrayList<>();
         pacientes = new ArrayList<>();
+        recetas = new ArrayList<>();
+
 
     }
 
@@ -64,11 +67,13 @@ public class Data {
         return medicos;
     }
 
+    public List<Paciente> getPacientes() { return pacientes; }
+
     public List<Receta> getRecetas() {
         return recetas;
     }
 
-    public List<Paciente> getPacientes() { return pacientes; }
+
 
 
 

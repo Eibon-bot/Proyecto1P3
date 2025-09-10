@@ -2,44 +2,52 @@
 <data>
     <ListaFarmaceuticos>
         <farmaceutico>
-            <clave>FARMA-0001</clave>
             <id>FARMA-0001</id>
             <nombre>ana</nombre>
+            <clave>FARMA-0001</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0002</clave>
             <id>FARMA-0002</id>
             <nombre>pedro</nombre>
+            <clave>FARMA-0002</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0003</clave>
             <id>FARMA-0003</id>
             <nombre>juan</nombre>
+            <clave>FARMA-0003</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0004</clave>
             <id>FARMA-0004</id>
             <nombre>maria</nombre>
+            <clave>FARMA-0004</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0005</clave>
             <id>FARMA-0005</id>
             <nombre>luis</nombre>
+            <clave>FARMA-0005</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0006</clave>
             <id>FARMA-0006</id>
             <nombre>matias</nombre>
+            <clave>FARMA-0006</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0007</clave>
             <id>FARMA-0007</id>
             <nombre>alejandro</nombre>
+            <clave>FARMA-0007</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <clave>FARMA-0008</clave>
             <id>FARMA-0008</id>
             <nombre>sanchez</nombre>
+            <clave>FARMA-0008</clave>
+            <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos>
@@ -54,11 +62,6 @@
             <presentacion>pastilla</presentacion>
         </medicamento>
         <medicamento>
-            <codigo></codigo>
-            <nombre> neumonill</nombre>
-            <presentacion>pastillas</presentacion>
-        </medicamento>
-        <medicamento>
             <codigo>PAR-001</codigo>
             <nombre> Paracetamol</nombre>
             <presentacion>pastilla para todo</presentacion>
@@ -71,76 +74,27 @@
     </ListaMedicamentos>
     <ListaMedicos>
         <medico>
-            <clave>MED-0006</clave>
             <id>MED-0006</id>
             <nombre>andrea</nombre>
+            <clave>MED-0006</clave>
+            <rol>medico</rol>
             <especialidad>geriatria</especialidad>
         </medico>
         <medico>
-            <clave>MED-0007</clave>
             <id>MED-0007</id>
             <nombre>GOku</nombre>
+            <clave>MED-0007</clave>
+            <rol>medico</rol>
             <especialidad>magia</especialidad>
         </medico>
         <medico>
-            <clave>MED-0008</clave>
             <id>MED-0008</id>
             <nombre>gohan</nombre>
+            <clave>MED-0008</clave>
+            <rol>medico</rol>
             <especialidad>ada</especialidad>
         </medico>
     </ListaMedicos>
-    <ListaRecetas>
-        <receta>
-            <estado>Confeccionada</estado>
-            <paciente>
-                <id>PAC-0005</id>
-                <nombre>yulisa</nombre>
-                <fechaNacimiento>13/06/1990</fechaNacimiento>
-                <telefono>82838283</telefono>
-            </paciente>
-            <prescripciones>
-                <cantidad>20</cantidad>
-                <duracion>15</duracion>
-                <indicaciones>fwef</indicaciones>
-                <medicamento>
-                    <codigo>PAR-002</codigo>
-                    <nombre> paracetamol</nombre>
-                    <presentacion>200g</presentacion>
-                </medicamento>
-            </prescripciones>
-        </receta>
-        <receta>
-            <estado>Confeccionada</estado>
-            <fechaEmision>2025-09-09</fechaEmision>
-            <fechaRetiro>2025-09-20</fechaRetiro>
-            <paciente>
-                <id>PAC-0005</id>
-                <nombre>yulisa</nombre>
-                <fechaNacimiento>13/06/1990</fechaNacimiento>
-                <telefono>82838283</telefono>
-            </paciente>
-            <prescripciones>
-                <cantidad>9</cantidad>
-                <duracion>14</duracion>
-                <indicaciones>wsfvfsge</indicaciones>
-                <medicamento>
-                    <codigo>IBU-002</codigo>
-                    <nombre> ibuprofeno</nombre>
-                    <presentacion>pastilla</presentacion>
-                </medicamento>
-            </prescripciones>
-            <prescripciones>
-                <cantidad>7</cantidad>
-                <duracion>3</duracion>
-                <indicaciones>bdbd</indicaciones>
-                <medicamento>
-                    <codigo>PAR-002</codigo>
-                    <nombre> paracetamol</nombre>
-                    <presentacion>200g</presentacion>
-                </medicamento>
-            </prescripciones>
-        </receta>
-    </ListaRecetas>
     <ListaPacientes>
         <paciente>
             <id>Pac-123</id>
@@ -173,4 +127,80 @@
             <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
+    <ListaRecetas>
+        <receta>
+            <prescripciones>
+                <cantidad>20</cantidad>
+                <indicaciones>fwef</indicaciones>
+                <duracion>15</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-20</fechaRetiro>
+            <prescripciones>
+                <cantidad>9</cantidad>
+                <indicaciones>wsfvfsge</indicaciones>
+                <duracion>14</duracion>
+            </prescripciones>
+            <prescripciones>
+                <cantidad>7</cantidad>
+                <indicaciones>bdbd</indicaciones>
+                <duracion>3</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-11</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>69</cantidad>
+                <indicaciones>Tomar mucho</indicaciones>
+                <duracion>3</duracion>
+            </prescripciones>
+            <prescripciones>
+                <medicamento>IBU-002</medicamento>
+                <cantidad>666</cantidad>
+                <indicaciones>Te amo Loria</indicaciones>
+                <duracion>666</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-03</fechaRetiro>
+            <prescripciones>
+                <medicamento>IBU-002</medicamento>
+                <cantidad>2</cantidad>
+                <indicaciones>Hola</indicaciones>
+                <duracion>4</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-05</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>0</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0005</paciente>
+            <fechaEmision>2025-09-09</fechaEmision>
+            <fechaRetiro>2025-09-11</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-001</medicamento>
+                <cantidad>0</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+    </ListaRecetas>
 </data>

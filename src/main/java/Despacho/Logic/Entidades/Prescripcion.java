@@ -1,7 +1,11 @@
 package Despacho.Logic.Entidades;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Prescripcion {
 
+    @XmlIDREF
     private Medicamento medicamento;
     private int cantidad;
     private String indicaciones;
