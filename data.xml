@@ -8,9 +8,9 @@
             <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <id>FARMA-0002</id>
+            <id>P</id>
             <nombre>pedro</nombre>
-            <clave>FARMA-0002</clave>
+            <clave>P</clave>
             <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
@@ -70,64 +70,61 @@
     </ListaPacientes>
     <ListaRecetas>
         <receta>
-            <paciente>PAC-0001</paciente>
-            <fechaEmision>2025-09-09</fechaEmision>
-            <fechaRetiro>2025-09-15</fechaRetiro>
-            <prescripciones>
-                <medicamento>IBU-002</medicamento>
-                <cantidad>12</cantidad>
-                <indicaciones>Cada 8 horas</indicaciones>
-                <duracion>7</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-        <receta>
-            <paciente>PAC-0002</paciente>
-            <fechaEmision>2025-09-08</fechaEmision>
+            <paciente>PAC-0003</paciente>
+            <medico>MED-0006</medico>
+            <fechaEmision>2025-09-11</fechaEmision>
             <fechaRetiro>2025-09-10</fechaRetiro>
             <prescripciones>
                 <medicamento>PAR-001</medicamento>
-                <cantidad>20</cantidad>
-                <indicaciones>1 cada 6 horas</indicaciones>
-                <duracion>5</duracion>
-            </prescripciones>
-            <estado>Entregada</estado>
-        </receta>
-        <receta>
-            <paciente>PAC-0003</paciente>
-            <fechaEmision>2025-09-10</fechaEmision>
-            <fechaRetiro>2025-09-18</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>15</cantidad>
-                <indicaciones>1 diaria</indicaciones>
-                <duracion>15</duracion>
+                <cantidad>3</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>1</duracion>
             </prescripciones>
             <estado>Proceso</estado>
         </receta>
         <receta>
-            <paciente>PAC-0002</paciente>
-            <fechaEmision>2025-09-07</fechaEmision>
-            <fechaRetiro>2025-09-12</fechaRetiro>
+            <paciente>PAC-0001</paciente>
+            <medico>MED-0006</medico>
+            <fechaEmision>2025-09-11</fechaEmision>
+            <fechaRetiro>2025-09-19</fechaRetiro>
             <prescripciones>
-                <medicamento>ALG-001</medicamento>
-                <cantidad>5</cantidad>
-                <indicaciones>Uso hospitalario</indicaciones>
-                <duracion>2</duracion>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>0</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
             </prescripciones>
-            <estado>Lista</estado>
+            <estado>Confeccionada</estado>
         </receta>
         <receta>
             <paciente>PAC-0001</paciente>
+            <medico>MED-0006</medico>
             <fechaEmision>2025-09-11</fechaEmision>
-            <fechaRetiro>2025-09-11</fechaRetiro>
+            <fechaRetiro>2025-09-12</fechaRetiro>
             <prescripciones>
                 <medicamento>PAR-002</medicamento>
-                <cantidad>9</cantidad>
-                <indicaciones>uygiugigh</indicaciones>
-                <duracion>8</duracion>
+                <cantidad>0</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
             </prescripciones>
-            <estado>Entregada</estado>
+            <prescripciones>
+                <medicamento>ALG-001</medicamento>
+                <cantidad>1</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>1</duracion>
+            </prescripciones>
+            <prescripciones>
+                <medicamento>PAR-001</medicamento>
+                <cantidad>2</cantidad>
+                <indicaciones>HOLA</indicaciones>
+                <duracion>2</duracion>
+            </prescripciones>
+            <prescripciones>
+                <medicamento>PAR-001</medicamento>
+                <cantidad>0</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
+            </prescripciones>
+            <estado>Lista</estado>
         </receta>
     </ListaRecetas>
 </data>

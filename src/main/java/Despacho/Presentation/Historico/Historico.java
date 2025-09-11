@@ -46,14 +46,14 @@ public class Historico implements PropertyChangeListener
                 String criterio = TipoBusqueda.getSelectedItem() != null ? TipoBusqueda.getSelectedItem().toString() : "Nombre del Paciente";
                 String texto = textField1.getText();
                 String estado = Estado.getSelectedItem() != null ? Estado.getSelectedItem().toString() : "Todos";
-//                controller.aplicarFiltros(texto, criterio, estado);
+                controller.aplicarFiltros(texto, criterio, estado);
             }});
         Estado.addActionListener(e -> {
             if (controller == null) return;
             String criterio = TipoBusqueda.getSelectedItem() != null ? TipoBusqueda.getSelectedItem().toString() : "Nombre del Paciente";
             String texto = textField1.getText();
             String estado = Estado.getSelectedItem() != null ? Estado.getSelectedItem().toString() : "Todos";
-//            controller.aplicarFiltros(texto, criterio, estado);
+            controller.aplicarFiltros(texto, criterio, estado);
         });
 
         table1.getSelectionModel().addListSelectionListener(e -> {

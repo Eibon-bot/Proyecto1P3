@@ -26,14 +26,14 @@ public class MainWindow extends JFrame {
             tabs.addTab("Pacientes", buildPacientesTab());
             tabs.addTab("Medicamentos", buildMedicamentosTab());
             tabs.addTab("Dashboard", buildDashboardTab());
-            tabs.addTab("Histórico", new JPanel());
+            tabs.addTab("Histórico", buildHistoricotab());
         } else if ("medico".equals(rol)) {
             tabs.addTab("Prescribir", buildPrescribirTab());
             tabs.addTab("Histórico", buildHistoricotab());
             tabs.addTab("Dashboard", buildDashboardTab());
         } else if ("farmaceutico".equals(rol)) {
             tabs.addTab("Despacho", buildDespachoTab());
-            tabs.addTab("Histórico", new JPanel());
+            tabs.addTab("Histórico", buildHistoricotab());
             tabs.addTab("Dashboard", buildDashboardTab());
         } else {
             tabs.add("Inicio", new JPanel());
@@ -104,9 +104,10 @@ public class MainWindow extends JFrame {
     private JPanel buildHistoricotab() {
         var view = new Despacho.Presentation.Historico.Historico();
         var model = new Despacho.Presentation.Historico.Model();
-        var controller = new Despacho.Presentation.Historico.Controller(view,model);
-        controller.loadRecetas();
+        var controller = new Despacho.Presentation.Historico.Controller(view, model);
+        controller.loadRecetas(); // después de que el controller ya enlazó vista y modelo
         return view.getHistorico();
+
     }
 
 }
