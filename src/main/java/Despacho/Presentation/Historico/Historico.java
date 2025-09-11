@@ -43,47 +43,47 @@ public class Historico implements PropertyChangeListener
                 String criterio = TipoBusqueda.getSelectedItem() != null ? TipoBusqueda.getSelectedItem().toString() : "Nombre del Paciente";
                 String texto = textField1.getText();
                 String estado = Estado.getSelectedItem() != null ? Estado.getSelectedItem().toString() : "Todos";
-                controller.aplicarFiltros(texto, criterio, estado);
+//                controller.aplicarFiltros(texto, criterio, estado);
             }});
         Estado.addActionListener(e -> {
             if (controller == null) return;
             String criterio = TipoBusqueda.getSelectedItem() != null ? TipoBusqueda.getSelectedItem().toString() : "Nombre del Paciente";
             String texto = textField1.getText();
             String estado = Estado.getSelectedItem() != null ? Estado.getSelectedItem().toString() : "Todos";
-            controller.aplicarFiltros(texto, criterio, estado);
+//            controller.aplicarFiltros(texto, criterio, estado);
         });
 
         table1.getSelectionModel().addListSelectionListener(e -> {
 
-                int viewRow = table1.getSelectedRow();
-                int modelRow = table1.convertRowIndexToModel(viewRow);
+            int viewRow = table1.getSelectedRow();
+            int modelRow = table1.convertRowIndexToModel(viewRow);
 
-                if (modelRow < 0 || modelRow >= model.getList().size()) return;
+            if (modelRow < 0 || modelRow >= model.getList().size()) return;
 
-                Receta receta = model.getList().get(modelRow);
-                if (receta == null) return;
+            Receta receta = model.getList().get(modelRow);
+            if (receta == null) return;
 
-                StringBuilder info = new StringBuilder();
+            StringBuilder info = new StringBuilder();
 
-                if (receta.getPaciente() != null) {
-                    info.append("ID Paciente: ").append(receta.getPaciente().getId()).append("\n");
-                    info.append("Nombre Paciente: ").append(receta.getPaciente().getNombre()).append("\n");
-                }
-                if (receta.getMedico() != null) {
-                    info.append("Médico: ").append(receta.getMedico().getNombre()).append("\n");
-                }
+            if (receta.getPaciente() != null) {
+                info.append("ID Paciente: ").append(receta.getPaciente().getId()).append("\n");
+                info.append("Nombre Paciente: ").append(receta.getPaciente().getNombre()).append("\n");
+            }
+            if (receta.getMedico() != null) {
+                info.append("Médico: ").append(receta.getMedico().getNombre()).append("\n");
+            }
 
-                info.append("Fecha Emisión: ").append(receta.getFechaEmision()).append("\n");
-                info.append("Estado: ").append(receta.getEstado()).append("\n");
-                info.append("Detalles: ").append(receta.getPrescripciones());
+            info.append("Fecha Emisión: ").append(receta.getFechaEmision()).append("\n");
+            info.append("Estado: ").append(receta.getEstado()).append("\n");
+            info.append("Detalles: ").append(receta.getPrescripciones());
 
 
-                JOptionPane.showMessageDialog(
-                        Historico.this.Historico,
-                        info.toString(),
-                        "Información de la Receta",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+            JOptionPane.showMessageDialog(
+                    Historico.this.Historico,
+                    info.toString(),
+                    "Información de la Receta",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
 
         });
 
@@ -94,7 +94,7 @@ public class Historico implements PropertyChangeListener
 
     }
     Controller controller;
-            Model model;
+    Model model;
     public void setController(Controller controller) {
         this.controller = controller;
     }

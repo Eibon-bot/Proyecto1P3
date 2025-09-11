@@ -1,5 +1,6 @@
 package Despacho.Presentation;
 
+import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Usuario;
@@ -31,7 +32,7 @@ public class MainWindow extends JFrame {
             tabs.addTab("Histórico", new JPanel());
             tabs.addTab("Dashboard", buildDashboardTab());
         } else if ("farmaceutico".equals(rol)) {
-            tabs.addTab("Despacho", new JPanel());
+            tabs.addTab("Despacho", buildDespachoTab());
             tabs.addTab("Histórico", new JPanel());
             tabs.addTab("Dashboard", buildDashboardTab());
         } else {
@@ -91,4 +92,13 @@ public class MainWindow extends JFrame {
         controller.init();
         return view.getPanel();
     }
+    private JPanel buildDespachoTab() {
+        var view = new Despacho.Presentation.DespachoFarma.DespachoFarma();
+        var model = new Despacho.Presentation.DespachoFarma.ModelDF();
+        var controller = new Despacho.Presentation.DespachoFarma.ControllerDF(model,view);
+        model.setCurrentFarmaceutico((Farmaceutico)user);
+        controller.loadPacientes();
+        return view.getPanel1();
+    }
+
 }

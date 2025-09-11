@@ -6,78 +6,96 @@ import Despacho.Logic.Entidades.Receta;
 import Despacho.Logic.Service;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerDF {
     private ModelDF model;
     private DespachoFarma view;
-    private String usuarioRol;
 
-    public ControllerDF(ModelDF model, DespachoFarma view, String usuarioRol) {
+    public ControllerDF(ModelDF model, DespachoFarma view) {
         this.model = model;
         this.view = view;
-        this.usuarioRol = usuarioRol;
 
         this.view.setController(this);
         this.view.setModel(model);
     }
+    public void setPaciente(int row) {
+        Paciente p = model.getListaPacientes().get(row);
+        Receta filtro = new Receta();
+        filtro.setPaciente(p);
+        model.setCurrentPaciente(p);
+        model.setRecetasPaciente(Service.instance().searchRecetaPorIdPaciente(filtro));
+    }
+
 
     public void buscarPaciente(String id) throws Exception {
-        try {
-            Paciente criterio = new Paciente();
-            criterio.setId(id);
+        Paciente criterio = new Paciente();
+        criterio.setId(id);
 
-            List<Paciente> resultados = Service.instance().searchPacienteId(criterio);
+        List<Paciente> resultados = Service.instance().searchPacienteId(criterio);
+        model.setListaPacientes(resultados);
 
-            if (!resultados.isEmpty()) {
-                model.setListaPacientes(resultados);
+        if (!resultados.isEmpty()) {
+            Paciente p = resultados.get(0);
+            model.setCurrentPaciente(p);
 
-                model.setCurrentPaciente(resultados.get(0));
-//                model.setRecetasPaciente(Service.instance().recetasDePaciente(resultados.get(0)));
+            Receta filtro = new Receta();
+            filtro.setPaciente(p);
 
-            } else {
-                Paciente b = new Paciente();
-                b.setId(id);
-
-                model.setCurrentPaciente(b);
-                model.setRecetasPaciente(null);
-
-                throw new Exception("Paciente no encontrado.");
-            }
-
-        } catch (Exception ex) {
-            throw ex;
+            model.setRecetasPaciente(Service.instance().searchRecetaPorIdPaciente(filtro));
+        } else {
+            model.setCurrentPaciente(null);
+            model.setRecetasPaciente(new ArrayList<>());
         }
     }
 
 
-    public void avanzarEstado(Receta receta) {
-        if (!"farmaceuta".equals(usuarioRol)) {
-            JOptionPane.showMessageDialog(view.getPanel1(), "Solo farmaceutas pueden despachar recetas.");
-            return;
+    public void loadPacientes() {
+        model.setListaPacientes(Service.instance().findAllPaciente());
+    }
+
+    public boolean puedeProcesar(Receta receta) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaRetiro = receta.getFechaRetiro();
+
+        return !hoy.isBefore(fechaRetiro.minusDays(3)) && !hoy.isAfter(fechaRetiro.plusDays(3));
+    }
+
+
+
+    public boolean avanzarEstado(Receta receta) {
+
+        if (!puedeProcesar(receta)) {
+            return false;
         }
+
 
         switch (receta.getEstado()) {
-            case "confeccionada":
-                receta.setEstado("proceso");
+            case "Confeccionada":
+                if (model.getCurrentFarmaceutico() != null) {
+                    receta.setEstado("Proceso");
+                }
                 break;
-            case "proceso":
-                receta.setEstado("lista");
+            case "Proceso":
+                if (model.getCurrentFarmaceutico() != null) {
+                    receta.setEstado("Lista");
+                }
                 break;
-            case "lista":
-                receta.setEstado("entregada");
+            case "Lista":
+                if (model.getCurrentFarmaceutico() != null) {
+                    receta.setEstado("Entregada");
+                }
                 break;
-            default:
-                JOptionPane.showMessageDialog(view.getPanel1(), "La receta ya está entregada.");
         }
 
-        try {
-//            Service.instance().actualizarReceta(receta);
+        Service.instance().store();
 
-            model.updateReceta(receta);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(view.getPanel1(), "Error al actualizar receta: " + e.getMessage());
-        }
+        model.updateReceta(receta);
+        return true;
     }
+
+
 }

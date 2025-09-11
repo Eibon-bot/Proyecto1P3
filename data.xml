@@ -141,5 +141,42 @@
             <telefono>7758585</telefono>
         </paciente>
     </ListaPacientes>
-    <ListaRecetas/>
+    <ListaRecetas>
+        <receta>
+            <paciente>PAC-0005</paciente>
+            <fechaEmision>2025-09-10</fechaEmision>
+            <fechaRetiro>2025-09-16</fechaRetiro>
+            <prescripciones>
+                <medicamento>IBU-002</medicamento>
+                <cantidad>34</cantidad>
+                <indicaciones>nnnnnn</indicaciones>
+                <duracion>3</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0006</paciente>
+            <fechaEmision>2025-09-10</fechaEmision>
+            <fechaRetiro>2025-09-23</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>45</cantidad>
+                <indicaciones>bvbvbv</indicaciones>
+                <duracion>5</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0003</paciente>
+            <fechaEmision>2025-09-10</fechaEmision>
+            <fechaRetiro>2025-09-10</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>34</cantidad>
+                <indicaciones>ncnvnb</indicaciones>
+                <duracion>20</duracion>
+            </prescripciones>
+            <estado>Entregada</estado>
+        </receta>
+    </ListaRecetas>
 </data>

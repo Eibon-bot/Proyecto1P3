@@ -15,6 +15,8 @@ public class ModelDF extends AbstractModel {
     public static final String PACIENTES = "pacientes";
 
     private Paciente currentPaciente;
+    private Farmaceutico currentFarmaceutico;
+
     private List<Paciente> listaPacientes = new ArrayList<>();
     private List<Receta> recetasPaciente;
 
@@ -36,6 +38,12 @@ public class ModelDF extends AbstractModel {
         this.currentPaciente = paciente;
         support.firePropertyChange(PACIENTE, null, paciente);
     }
+    public Farmaceutico getCurrentFarmaceutico() {
+        return currentFarmaceutico;
+    }
+    public void setCurrentFarmaceutico(Farmaceutico farmaceutico) {
+        this.currentFarmaceutico = farmaceutico;
+    }
     public List<Paciente> getListaPacientes() {
         return listaPacientes;
     }
@@ -56,4 +64,6 @@ public class ModelDF extends AbstractModel {
     public void updateReceta(Receta receta) {
         support.firePropertyChange(RECETAS, null, recetasPaciente);
     }
+
+
 }
