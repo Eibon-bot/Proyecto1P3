@@ -3,47 +3,46 @@
     <ListaFarmaceuticos>
         <farmaceutico>
             <id>FARMA-0001</id>
-            <nombre>ana</nombre>
+            <nombre>Sofia</nombre>
             <clave>FARMA-0001</clave>
             <rol>farmaceutico</rol>
         </farmaceutico>
         <farmaceutico>
-            <id>P</id>
-            <nombre>pedro</nombre>
-            <clave>P</clave>
+            <id>FARMA-0002</id>
+            <nombre>Katherine</nombre>
+            <clave>FARMA-0002</clave>
+            <rol>farmaceutico</rol>
+        </farmaceutico>
+        <farmaceutico>
+            <id>FARMA-0003</id>
+            <nombre>Kendall</nombre>
+            <clave>FARMA-0003</clave>
             <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos>
         <medicamento>
-            <codigo>ALG-001</codigo>
-            <nombre>algo</nombre>
-            <presentacion>inyeccion</presentacion>
-        </medicamento>
-        <medicamento>
-            <codigo>IBU-002</codigo>
-            <nombre>ibuprofeno</nombre>
-            <presentacion>pastilla</presentacion>
-        </medicamento>
-        <medicamento>
             <codigo>PAR-001</codigo>
-            <nombre>Paracetamol</nombre>
-            <presentacion>pastilla para todo</presentacion>
+            <nombre> Paracetamol</nombre>
+            <presentacion>Pastilla</presentacion>
         </medicamento>
         <medicamento>
-            <codigo>PAR-002</codigo>
-            <nombre>paracetamol</nombre>
-            <presentacion>200g</presentacion>
+            <codigo>AMO-001</codigo>
+            <nombre> Amoxilcilina</nombre>
+            <presentacion>Pastillas</presentacion>
+        </medicamento>
+        <medicamento>
+            <codigo>JAR-001</codigo>
+            <nombre> Jarabe</nombre>
+            <presentacion>Frasco</presentacion>
+        </medicamento>
+        <medicamento>
+            <codigo>MMR-001</codigo>
+            <nombre> MMR</nombre>
+            <presentacion>Vacuna</presentacion>
         </medicamento>
     </ListaMedicamentos>
     <ListaMedicos>
-        <medico>
-            <id>MED-0006</id>
-            <nombre>andrea</nombre>
-            <clave>MED-0006</clave>
-            <rol>medico</rol>
-            <especialidad>geriatria</especialidad>
-        </medico>
         <medico>
             <id>ADM-0001</id>
             <nombre>Administrador</nombre>
@@ -51,80 +50,47 @@
             <rol>administrador</rol>
             <especialidad>general</especialidad>
         </medico>
+        <medico>
+            <id>MED-0001</id>
+            <nombre>Pablo</nombre>
+            <clave>MED-0001</clave>
+            <rol>medico</rol>
+            <especialidad>Cirujano</especialidad>
+        </medico>
+        <medico>
+            <id>MED-0002</id>
+            <nombre>Arianna</nombre>
+            <clave>MED-0002</clave>
+            <rol>medico</rol>
+            <especialidad>Pediatra</especialidad>
+        </medico>
+        <medico>
+            <id>MED-0003</id>
+            <nombre>Ismael</nombre>
+            <clave>MED-0003</clave>
+            <rol>medico</rol>
+            <especialidad>Urologo(ama su trabajo)</especialidad>
+        </medico>
     </ListaMedicos>
     <ListaPacientes>
         <paciente>
             <id>PAC-0001</id>
-            <nombre>mario</nombre>
+            <nombre>Kevin</nombre>
+            <fechaNacimiento>06/11/2006</fechaNacimiento>
+            <telefono>63417051</telefono>
         </paciente>
         <paciente>
             <id>PAC-0002</id>
-            <nombre>susan</nombre>
+            <nombre>Kaleb</nombre>
+            <fechaNacimiento>11/03/2001</fechaNacimiento>
+            <telefono>84785899</telefono>
         </paciente>
         <paciente>
             <id>PAC-0003</id>
-            <nombre>sonia</nombre>
-            <fechaNacimiento>1995-09-20</fechaNacimiento>
-            <telefono>82838283</telefono>
+            <nombre>Javier</nombre>
+            <fechaNacimiento>20/01/2004</fechaNacimiento>
+            <telefono>85377240</telefono>
         </paciente>
     </ListaPacientes>
-    <ListaRecetas>
-        <receta>
-            <paciente>PAC-0003</paciente>
-            <medico>MED-0006</medico>
-            <fechaEmision>2025-09-11</fechaEmision>
-            <fechaRetiro>2025-09-10</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-001</medicamento>
-                <cantidad>3</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>1</duracion>
-            </prescripciones>
-            <estado>Proceso</estado>
-        </receta>
-        <receta>
-            <paciente>PAC-0001</paciente>
-            <medico>MED-0006</medico>
-            <fechaEmision>2025-09-11</fechaEmision>
-            <fechaRetiro>2025-09-19</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>0</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>0</duracion>
-            </prescripciones>
-            <estado>Confeccionada</estado>
-        </receta>
-        <receta>
-            <paciente>PAC-0001</paciente>
-            <medico>MED-0006</medico>
-            <fechaEmision>2025-09-11</fechaEmision>
-            <fechaRetiro>2025-09-12</fechaRetiro>
-            <prescripciones>
-                <medicamento>PAR-002</medicamento>
-                <cantidad>0</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>0</duracion>
-            </prescripciones>
-            <prescripciones>
-                <medicamento>ALG-001</medicamento>
-                <cantidad>1</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>1</duracion>
-            </prescripciones>
-            <prescripciones>
-                <medicamento>PAR-001</medicamento>
-                <cantidad>2</cantidad>
-                <indicaciones>HOLA</indicaciones>
-                <duracion>2</duracion>
-            </prescripciones>
-            <prescripciones>
-                <medicamento>PAR-001</medicamento>
-                <cantidad>0</cantidad>
-                <indicaciones></indicaciones>
-                <duracion>0</duracion>
-            </prescripciones>
-            <estado>Lista</estado>
-        </receta>
-    </ListaRecetas>
+    <ListaRecetas/>
 </data>

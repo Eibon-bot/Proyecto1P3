@@ -44,7 +44,7 @@ public class Service {
             data.getMedicos().add(e);
             store();
         } else {
-            throw new Exception("Farmaceutico ya existe");
+            throw new Exception("Medico ya existe");
         }
     }
 
