@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
             tabs.addTab("Histórico", new JPanel());
         } else if ("medico".equals(rol)) {
             tabs.addTab("Prescribir", buildPrescribirTab());
-            tabs.addTab("Histórico", new JPanel());
+            tabs.addTab("Histórico", buildHistoricotab());
             tabs.addTab("Dashboard", buildDashboardTab());
         } else if ("farmaceutico".equals(rol)) {
             tabs.addTab("Despacho", buildDespachoTab());
@@ -99,6 +99,14 @@ public class MainWindow extends JFrame {
         model.setCurrentFarmaceutico((Farmaceutico)user);
         controller.loadPacientes();
         return view.getPanel1();
+    }
+
+    private JPanel buildHistoricotab() {
+        var view = new Despacho.Presentation.Historico.Historico();
+        var model = new Despacho.Presentation.Historico.Model();
+        var controller = new Despacho.Presentation.Historico.Controller(view,model);
+        controller.loadRecetas();
+        return view.getHistorico();
     }
 
 }

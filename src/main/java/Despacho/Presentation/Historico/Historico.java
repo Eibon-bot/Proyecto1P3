@@ -18,6 +18,9 @@ public class Historico implements PropertyChangeListener
     private JTextField textField1;
     private JPanel Historico;
 
+    public JPanel getHistorico() {
+        return Historico;
+    }
 
     public Historico() {
 

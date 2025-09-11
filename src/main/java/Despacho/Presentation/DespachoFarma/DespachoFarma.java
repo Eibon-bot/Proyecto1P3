@@ -49,8 +49,8 @@ public class DespachoFarma implements PropertyChangeListener {
         JScrollPane scrollRecetas = new JScrollPane(tableRecetasPaciente);
         recetaspanel.setLayout(new BorderLayout());
         recetaspanel.add(scrollRecetas, BorderLayout.CENTER);
-        JPanel buttonPanel = new JPanel(); // FlowLayout por defecto, centra horizontalmente
-        buttonPanel.add(siguienteButton);  // tamaño normal del botón
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(siguienteButton);
         recetaspanel.add(buttonPanel, BorderLayout.SOUTH);
 
 

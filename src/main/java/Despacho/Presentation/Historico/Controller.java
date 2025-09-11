@@ -20,6 +20,9 @@ public class Controller {
         Receta r = model.getList().get(row);
         model.setCurrent(r);
     }
+    public void loadRecetas() {
+        model.setList(Service.instance().findAllRecetas());
+    }
 
     public void aplicarFiltros(String textoBusqueda, String tipoBusqueda, String estado) {
         Receta filtro = new Receta();
