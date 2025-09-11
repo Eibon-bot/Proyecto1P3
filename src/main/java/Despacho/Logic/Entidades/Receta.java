@@ -65,7 +65,15 @@ public class Receta {
     }
 
 
-
+    public String getPrescripciones2() {
+        StringBuilder sb = new StringBuilder();
+        for (Prescripcion p : prescripciones) {
+            if (p != null) {
+                sb.append(p.toString()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
 
     @Override
     public String toString() {

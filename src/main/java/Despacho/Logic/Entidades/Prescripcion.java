@@ -56,11 +56,11 @@ public class Prescripcion {
 
     @Override
     public String toString() {
-        return "MedicamentoRecetado{" +
-                "Medicamento='" + medicamento.getNombre() + '\'' +
-                ", cantidad='" + cantidad + '\'' +
-                ", idicaciones='" + indicaciones + '\'' +
-                ", duracion=" + duracion +
-                '}';
+        return "[" +
+                "Medicamento= " + medicamento.getNombre() +
+                ", cantidad= " + cantidad +
+                ", idicaciones= " + indicaciones +
+                ", duracion= " + duracion +
+                ']';
     }
 }
