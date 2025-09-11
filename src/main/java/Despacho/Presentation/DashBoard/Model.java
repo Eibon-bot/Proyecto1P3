@@ -5,8 +5,7 @@ import Despacho.Logic.Entidades.Prescripcion;
 import Despacho.Logic.Entidades.Receta;
 import Despacho.Logic.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Model {
     private final List<LineChart.Series> series = new ArrayList<>();
@@ -35,7 +34,8 @@ public class Model {
         if (data != null) pie.addAll(data);
     }
 
-    public List<Integer> seriesFor(String med, int y1, int m1, int y2, int m2) {
+
+    public List<Integer> seriesFor(String medCode, int y1, int m1, int y2, int m2) {
         List<Integer> values = new ArrayList<>();
 
         for (Receta r : Service.instance().findAllRecetas()) {
@@ -50,8 +50,8 @@ public class Model {
 
             if (dentroRango) {
                 for (Prescripcion p : r.getPrescripciones()) {
-                    if (p.getMedicamento() != null &&
-                            p.getMedicamento().getNombre().equalsIgnoreCase(med)) {
+                    Medicamento m = p.getMedicamento();
+                    if (m != null && m.getCodigo().equalsIgnoreCase(medCode)) {
                         values.add(p.getCantidad());
                     }
                 }
@@ -62,7 +62,7 @@ public class Model {
         return values;
     }
 
-    public int totalFor(String med, int y1, int m1, int y2, int m2) {
+    public int totalFor(String medCode, int y1, int m1, int y2, int m2) {
         int total = 0;
 
         for (Receta r : Service.instance().findAllRecetas()) {
@@ -77,8 +77,8 @@ public class Model {
 
             if (dentroRango) {
                 for (Prescripcion p : r.getPrescripciones()) {
-                    if (p.getMedicamento() != null &&
-                            p.getMedicamento().getNombre().equalsIgnoreCase(med)) {
+                    Medicamento m = p.getMedicamento();
+                    if (m != null && m.getCodigo().equalsIgnoreCase(medCode)) {
                         total += p.getCantidad();
                     }
                 }
@@ -87,5 +87,29 @@ public class Model {
 
         return total;
     }
+
+
+    public Map<String, Integer> recetasPorEstado(int y1, int m1, int y2, int m2) {
+        Map<String, Integer> conteo = new HashMap<>();
+
+        for (Receta r : Service.instance().findAllRecetas()) {
+            if (r.getFechaEmision() == null) continue;
+
+            int year = r.getFechaEmision().getYear();
+            int month = r.getFechaEmision().getMonthValue();
+
+            boolean dentroRango =
+                    (year > y1 || (year == y1 && month >= m1)) &&
+                            (year < y2 || (year == y2 && month <= m2));
+
+            if (dentroRango) {
+                String estado = r.getEstado() != null ? r.getEstado() : "Desconocido";
+                conteo.put(estado, conteo.getOrDefault(estado, 0) + 1);
+            }
+        }
+
+        return conteo;
+    }
 }
+
 

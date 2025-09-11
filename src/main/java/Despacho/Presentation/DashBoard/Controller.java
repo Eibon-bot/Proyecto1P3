@@ -28,7 +28,7 @@ public class Controller {
         List<Medicamento> meds = Service.instance().findAllMedicamento();
         medByName.clear();
         for (Medicamento m : meds) {
-            medByName.put(m.getNombre(), m);
+            medByName.put(m.getCodigo(), m);
         }
 
         DefaultComboBoxModel<String> cbm =
@@ -53,8 +53,8 @@ public class Controller {
 
     private void bind() {
         view.getAplicarSeleccionButton().addActionListener(e -> {
-            String name = (String) view.getMedsCombo().getSelectedItem();
-            Medicamento m = name == null ? null : medByName.get(name);
+            String code = (String) view.getMedsCombo().getSelectedItem();
+            Medicamento m = code == null ? null : medByName.get(code);
             if (m != null && !containsByCode(selectedModel, m.getCodigo())) {
                 selectedModel.addElement(m);
             }
@@ -111,36 +111,40 @@ public class Controller {
         int y2 = getInt(view.getHastaYear(), 2025);
         int m2 = getInt(view.getHastaMonth(), 12);
 
-        List<String> medNames = new ArrayList<>();
+
+        List<String> medCodes = new ArrayList<>();
         if (selectedModel.size() == 0) {
-            medNames.addAll(medByName.keySet());
+            for (Medicamento m : medByName.values()) {
+                medCodes.add(m.getCodigo());
+            }
         } else {
             for (int i = 0; i < selectedModel.size(); i++) {
-                medNames.add(selectedModel.get(i).getNombre());
+                medCodes.add(selectedModel.get(i).getCodigo());
             }
         }
 
         List<LineChart.Series> series = new ArrayList<>();
-        for (String med : medNames) {
-            series.add(new LineChart.Series(med, model.seriesFor(med, y1, m1, y2, m2)));
+        for (String medCode : medCodes) {
+            series.add(new LineChart.Series(medCode, model.seriesFor(medCode, y1, m1, y2, m2)));
         }
         view.getLineChart().setSeries(series);
 
+
+        Map<String, Integer> estados = model.recetasPorEstado(y1, m1, y2, m2);
+
         List<PieChart.Slice> slices = new ArrayList<>();
-        int idx = 0;
-        Color[] colors = {new Color(220,20,60), new Color(30,144,255), new Color(34,139,34),
-                new Color(255,140,0), new Color(128,0,128), new Color(70,130,180)};
-        for (String med : medNames) {
-            int total = model.totalFor(med, y1, m1, y2, m2);
-            if (total > 0) {
-                slices.add(new PieChart.Slice(med, total, colors[idx % colors.length]));
-                idx++;
+        Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
+        String[] labels = {"Proceso", "Confeccionada", "Entregada", "Lista"};
+
+        for (int i = 0; i < labels.length; i++) {
+            int count = estados.getOrDefault(labels[i], 0);
+            if (count > 0) {
+                slices.add(new PieChart.Slice(labels[i], count, colors[i]));
             }
         }
+
         if (slices.isEmpty()) slices.add(new PieChart.Slice("Sin datos", 1, Color.LIGHT_GRAY));
         view.getPieChart().setData(slices);
     }
 }
-
-
 
