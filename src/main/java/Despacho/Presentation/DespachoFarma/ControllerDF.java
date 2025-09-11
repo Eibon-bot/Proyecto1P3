@@ -74,20 +74,18 @@ public class ControllerDF {
 
         switch (receta.getEstado()) {
             case "Confeccionada":
-                if (model.getCurrentFarmaceutico() != null) {
-                    receta.setEstado("Proceso");
-                }
+                receta.setEstado("Proceso");
                 break;
             case "Proceso":
-                if (model.getCurrentFarmaceutico() != null) {
-                    receta.setEstado("Lista");
-                }
+                receta.setEstado("Lista");
                 break;
             case "Lista":
-                if (model.getCurrentFarmaceutico() != null) {
-                    receta.setEstado("Entregada");
-                }
+                receta.setEstado("Entregada");
                 break;
+            case "Entregada":
+                JOptionPane.showMessageDialog(null,
+                        "La receta ya está entregada.");
+                return false;
         }
 
         Service.instance().store();

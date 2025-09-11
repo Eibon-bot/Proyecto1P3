@@ -14,7 +14,6 @@
             <rol>farmaceutico</rol>
         </farmaceutico>
     </ListaFarmaceuticos>
-
     <ListaMedicamentos>
         <medicamento>
             <codigo>ALG-001</codigo>
@@ -37,7 +36,6 @@
             <presentacion>200g</presentacion>
         </medicamento>
     </ListaMedicamentos>
-
     <ListaMedicos>
         <medico>
             <id>MED-0006</id>
@@ -54,7 +52,6 @@
             <especialidad>general</especialidad>
         </medico>
     </ListaMedicos>
-
     <ListaPacientes>
         <paciente>
             <id>PAC-0001</id>
@@ -71,9 +68,7 @@
             <telefono>82838283</telefono>
         </paciente>
     </ListaPacientes>
-
     <ListaRecetas>
-
         <receta>
             <paciente>PAC-0001</paciente>
             <fechaEmision>2025-09-09</fechaEmision>
@@ -86,8 +81,6 @@
             </prescripciones>
             <estado>Confeccionada</estado>
         </receta>
-
-
         <receta>
             <paciente>PAC-0002</paciente>
             <fechaEmision>2025-09-08</fechaEmision>
@@ -100,8 +93,6 @@
             </prescripciones>
             <estado>Entregada</estado>
         </receta>
-
-
         <receta>
             <paciente>PAC-0003</paciente>
             <fechaEmision>2025-09-10</fechaEmision>
@@ -114,8 +105,6 @@
             </prescripciones>
             <estado>Proceso</estado>
         </receta>
-
-
         <receta>
             <paciente>PAC-0002</paciente>
             <fechaEmision>2025-09-07</fechaEmision>
@@ -127,6 +116,18 @@
                 <duracion>2</duracion>
             </prescripciones>
             <estado>Lista</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0001</paciente>
+            <fechaEmision>2025-09-11</fechaEmision>
+            <fechaRetiro>2025-09-11</fechaRetiro>
+            <prescripciones>
+                <medicamento>PAR-002</medicamento>
+                <cantidad>9</cantidad>
+                <indicaciones>uygiugigh</indicaciones>
+                <duracion>8</duracion>
+            </prescripciones>
+            <estado>Entregada</estado>
         </receta>
     </ListaRecetas>
 </data>
