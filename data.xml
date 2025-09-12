@@ -92,5 +92,44 @@
             <telefono>85377240</telefono>
         </paciente>
     </ListaPacientes>
-    <ListaRecetas/>
+    <ListaRecetas>
+        <receta>
+            <paciente>PAC-0003</paciente>
+            <medico>MED-0001</medico>
+            <fechaEmision>2025-09-11</fechaEmision>
+            <fechaRetiro>2025-09-12</fechaRetiro>
+            <prescripciones>
+                <medicamento>JAR-001</medicamento>
+                <cantidad>3</cantidad>
+                <indicaciones>Tomar en la mañana</indicaciones>
+                <duracion>2</duracion>
+            </prescripciones>
+            <prescripciones>
+                <medicamento>AMO-001</medicamento>
+                <cantidad>3</cantidad>
+                <indicaciones>Tomar con agua</indicaciones>
+                <duracion>2</duracion>
+            </prescripciones>
+            <prescripciones>
+                <medicamento>MMR-001</medicamento>
+                <cantidad>1</cantidad>
+                <indicaciones></indicaciones>
+                <duracion>0</duracion>
+            </prescripciones>
+            <estado>Lista</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0002</paciente>
+            <medico>MED-0001</medico>
+            <fechaEmision>2025-09-11</fechaEmision>
+            <fechaRetiro>2025-09-12</fechaRetiro>
+            <prescripciones>
+                <medicamento>JAR-001</medicamento>
+                <cantidad>3</cantidad>
+                <indicaciones>Tomar en la mañana</indicaciones>
+                <duracion>2</duracion>
+            </prescripciones>
+            <estado>Lista</estado>
+        </receta>
+    </ListaRecetas>
 </data>

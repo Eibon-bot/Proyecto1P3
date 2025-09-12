@@ -93,7 +93,7 @@ public class DespachoFarma implements PropertyChangeListener {
                 String mensaje = "Paciente: " + (r.getPaciente() != null ? r.getPaciente().getNombre() : "N/A") + "\n"
                         + "Fecha emisión: " + r.getFechaEmision() + "\n"
                         + "Fecha: " + r.getFechaRetiro()+ "\n"
-                        +"Medico" + (r.getMedico() != null ? r.getMedico().getNombre() : "N/A") + "\n"
+                        +"Medico: " + (r.getMedico() != null ? r.getMedico().getNombre() : "N/A") + "\n"
                         + "Estado: " + r.getEstado();
                 JOptionPane.showMessageDialog(panel1, mensaje, "Detalles de la Receta", JOptionPane.INFORMATION_MESSAGE);
             }
