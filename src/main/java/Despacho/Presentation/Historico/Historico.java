@@ -79,7 +79,7 @@ public class Historico implements PropertyChangeListener
             info.append("Fecha Emisión: ").append(receta.getFechaEmision()).append("\n");
             info.append("Estado: ").append(receta.getEstado()).append("\n");
             info.append("Prescripciones: ").append("\n");
-            info.append(receta.getPrescripciones2());
+            info.append(receta.getPrescripciones());
 
 
             JOptionPane.showMessageDialog(

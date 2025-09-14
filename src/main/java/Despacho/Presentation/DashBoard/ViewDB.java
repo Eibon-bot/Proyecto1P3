@@ -1,41 +1,35 @@
 package Despacho.Presentation.DashBoard;
+
 import Despacho.Logic.Entidades.Medicamento;
+
 import javax.swing.*;
+import java.awt.*;
+
 public class ViewDB {
+    public JPanel panel1;
+    public JComboBox<String> DesdeMes;
+    public JComboBox<String> HastaMes;
+    public JComboBox<Integer> DesdeAño;
+    public JComboBox<Integer> HastaAño;
+    public JButton aplicarRangoButton;
+    public JList<Medicamento> list1;
+    public JComboBox<Medicamento> comboBox3;
+    public JButton aplicarSeleccionButton;
+    public JPanel lineChart;
+    public JPanel pieChart;
 
+    public DefaultListModel<Medicamento> listModel = new DefaultListModel<>();
 
-    private JPanel panel1;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JComboBox comboBox4;
-    private JComboBox comboBox5;
-    private JButton aplicarRangoButton;
-    private JList<Medicamento> medList;
-    private JButton aplicarSeleccionButton;
-    private JPanel lineChart;
-    private JPanel pieChart;
-    private JComboBox<String> comboBox3;
-    public JPanel getPanel() { return panel1; }
+    public ViewDB() {
+        list1.setModel(listModel);
+    }
 
-
-
-
-    public JComboBox<Integer> getDesdeYear() { return comboBox1; }
-    public JComboBox<Integer> getDesdeMonth() { return comboBox2; }
-    public JComboBox<Integer> getHastaYear() { return comboBox4; }
-    public JComboBox<Integer> getHastaMonth() { return comboBox5; }
-
-
-
-
-    public JButton getAplicarRangoButton() { return aplicarRangoButton; }
-    public JList<Medicamento> getMedList() { return medList; }
-    public JButton getAplicarSeleccionButton() { return aplicarSeleccionButton; }
-    public JComboBox<String> getMedsCombo() { return comboBox3; }
-    public LineChart getLineChart() { return (LineChart) lineChart; }
-    public PieChart getPieChart() { return (PieChart) pieChart; }
-    private void createUIComponents() { lineChart = new LineChart(); pieChart = new PieChart(); }
+    public JPanel getPanel() {
+        return panel1;
+    }
+    private void createUIComponents() {
+        lineChart = new JPanel(new BorderLayout());
+        pieChart = new JPanel(new BorderLayout());
+    }
 
 }
-
-

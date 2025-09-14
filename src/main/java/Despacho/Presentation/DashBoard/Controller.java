@@ -1,150 +1,129 @@
 package Despacho.Presentation.DashBoard;
 
 import Despacho.Logic.Entidades.Medicamento;
-import Despacho.Logic.Service;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
     private final ViewDB view;
     private final Model model;
 
-    private final LinkedHashMap<String, Medicamento> medByName = new LinkedHashMap<>();
-    private DefaultListModel<Medicamento> selectedModel = new DefaultListModel<>();
-
     public Controller(ViewDB view, Model model) {
         this.view = view;
         this.model = model;
-        bind();
+
+        view.aplicarSeleccionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Medicamento seleccionado = (Medicamento) view.comboBox3.getSelectedItem();
+                if (seleccionado != null && !view.listModel.contains(seleccionado)) {
+                    view.listModel.addElement(seleccionado);
+                    view.list1.setSelectedValue(seleccionado, true);
+                }
+            }
+        });
+
+        view.aplicarRangoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarGraficos();
+            }
+        });
     }
 
     public void init() {
-        ensureCombosPopulated();
-        ensureDefaultsSelected();
-
-        List<Medicamento> meds = Service.instance().findAllMedicamento();
-        medByName.clear();
-        for (Medicamento m : meds) {
-            medByName.put(m.getCodigo(), m);
+        view.comboBox3.removeAllItems();
+        for (Medicamento m : model.getTodosLosMedicamentos()) {
+            view.comboBox3.addItem(m);
         }
 
-        DefaultComboBoxModel<String> cbm =
-                new DefaultComboBoxModel<>(medByName.keySet().toArray(new String[0]));
-        view.getMedsCombo().setModel(cbm);
-
-        selectedModel = new DefaultListModel<>();
-        view.getMedList().setModel(selectedModel);
-        view.getMedList().setCellRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(
-                    JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                JLabel lbl = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                Medicamento m = (Medicamento) value;
-                lbl.setText(m.getCodigo() + " — " + m.getNombre() + " (" + m.getPresentacion() + ")");
-                return lbl;
-            }
-        });
-
-        applySelection();
-    }
-
-    private void bind() {
-        view.getAplicarSeleccionButton().addActionListener(e -> {
-            String code = (String) view.getMedsCombo().getSelectedItem();
-            Medicamento m = code == null ? null : medByName.get(code);
-            if (m != null && !containsByCode(selectedModel, m.getCodigo())) {
-                selectedModel.addElement(m);
-            }
-            applySelection();
-        });
-        view.getAplicarRangoButton().addActionListener(e -> applySelection());
-    }
-
-    private boolean containsByCode(DefaultListModel<Medicamento> model, String codigo) {
-        for (int i = 0; i < model.size(); i++) {
-            if (codigo.equalsIgnoreCase(model.get(i).getCodigo())) return true;
+        view.DesdeMes.removeAllItems();
+        view.HastaMes.removeAllItems();
+        for (String mes : model.getMesesDisponibles()) {
+            view.DesdeMes.addItem(mes);
+            view.HastaMes.addItem(mes);
         }
-        return false;
-    }
 
-    private void ensureCombosPopulated() {
-        if (view.getDesdeYear().getItemCount() == 0 || view.getHastaYear().getItemCount() == 0) {
-            DefaultComboBoxModel<Integer> years = new DefaultComboBoxModel<>();
-            for (int y = 2020; y <= 2026; y++) years.addElement(y);
-            view.getDesdeYear().setModel(years);
-            DefaultComboBoxModel<Integer> years2 = new DefaultComboBoxModel<>();
-            for (int y = 2020; y <= 2026; y++) years2.addElement(y);
-            view.getHastaYear().setModel(years2);
+        view.DesdeAño.removeAllItems();
+        view.HastaAño.removeAllItems();
+        for (Integer año : model.getAniosDisponibles()) {
+            view.DesdeAño.addItem(año);
+            view.HastaAño.addItem(año);
         }
-        if (view.getDesdeMonth().getItemCount() == 0 || view.getHastaMonth().getItemCount() == 0) {
-            DefaultComboBoxModel<Integer> months = new DefaultComboBoxModel<>();
-            for (int m = 1; m <= 12; m++) months.addElement(m);
-            view.getDesdeMonth().setModel(months);
-            DefaultComboBoxModel<Integer> months2 = new DefaultComboBoxModel<>();
-            for (int m = 1; m <= 12; m++) months2.addElement(m);
-            view.getHastaMonth().setModel(months2);
-        }
+
+        if (view.DesdeAño.getItemCount() > 0)
+            view.DesdeAño.setSelectedIndex(0);
+        if (view.HastaAño.getItemCount() > 0)
+            view.HastaAño.setSelectedIndex(view.HastaAño.getItemCount() - 1);
     }
 
-    private void ensureDefaultsSelected() {
-        if (view.getDesdeYear().getSelectedItem() == null) view.getDesdeYear().setSelectedItem(2023);
-        if (view.getDesdeMonth().getSelectedItem() == null) view.getDesdeMonth().setSelectedItem(1);
-        if (view.getHastaYear().getSelectedItem() == null) view.getHastaYear().setSelectedItem(2025);
-        if (view.getHastaMonth().getSelectedItem() == null) view.getHastaMonth().setSelectedItem(12);
-    }
+    private void actualizarGraficos() {
+        int añoDesde = (int) view.DesdeAño.getSelectedItem();
+        int añoHasta = (int) view.HastaAño.getSelectedItem();
+        int mesDesde = parseMes((String) view.DesdeMes.getSelectedItem());
+        int mesHasta = parseMes((String) view.HastaMes.getSelectedItem());
 
-    private int getInt(JComboBox box, int def) {
-        Object o = box.getSelectedItem();
-        if (o instanceof Integer) return (Integer) o;
-        if (o instanceof String) {
-            try { return Integer.parseInt((String) o); } catch (Exception ignored) {}
-        }
-        return def;
-    }
+        LocalDate desde = LocalDate.of(añoDesde, mesDesde, 1);
+        LocalDate hasta = LocalDate.of(añoHasta, mesHasta, 1).withDayOfMonth(28).plusDays(4).withDayOfMonth(1).minusDays(1);
 
-    private void applySelection() {
-        int y1 = getInt(view.getDesdeYear(), 2023);
-        int m1 = getInt(view.getDesdeMonth(), 1);
-        int y2 = getInt(view.getHastaYear(), 2025);
-        int m2 = getInt(view.getHastaMonth(), 12);
+        List<Medicamento> seleccionados = view.list1.getSelectedValuesList();
 
+        Map<String, Map<String, Integer>> datosLineChart = model.getCantidadMedicamentosPorMes(seleccionados, desde, hasta);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        List<String> medCodes = new ArrayList<>();
-        if (selectedModel.size() == 0) {
-            for (Medicamento m : medByName.values()) {
-                medCodes.add(m.getCodigo());
-            }
-        } else {
-            for (int i = 0; i < selectedModel.size(); i++) {
-                medCodes.add(selectedModel.get(i).getCodigo());
+        for (String nombre : datosLineChart.keySet()) {
+            for (Map.Entry<String, Integer> entry : datosLineChart.get(nombre).entrySet()) {
+                dataset.addValue(entry.getValue(), nombre, entry.getKey());
             }
         }
 
-        List<LineChart.Series> series = new ArrayList<>();
-        for (String medCode : medCodes) {
-            series.add(new LineChart.Series(medCode, model.seriesFor(medCode, y1, m1, y2, m2)));
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Medicamentos",
+                "Mes",
+                "Cantidad",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false
+        );
+
+        view.lineChart.removeAll();
+        view.lineChart.add(new ChartPanel(chart));
+        view.lineChart.revalidate();
+
+        Map<String, Long> estados = model.getEstadosRecetas(desde, hasta);
+        DefaultPieDataset pieDataset = new DefaultPieDataset();
+
+        for (Map.Entry<String, Long> entry : estados.entrySet()) {
+            pieDataset.setValue(entry.getKey(), entry.getValue());
         }
-        view.getLineChart().setSeries(series);
 
+        JFreeChart pieChart = ChartFactory.createPieChart(
+                "Recetas",
+                pieDataset,
+                true, true, false
+        );
 
-        Map<String, Integer> estados = model.recetasPorEstado(y1, m1, y2, m2);
+        view.pieChart.removeAll();
+        view.pieChart.add(new ChartPanel(pieChart));
+        view.pieChart.revalidate();
+    }
 
-        List<PieChart.Slice> slices = new ArrayList<>();
-        Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
-        String[] labels = {"Proceso", "Confeccionada", "Entregada", "Lista"};
-
-        for (int i = 0; i < labels.length; i++) {
-            int count = estados.getOrDefault(labels[i], 0);
-            if (count > 0) {
-                slices.add(new PieChart.Slice(labels[i], count, colors[i]));
-            }
+    private int parseMes(String str) {
+        if (str == null) return 1;
+        try {
+            return Integer.parseInt(str.split("-")[0]);
+        } catch (Exception e) {
+            return 1;
         }
-
-        if (slices.isEmpty()) slices.add(new PieChart.Slice("Sin datos", 1, Color.LIGHT_GRAY));
-        view.getPieChart().setData(slices);
     }
 }
-

@@ -32,5 +32,18 @@ public class Medicamento {
     public String toString() {
         return codigo + " — " + nombre + " (" + presentacion + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Medicamento that = (Medicamento) o;
+        return codigo != null && codigo.equals(that.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo != null ? codigo.hashCode() : 0;
+    }
 }
 

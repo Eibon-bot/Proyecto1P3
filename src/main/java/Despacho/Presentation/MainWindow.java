@@ -87,7 +87,7 @@ public class MainWindow extends JFrame {
 
     private JPanel buildDashboardTab() {
         var view = new Despacho.Presentation.DashBoard.ViewDB();
-        var model = new Despacho.Presentation.DashBoard.Model();
+        var model = new Despacho.Presentation.DashBoard.Model(Service.instance());
         var controller = new Despacho.Presentation.DashBoard.Controller(view, model);
         controller.init();
         return view.getPanel();
@@ -105,7 +105,7 @@ public class MainWindow extends JFrame {
         var view = new Despacho.Presentation.Historico.Historico();
         var model = new Despacho.Presentation.Historico.Model();
         var controller = new Despacho.Presentation.Historico.Controller(view, model);
-        controller.loadRecetas(); // después de que el controller ya enlazó vista y modelo
+        controller.loadRecetas();
         return view.getHistorico();
 
     }

@@ -85,4 +85,8 @@ public class Receta {
                 ", estado='" + estado + '\'' +
                 '}';
     }
+    public LocalDate getFecha() {
+        return getFechaEmision();
+    }
+
 }
