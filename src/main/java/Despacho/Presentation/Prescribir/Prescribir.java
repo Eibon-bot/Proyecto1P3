@@ -74,6 +74,7 @@ public class Prescribir implements PropertyChangeListener {
         table1.getSelectionModel().addListSelectionListener(e -> {
             boolean filaSeleccionada = table1.getSelectedRow() >= 0;
             descartarMedicamentoButton.setEnabled(filaSeleccionada);
+            detallesButton.setEnabled(filaSeleccionada);
         });
 
 

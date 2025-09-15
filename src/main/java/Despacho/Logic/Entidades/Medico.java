@@ -19,7 +19,13 @@ public class Medico extends Usuario {
 
     public Medico(Usuario u) {
         super(u.getId(), u.getNombre(), u.getClave(), "medico");
+        if (u instanceof Medico) {
+            this.especialidad = ((Medico) u).getEspecialidad();
+        } else {
+            this.especialidad = "";
+        }
     }
+
 
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String esp) { this.especialidad = esp; }
