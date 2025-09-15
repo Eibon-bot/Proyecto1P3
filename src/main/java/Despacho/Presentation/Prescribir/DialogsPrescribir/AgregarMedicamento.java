@@ -103,6 +103,7 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
                 if (table1.getSelectedRow() >= 0) {
                     controller.setMedicamento(table1.getSelectedRow());
 //                    SwingUtilities.getWindowAncestor(buttonOK).dispose();
+                    dispose();
                 }
             }
         });
