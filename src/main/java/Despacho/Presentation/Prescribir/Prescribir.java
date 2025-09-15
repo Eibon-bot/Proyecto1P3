@@ -79,6 +79,11 @@ public class Prescribir implements PropertyChangeListener {
 
 
         guardarButton.addActionListener(e -> {
+            Paciente p = model.getCurrentPaciente();
+            if (p == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione un paciente antes de guardar la receta.");
+                return;
+            }
             if (fechaRetiroChooser.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Seleccione una fecha de retiro.");
                 return;
