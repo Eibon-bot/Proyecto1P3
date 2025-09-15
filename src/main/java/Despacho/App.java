@@ -3,7 +3,7 @@ package Despacho;
 import Despacho.Logic.Service;
 import Despacho.Presentation.Medicamentos.MedicaAdmin;
 import Despacho.Presentation.Medico.MediAdmin;
-import Despacho.Presentation.View.login;
+import Despacho.Presentation.Login.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
 import Despacho.Logic.Registro.AuthService;

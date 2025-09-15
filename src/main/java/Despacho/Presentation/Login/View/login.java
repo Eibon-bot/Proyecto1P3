@@ -1,10 +1,9 @@
-package Despacho.Presentation.View;
+package Despacho.Presentation.Login.View;
 
 import Despacho.Presentation.Login.CambiarClave;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
 import Despacho.Logic.Entidades.Usuario;
-import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

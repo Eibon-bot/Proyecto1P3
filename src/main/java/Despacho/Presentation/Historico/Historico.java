@@ -7,6 +7,7 @@ import Despacho.Presentation.Prescribir.TableModelPacientes;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -17,12 +18,19 @@ public class Historico implements PropertyChangeListener
     private JComboBox TipoBusqueda;
     private JTextField textField1;
     private JPanel Historico;
+    private JPanel panelrecetas;
 
     public JPanel getHistorico() {
         return Historico;
     }
 
     public Historico() {
+
+        panelrecetas.setLayout(new BorderLayout());
+
+        JScrollPane scrollPane = new JScrollPane(table1);
+        scrollPane.setPreferredSize(new Dimension(500, 150));
+        panelrecetas.add(scrollPane, BorderLayout.CENTER);
 
 
         textField1.getDocument().addDocumentListener(new DocumentListener() {

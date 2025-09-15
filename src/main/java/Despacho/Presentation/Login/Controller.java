@@ -5,7 +5,7 @@ import Despacho.Logic.Entidades.Administrador;
 import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Usuario;
-import Despacho.Presentation.View.login;
+import Despacho.Presentation.Login.View.login;
 import Despacho.Presentation.Sesion;
 
 import javax.swing.*;
