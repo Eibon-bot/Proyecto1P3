@@ -1,5 +1,6 @@
 package Despacho.Presentation.Prescribir;
 
+import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Paciente;
 import Despacho.Logic.Entidades.Prescripcion;
 import Despacho.Logic.Entidades.Receta;
@@ -50,12 +51,11 @@ public class Prescribir implements PropertyChangeListener {
         panelfecha.setLayout(new java.awt.BorderLayout());
         panelfecha.add(fechaRetiroChooser, BorderLayout.CENTER);
 
-        table1.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting() && table1.getSelectedRow() >= 0) {
-                int row = table1.getSelectedRow();
-                controller.setPaciente(row);
-            }
-        });
+        limpiarButton.setEnabled(false);
+        descartarMedicamentoButton.setEnabled(false);
+        detallesButton.setEnabled(false);
+
+
 
         panellistado.setLayout(new BorderLayout());
 
@@ -71,8 +71,10 @@ public class Prescribir implements PropertyChangeListener {
         panellistado.add(panelBotones, BorderLayout.SOUTH);
 
 
-
-
+        table1.getSelectionModel().addListSelectionListener(e -> {
+            boolean filaSeleccionada = table1.getSelectedRow() >= 0;
+            descartarMedicamentoButton.setEnabled(filaSeleccionada);
+        });
 
 
         guardarButton.addActionListener(e -> {
@@ -122,6 +124,42 @@ public class Prescribir implements PropertyChangeListener {
 
             }
         });
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.limpiarPrescripciones();
+            }
+        });
+        descartarMedicamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int fila = table1.getSelectedRow();
+                if (fila >= 0) {
+                    controller.descartarPrescripcion(fila);
+                }
+            }
+        });
+        detallesButton.addActionListener(e -> {
+            int fila = table1.getSelectedRow();
+            if (fila < 0) return;
+            Paciente p = model.getCurrentPaciente();
+            Medico medico = model.getCurrentMedico();
+
+            if (p == null || medico == null) {
+                JOptionPane.showMessageDialog(null, "No hay información suficiente para mostrar detalles.");
+                return;
+            }
+            String mensaje = String.format(
+                    "Médico:\n  Nombre: %s\n  ID: %s\n  Especialidad: %s\n\nPaciente:\n  Nombre: %s\n  ID: %s",
+                    medico.getNombre(),
+                    medico.getId(),
+                    (medico instanceof Medico) ? ((Medico) medico).getEspecialidad() : "N/A",
+                    p.getNombre(),
+                    p.getId()
+            );
+            JOptionPane.showMessageDialog(null, mensaje, "Detalles de la Prescripción", JOptionPane.INFORMATION_MESSAGE);
+        });
+
     }
 
     public JPanel getPrescribir() {
@@ -161,14 +199,12 @@ public class Prescribir implements PropertyChangeListener {
                         TableModelPres.INDICACIONES
                 };
                 table1.setModel(new TableModelPres(cols, model.getPrescripcionesTemp()));
+
+                boolean hayPrescripciones = !model.getPrescripcionesTemp().isEmpty();
+                limpiarButton.setEnabled(hayPrescripciones);
+                detallesButton.setEnabled(hayPrescripciones && table1.getSelectedRow() >= 0);
+                descartarMedicamentoButton.setEnabled(hayPrescripciones && table1.getSelectedRow() >= 0);
                 break;
-
-
-//            case Despacho.Presentation.Prescribir.Model.:
-//                // refrescar la tabla con medicamentos
-//                int[] cols = { /* columnas necesarias */ };
-//                table1.setModel(new MedicamentoTableModel(cols, model.getMedicamentos()));
-//                break;
         }
 
     }

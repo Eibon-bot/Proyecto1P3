@@ -65,6 +65,15 @@ public class Controller {
         model.setCurrentMedico(medico);
     }
 
+    public void limpiarPrescripciones() {
+        model.limpiarPrescripcionesTemp();
+    }
+    public void descartarPrescripcion(int indice) {
+        model.removerPrescripcionTemp(indice);
+    }
+
+
+
     public void guardarReceta(LocalDate fechaRetiro) {
 
         Receta receta = new Receta();
