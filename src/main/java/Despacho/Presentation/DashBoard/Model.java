@@ -29,12 +29,12 @@ public class Model {
                 .collect(Collectors.toList());
     }
 
-    public Map<String, Long> contarEstadosRecetas(LocalDate desde, LocalDate hasta) {
+    public Map<String, Long> getEstadosRecetas(LocalDate desde, LocalDate hasta) {
         return getRecetasEntreFechas(desde, hasta).stream()
                 .collect(Collectors.groupingBy(Receta::getEstado, Collectors.counting()));
     }
 
-    public Map<String, Map<String, Integer>> contarMedicamentosPorMes(List<Medicamento> seleccionados, LocalDate desde, LocalDate hasta) {
+    public Map<String, Map<String, Integer>> getCantidadMedicamentosPorMes(List<Medicamento> seleccionados, LocalDate desde, LocalDate hasta) {
         Map<String, Map<String, Integer>> resultado = new HashMap<>();
 
         for (Medicamento m : seleccionados) {
@@ -50,6 +50,7 @@ public class Model {
                     }
                 }
             }
+
             resultado.put(m.getNombre(), porMes);
         }
 

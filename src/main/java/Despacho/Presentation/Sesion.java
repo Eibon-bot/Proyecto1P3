@@ -2,8 +2,9 @@ package Despacho.Presentation;
 
 import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
-import Despacho.Logic.Service;
 import Despacho.Logic.Entidades.Usuario;
+import Despacho.Logic.Service;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +12,7 @@ public class Sesion extends JFrame {
     private final Usuario user;
 
     public Sesion(Usuario user) {
-        super("Recetas - " + user.getId() + " (" + (user.getRol()==null?"":user.getRol().toUpperCase()) + ")");
+        super("Recetas - " + user.getId() + " (" + (user.getRol() == null ? "" : user.getRol().toUpperCase()) + ")");
         this.user = user;
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -19,7 +20,7 @@ public class Sesion extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
 
-        String rol = user.getRol()==null? "" : user.getRol().toLowerCase();
+        String rol = user.getRol() == null ? "" : user.getRol().toLowerCase();
         if ("administrador".equals(rol)) {
             tabs.addTab("Médicos", buildMedicosTab());
             tabs.addTab("Farmaceutas", buildFarmaceuticosTab());
@@ -82,9 +83,7 @@ public class Sesion extends JFrame {
         var view = new Despacho.Presentation.Prescribir.Prescribir();
         var model = new Despacho.Presentation.Prescribir.Model();
         new Despacho.Presentation.Prescribir.Controller(view, model);
-        model.setCurrentMedico((Medico)user);
-
-
+        model.setCurrentMedico((Medico) user);
         return view.getPrescribir();
     }
 
@@ -92,14 +91,17 @@ public class Sesion extends JFrame {
         var view = new Despacho.Presentation.DashBoard.ViewDB();
         var model = new Despacho.Presentation.DashBoard.Model(Service.instance());
         var controller = new Despacho.Presentation.DashBoard.Controller(view, model);
-        controller.init();
+        view.setModel(model);
+        view.setController(controller);
+        view.init();
         return view.getPanel();
     }
+
     private JPanel buildDespachoTab() {
         var view = new Despacho.Presentation.DespachoFarma.DespachoFarma();
         var model = new Despacho.Presentation.DespachoFarma.ModelDF();
-        var controller = new Despacho.Presentation.DespachoFarma.ControllerDF(model,view);
-        model.setCurrentFarmaceutico((Farmaceutico)user);
+        var controller = new Despacho.Presentation.DespachoFarma.ControllerDF(model, view);
+        model.setCurrentFarmaceutico((Farmaceutico) user);
         controller.loadPacientes();
         return view.getPanel1();
     }
@@ -110,7 +112,5 @@ public class Sesion extends JFrame {
         var controller = new Despacho.Presentation.Historico.Controller(view, model);
         controller.loadRecetas();
         return view.getHistorico();
-
     }
-
 }
