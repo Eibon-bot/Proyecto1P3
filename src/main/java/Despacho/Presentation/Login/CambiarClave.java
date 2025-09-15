@@ -1,9 +1,13 @@
 package Despacho.Presentation.Login;
 
+import Despacho.Logic.Entidades.Usuario;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class CambiarClave extends JDialog {
+public class CambiarClave extends JDialog implements PropertyChangeListener {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -45,19 +49,58 @@ public class CambiarClave extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        String actual = textField1.getText().trim();
+        String nueva = textField2.getText().trim();
+        String confirmacion = textField3.getText().trim();
+
+        try {
+            String resultado = controller.cambiarClave(actual, nueva, confirmacion);
+
+            if (resultado == null) {
+                JOptionPane.showMessageDialog(this, "Clave cambiada exitosamente");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: " + resultado);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
     }
+
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
 
-    public static void main(String[] args) {
-        CambiarClave dialog = new CambiarClave();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    Controller controller;
+    Model model;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case Model.CURRENT:
+                Usuario u = model.getCurrent();
+                if (u != null) {
+                    setTitle("Cambiar clave - " + u.getId());
+                    textField1.setText("");
+                    textField2.setText("");
+                    textField3.setText("");
+                } else {
+                    setTitle("Cambiar clave - (sin usuario)");
+                }
+                break;
+        }
+    }
+
+
 }

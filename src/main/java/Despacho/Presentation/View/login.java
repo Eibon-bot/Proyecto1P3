@@ -1,8 +1,10 @@
 package Despacho.Presentation.View;
 
+import Despacho.Presentation.Login.CambiarClave;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
 import Despacho.Logic.Entidades.Usuario;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,6 +39,27 @@ public class login implements PropertyChangeListener {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
 
+            }
+        });
+        cambiarClaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        String id = ID.getText().trim();
+        String clave = new String(CLAVE.getPassword());
+
+        try {
+            Usuario usuarioValidado = controller.validarUsuario(id,clave);
+            model.setCurrent(usuarioValidado);
+            CambiarClave dialog = new CambiarClave();
+            dialog.setController(controller);
+            dialog.setModel(model);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
             }
         });
     }

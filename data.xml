@@ -66,7 +66,7 @@
         <medico>
             <id>MED-0002</id>
             <nombre>Arianna</nombre>
-            <clave>MED-0002</clave>
+            <clave>MEDICINA</clave>
             <rol>medico</rol>
             <especialidad>Pediatra</especialidad>
         </medico>
@@ -150,8 +150,6 @@
             </prescripciones>
             <estado>Lista</estado>
         </receta>
-
-
         <receta>
             <paciente>PAC-0001</paciente>
             <medico>MED-0002</medico>
@@ -165,8 +163,6 @@
             </prescripciones>
             <estado>Lista</estado>
         </receta>
-
-
         <receta>
             <paciente>PAC-0002</paciente>
             <medico>MED-0002</medico>
@@ -206,8 +202,5 @@
             </prescripciones>
             <estado>Pendiente</estado>
         </receta>
-
-
     </ListaRecetas>
-
 </data>

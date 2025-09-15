@@ -1,6 +1,6 @@
 package Despacho.Presentation.Login;
 
-import Despacho.Data.Registro.AuthService;
+import Despacho.Logic.Registro.AuthService;
 import Despacho.Logic.Entidades.Administrador;
 import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
@@ -56,4 +56,26 @@ public class Controller {
             model.setCurrent(null);
         }
     }
+
+    public Usuario validarUsuario(String id, String clave) throws Exception {
+        Usuario u = auth.login(id, clave);
+        model.setCurrent(u);
+        return u;
+    }
+
+
+    public String cambiarClave(String actual, String nueva, String confirmacion) throws Exception {
+        Usuario u = model.getCurrent();
+        if (u == null) {
+            throw new Exception("No hay usuario en sesión");
+        }
+        if (!nueva.equals(confirmacion)) {
+            throw new Exception("La nueva clave no coincide con la confirmación");
+        }
+        auth.cambiarClave(u.getId(), actual, nueva);
+
+        return null;
+    }
+
+
 }

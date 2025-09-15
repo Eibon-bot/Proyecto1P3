@@ -105,11 +105,6 @@ public class Prescribir implements PropertyChangeListener {
                 dialogBuscarPaciente.setModal(true);
                 dialogBuscarPaciente.setVisible(true);
 
-
-//                if (dialogBuscarPaciente.getPacienteSeleccionado() != null) {
-//                    controller.setPaciente(dialogBuscarPaciente.getPacienteSeleccionado());
-//                }
-
             }
         });
         agregarMedicamentoButton.addActionListener(new ActionListener() {
