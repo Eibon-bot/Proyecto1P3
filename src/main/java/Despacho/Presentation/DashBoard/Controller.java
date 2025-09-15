@@ -62,7 +62,7 @@ public class Controller {
             return;
         }
 
-        // Line Chart
+
         Map<String, Map<String, Integer>> datosLineChart = model.getCantidadMedicamentosPorMes(seleccionados, desde, hasta);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -83,7 +83,7 @@ public class Controller {
         view.lineChart.revalidate();
         view.lineChart.repaint();
 
-        // Pie Chart
+
         Map<String, Long> estados = model.getEstadosRecetas(desde, hasta);
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
