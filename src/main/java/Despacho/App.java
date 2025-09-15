@@ -6,7 +6,7 @@ import Despacho.Presentation.Medico.MediAdmin;
 import Despacho.Presentation.View.login;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Login.Model;
-import Despacho.Data.Registro.AuthService;
+import Despacho.Logic.Registro.AuthService;
 
 import javax.swing.*;
 import java.awt.*;

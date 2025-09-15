@@ -1,4 +1,4 @@
-package Despacho.Data.Registro;
+package Despacho.Logic.Registro;
 
 import Despacho.Data.Listas.Data;
 import Despacho.Data.Listas.XmlPersister;
@@ -7,7 +7,6 @@ import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Usuario;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -56,14 +55,11 @@ public class AuthService {
         if (u == null) throw new Exception("Usuario no encontrado");
         if (claveNueva == null || claveNueva.isEmpty()) throw new Exception("La nueva clave no puede estar vacía");
 
-        // Validar clave actual
         if (!u.validarClave(claveActual)) throw new Exception("Clave actual incorrecta");
 
-        // Cambiar en memoria
         u.setClave(claveNueva);
         usuarios.put(id, u);
 
-        // Persistir en archivo XML
         Data data = XmlPersister.instance().load();
 
         if (u instanceof Medico) {
