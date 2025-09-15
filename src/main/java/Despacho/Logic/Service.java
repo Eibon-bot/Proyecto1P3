@@ -409,19 +409,26 @@ public class Service {
                 .orElse(null);
     }
 
-    private void forzarReferencias() {
-        Map<String, Medicamento> mapMed = data.getMedicamentos().stream()
-                .collect(Collectors.toMap(Medicamento::getCodigo, m -> m));
+    public Medicamento buscarMedicamentoPorCodigo(String codigo) {
+        return findAllMedicamentos().stream()
+                .filter(m -> m.getCodigo().equals(codigo))
+                .findFirst()
+                .orElse(null);
+    }
 
-        for (Receta receta : data.getRecetas()) {
+
+    public void forzarReferencias() {
+        for (Receta receta : findAllRecetas()) {
             for (Prescripcion prescripcion : receta.getPrescripciones()) {
-                if (prescripcion.getMedicamento() == null && prescripcion.getCodigoMedicamento() != null) {
-                    Medicamento med = mapMed.get(prescripcion.getCodigoMedicamento());
+                Medicamento med = buscarMedicamentoPorCodigo(prescripcion.getCodigoMedicamento());
+                if (med != null) {
                     prescripcion.setMedicamento(med);
                 }
             }
         }
     }
+
+
 
     public Medicamento findMedicamentoByCodigo(String codigo) {
         return data.getMedicamentos().stream()
