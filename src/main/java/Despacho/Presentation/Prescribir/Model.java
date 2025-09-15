@@ -132,4 +132,11 @@ public class Model extends AbstractModel {
         prescripcionesTemp.clear();
         firePropertyChange("PRESCRIPCION_TEMP", null, null);
     }
+    public void removerPrescripcionTemp(int indice) {
+        if (indice >= 0 && indice < prescripcionesTemp.size()) {
+            prescripcionesTemp.remove(indice);
+            firePropertyChange("PRESCRIPCION_TEMP");
+        }
+    }
+
 }
