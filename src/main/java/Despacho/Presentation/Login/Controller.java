@@ -6,7 +6,7 @@ import Despacho.Logic.Entidades.Farmaceutico;
 import Despacho.Logic.Entidades.Medico;
 import Despacho.Logic.Entidades.Usuario;
 import Despacho.Presentation.View.login;
-import Despacho.Presentation.MainWindow;
+import Despacho.Presentation.Sesion;
 
 import javax.swing.*;
 
@@ -45,7 +45,7 @@ public class Controller {
             final Usuario usuarioFinal = usuarioActual;
 
             SwingUtilities.invokeLater(() -> {
-                JFrame main = new MainWindow(usuarioFinal);
+                JFrame main = new Sesion(usuarioFinal);
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);
                 java.awt.Window w = SwingUtilities.getWindowAncestor(view.getLogin());

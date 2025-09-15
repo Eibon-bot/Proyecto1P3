@@ -7,10 +7,10 @@ import Despacho.Logic.Entidades.Usuario;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainWindow extends JFrame {
+public class Sesion extends JFrame {
     private final Usuario user;
 
-    public MainWindow(Usuario user) {
+    public Sesion(Usuario user) {
         super("Recetas - " + user.getId() + " (" + (user.getRol()==null?"":user.getRol().toUpperCase()) + ")");
         this.user = user;
 
@@ -48,6 +48,7 @@ public class MainWindow extends JFrame {
         var view = new Despacho.Presentation.Medico.MediAdmin();
         var model = new Despacho.Presentation.Medico.Model();
         new Despacho.Presentation.Medico.Controller(view, model);
+        model.setList(Service.instance().findAllMedicos());
         return view.getPanel();
     }
 
@@ -55,6 +56,7 @@ public class MainWindow extends JFrame {
         var view = new Despacho.Presentation.Farmaceutico.FarmaAdmin();
         var model = new Despacho.Presentation.Farmaceutico.Model();
         new Despacho.Presentation.Farmaceutico.Controller(view, model);
+        model.setList(Service.instance().findAllFarmaceutico());
         return view.getPanel();
     }
 
@@ -62,6 +64,7 @@ public class MainWindow extends JFrame {
         var view = new Despacho.Presentation.Pacientes.PacientesAdmin();
         var model = new Despacho.Presentation.Pacientes.Model();
         new Despacho.Presentation.Pacientes.Controller(view, model);
+        model.setList(Service.instance().findAllPaciente());
         return view.getPanel();
     }
 

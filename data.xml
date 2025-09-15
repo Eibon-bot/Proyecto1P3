@@ -19,6 +19,12 @@
             <clave>FARMA-0003</clave>
             <rol>farmaceutico</rol>
         </farmaceutico>
+        <farmaceutico>
+            <id>FARMA-0004</id>
+            <nombre>Bryan</nombre>
+            <clave>FARMA-0004</clave>
+            <rol>farmaceutico</rol>
+        </farmaceutico>
     </ListaFarmaceuticos>
     <ListaMedicamentos>
         <medicamento>
@@ -71,6 +77,13 @@
             <rol>medico</rol>
             <especialidad>Urologo(ama su trabajo)</especialidad>
         </medico>
+        <medico>
+            <id>MED-0004</id>
+            <nombre>ivan</nombre>
+            <clave>MED-0004</clave>
+            <rol>medico</rol>
+            <especialidad>ginecologo</especialidad>
+        </medico>
     </ListaMedicos>
     <ListaPacientes>
         <paciente>
@@ -90,6 +103,12 @@
             <nombre>Javier</nombre>
             <fechaNacimiento>20/01/2004</fechaNacimiento>
             <telefono>85377240</telefono>
+        </paciente>
+        <paciente>
+            <id>PAC-0004</id>
+            <nombre>sanchez</nombre>
+            <fechaNacimiento>13/09/2025</fechaNacimiento>
+            <telefono>77373737</telefono>
         </paciente>
     </ListaPacientes>
     <ListaRecetas>
@@ -116,7 +135,7 @@
                 <indicaciones></indicaciones>
                 <duracion>0</duracion>
             </prescripciones>
-            <estado>Lista</estado>
+            <estado>Entregada</estado>
         </receta>
         <receta>
             <paciente>PAC-0002</paciente>

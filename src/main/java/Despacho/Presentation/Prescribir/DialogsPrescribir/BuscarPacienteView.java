@@ -26,6 +26,7 @@ public class BuscarPacienteView extends JDialog implements PropertyChangeListene
     private JTable table1;
     private JPanel panellistado;
 
+
     public BuscarPacienteView() {
 
         table1.getSelectionModel().addListSelectionListener(e -> {
