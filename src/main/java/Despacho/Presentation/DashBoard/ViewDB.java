@@ -27,9 +27,9 @@ public class ViewDB {
     public JPanel getPanel() {
         return panel1;
     }
+
     private void createUIComponents() {
         lineChart = new JPanel(new BorderLayout());
         pieChart = new JPanel(new BorderLayout());
     }
-
 }

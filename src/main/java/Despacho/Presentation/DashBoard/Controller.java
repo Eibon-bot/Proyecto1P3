@@ -8,6 +8,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -22,23 +23,15 @@ public class Controller {
         this.view = view;
         this.model = model;
 
-        view.aplicarSeleccionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Medicamento seleccionado = (Medicamento) view.comboBox3.getSelectedItem();
-                if (seleccionado != null && !view.listModel.contains(seleccionado)) {
-                    view.listModel.addElement(seleccionado);
-                    view.list1.setSelectedValue(seleccionado, true);
-                }
+        view.aplicarSeleccionButton.addActionListener(e -> {
+            Medicamento seleccionado = (Medicamento) view.comboBox3.getSelectedItem();
+            if (seleccionado != null && !view.listModel.contains(seleccionado)) {
+                view.listModel.addElement(seleccionado);
+                view.list1.setSelectedValue(seleccionado, true);
             }
         });
 
-        view.aplicarRangoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarGraficos();
-            }
-        });
+        view.aplicarRangoButton.addActionListener(e -> actualizarGraficos());
     }
 
     public void init() {
@@ -78,12 +71,15 @@ public class Controller {
 
         List<Medicamento> seleccionados = view.list1.getSelectedValuesList();
 
-        Map<String, Map<String, Integer>> datosLineChart = model.getCantidadMedicamentosPorMes(seleccionados, desde, hasta);
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        actualizarGraficoLineal(model.contarMedicamentosPorMes(seleccionados, desde, hasta));
+        actualizarGraficoPastel(model.contarEstadosRecetas(desde, hasta));
+    }
 
-        for (String nombre : datosLineChart.keySet()) {
-            for (Map.Entry<String, Integer> entry : datosLineChart.get(nombre).entrySet()) {
-                dataset.addValue(entry.getValue(), nombre, entry.getKey());
+    private void actualizarGraficoLineal(Map<String, Map<String, Integer>> data) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (String medicamento : data.keySet()) {
+            for (Map.Entry<String, Integer> entry : data.get(medicamento).entrySet()) {
+                dataset.addValue(entry.getValue(), medicamento, entry.getKey());
             }
         }
 
@@ -97,13 +93,13 @@ public class Controller {
         );
 
         view.lineChart.removeAll();
-        view.lineChart.add(new ChartPanel(chart));
+        view.lineChart.add(new ChartPanel(chart), BorderLayout.CENTER);
         view.lineChart.revalidate();
+    }
 
-        Map<String, Long> estados = model.getEstadosRecetas(desde, hasta);
+    private void actualizarGraficoPastel(Map<String, Long> data) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
-
-        for (Map.Entry<String, Long> entry : estados.entrySet()) {
+        for (Map.Entry<String, Long> entry : data.entrySet()) {
             pieDataset.setValue(entry.getKey(), entry.getValue());
         }
 
@@ -114,7 +110,7 @@ public class Controller {
         );
 
         view.pieChart.removeAll();
-        view.pieChart.add(new ChartPanel(pieChart));
+        view.pieChart.add(new ChartPanel(pieChart), BorderLayout.CENTER);
         view.pieChart.revalidate();
     }
 

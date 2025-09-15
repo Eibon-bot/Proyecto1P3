@@ -29,12 +29,12 @@ public class Model {
                 .collect(Collectors.toList());
     }
 
-    public Map<String, Long> getEstadosRecetas(LocalDate desde, LocalDate hasta) {
+    public Map<String, Long> contarEstadosRecetas(LocalDate desde, LocalDate hasta) {
         return getRecetasEntreFechas(desde, hasta).stream()
                 .collect(Collectors.groupingBy(Receta::getEstado, Collectors.counting()));
     }
 
-    public Map<String, Map<String, Integer>> getCantidadMedicamentosPorMes(List<Medicamento> seleccionados, LocalDate desde, LocalDate hasta) {
+    public Map<String, Map<String, Integer>> contarMedicamentosPorMes(List<Medicamento> seleccionados, LocalDate desde, LocalDate hasta) {
         Map<String, Map<String, Integer>> resultado = new HashMap<>();
 
         for (Medicamento m : seleccionados) {
@@ -43,7 +43,9 @@ public class Model {
             for (Receta r : getRecetasEntreFechas(desde, hasta)) {
                 for (var p : r.getPrescripciones()) {
                     if (p.getMedicamento() != null && p.getMedicamento().equals(m)) {
-                        String mes = r.getFechaEmision().getMonthValue() + "-" + r.getFechaEmision().getMonth().name().substring(0, 1) + r.getFechaEmision().getMonth().name().substring(1).toLowerCase();
+                        String mes = r.getFechaEmision().getMonthValue() + "-" +
+                                r.getFechaEmision().getMonth().name().substring(0, 1) +
+                                r.getFechaEmision().getMonth().name().substring(1).toLowerCase();
                         porMes.put(mes, porMes.getOrDefault(mes, 0) + p.getCantidad());
                     }
                 }
