@@ -202,5 +202,31 @@
             </prescripciones>
             <estado>Pendiente</estado>
         </receta>
+        <receta>
+            <paciente>PAC-0004</paciente>
+            <medico>MED-0002</medico>
+            <fechaEmision>2025-09-18</fechaEmision>
+            <fechaRetiro>2025-09-18</fechaRetiro>
+            <prescripciones>
+                <medicamento>JAR-001</medicamento>
+                <cantidad>4</cantidad>
+                <indicaciones>PROBAR</indicaciones>
+                <duracion>5</duracion>
+            </prescripciones>
+            <estado>Entregada</estado>
+        </receta>
+        <receta>
+            <paciente>PAC-0004</paciente>
+            <medico>MED-0002</medico>
+            <fechaEmision>2025-10-08</fechaEmision>
+            <fechaRetiro>2025-10-08</fechaRetiro>
+            <prescripciones>
+                <medicamento>MMR-001</medicamento>
+                <cantidad>8</cantidad>
+                <indicaciones>1 al dia</indicaciones>
+                <duracion>8</duracion>
+            </prescripciones>
+            <estado>Confeccionada</estado>
+        </receta>
     </ListaRecetas>
 </data>

@@ -20,13 +20,13 @@ public class Model {
         return service.findAllMedicamentos();
     }
 
-    public List<Receta> getRecetasEntreFechas(LocalDate desde, LocalDate hasta) {
+    public java.util.List<Receta> getRecetasEntreFechas(java.time.LocalDate desde, java.time.LocalDate hasta) {
         return service.findAllRecetas().stream()
                 .filter(r -> {
-                    LocalDate fecha = r.getFechaEmision();
-                    return fecha != null && (fecha.isEqual(desde) || fecha.isEqual(hasta) || (fecha.isAfter(desde) && fecha.isBefore(hasta)));
+                    java.time.LocalDate fecha = r.getFechaEmision();
+                    return fecha != null && !fecha.isBefore(desde) && !fecha.isAfter(hasta);
                 })
-                .collect(Collectors.toList());
+                .collect(java.util.stream.Collectors.toList());
     }
 
     public Map<String, Long> getEstadosRecetas(LocalDate desde, LocalDate hasta) {

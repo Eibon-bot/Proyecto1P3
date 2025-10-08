@@ -8,6 +8,7 @@ import Despacho.Logic.Service;
 import Despacho.Presentation.Login.Controller;
 import Despacho.Presentation.Prescribir.DialogsPrescribir.AgregarMedicamento;
 import Despacho.Presentation.Prescribir.DialogsPrescribir.BuscarPacienteView;
+import Despacho.Presentation.Prescribir.DialogsPrescribir.ModificarDetalle;
 import Despacho.Presentation.TableModelPres;
 import com.toedter.calendar.JDateChooser;
 
@@ -15,6 +16,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
@@ -54,7 +57,6 @@ public class Prescribir implements PropertyChangeListener {
         limpiarButton.setEnabled(false);
         descartarMedicamentoButton.setEnabled(false);
         detallesButton.setEnabled(false);
-
 
 
         panellistado.setLayout(new BorderLayout());
@@ -97,8 +99,6 @@ public class Prescribir implements PropertyChangeListener {
 
             JOptionPane.showMessageDialog(null, "Receta guardada correctamente");
         });
-
-
 
 
         buscarPacienteButton.addActionListener(new ActionListener() {
@@ -166,7 +166,23 @@ public class Prescribir implements PropertyChangeListener {
             JOptionPane.showMessageDialog(null, mensaje, "Detalles de la Prescripción", JOptionPane.INFORMATION_MESSAGE);
         });
 
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && table1.getSelectedRow() >= 0) {
+                    int fila = table1.getSelectedRow();
+
+                    Prescripcion prescripcionEditar = model.getPrescripcionesTemp().get(fila);
+
+                    ModificarDetalle dialog = new ModificarDetalle(prescripcionEditar);
+                    dialog.setVisible(true);
+                    table1.repaint();
+                }
+            }
+        });
+
     }
+
 
     public JPanel getPrescribir() {
         return Prescribir;

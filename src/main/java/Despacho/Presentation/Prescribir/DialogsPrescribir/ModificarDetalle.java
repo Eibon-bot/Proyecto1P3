@@ -17,31 +17,31 @@ public class ModificarDetalle extends JDialog {
     private Prescripcion prescripcion;
     private Medicamento med;
 
+    public ModificarDetalle(Prescripcion prescripcion) {
+        this.prescripcion = prescripcion;
+        this.med = prescripcion.getMedicamento();
+        setupDialog();
+        setTitle("Modificar Detalle");
+        cargarDatos();
+    }
+
+
     public ModificarDetalle(Medicamento med) {
         this.med = med;
+        setupDialog();
+        setTitle("Agregar Detalle");
+    }
+
+    private void setupDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setTitle("Modificar Detalle");
         pack();
         setLocationRelativeTo(null);
 
+        buttonOK.addActionListener(e -> onOK());
+        buttonCancel.addActionListener(e -> onCancel());
 
-
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -49,12 +49,17 @@ public class ModificarDetalle extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void cargarDatos() {
+        if (prescripcion != null) {
+            spinner1.setValue(prescripcion.getCantidad());
+            spinner2.setValue(prescripcion.getDuracion());
+            textField1.setText(prescripcion.getIndicaciones());
+        }
     }
 
     private void onOK() {
@@ -62,21 +67,23 @@ public class ModificarDetalle extends JDialog {
         int duracion = (Integer) spinner2.getValue();
         String indicaciones = textField1.getText();
 
-        prescripcion = new Prescripcion(med, cantidad, indicaciones, duracion);
+        if (this.prescripcion != null) {
+
+            this.prescripcion.setCantidad(cantidad);
+            this.prescripcion.setDuracion(duracion);
+            this.prescripcion.setIndicaciones(indicaciones);
+        } else {
+            this.prescripcion = new Prescripcion(med, cantidad, indicaciones, duracion);
+        }
         dispose();
     }
 
-
     private void onCancel() {
-        // add your code here if necessary
+        this.prescripcion = null;
         dispose();
     }
 
     public Prescripcion getPrescripcion() {
         return prescripcion;
-    }
+    }}
 
-
-
-
-}
